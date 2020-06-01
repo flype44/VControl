@@ -7,10 +7,10 @@
  * VAMPIRE HARDWARE
  *****************************************************************/
 
-#define VREG_FASTIDE	0xdd1020
-#define VREG_SDCLKDIV	0xde000c
-#define VREG_VMODE		0xdff1f4
-#define VREG_BOARD		0xdff3fc
+#define VREG_FASTIDE  0xdd1020
+#define VREG_SDCLKDIV 0xde000c
+#define VREG_VMODE    0xdff1f4
+#define VREG_BOARD    0xdff3fc
 
 #define VREG_BOARD_Unknown  0x00
 #define VREG_BOARD_V600     0x01
