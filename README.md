@@ -45,10 +45,8 @@ MR=MAPROM | Map a ROM file
 
 # Screenshots
 
-https://github.com/flype44/VControl/blob/master/Screenshot01.png
+<img src="Screenshot01.png" />
 
-https://github.com/flype44/VControl/blob/master/Screenshot02.png
+<img src="Screenshot02.png" />
 
-https://github.com/flype44/VControl/blob/master/Screenshot03.png
-
-
+<img src="Screenshot03.png" />
