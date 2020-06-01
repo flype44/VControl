@@ -4,7 +4,11 @@
 
 The purpose of VControl is to bring some valuable informations and controls over the Vampire boards.
 
-# Compilation
+Latest official binary releases :
+
+https://www.apollo-accelerators.com/wiki/doku.php/saga:updates
+
+# Build instructions
 
 To compile VControl you need :
 
@@ -13,9 +17,9 @@ To compile VControl you need :
 **VASM** 1.8h for AmigaOS3 M68K
 
 Latest here :
+
 http://sun.hasenbraten.de/vasm/bin/rel/vasmm68k_mot_os3.lha
 
-# Build instructions
 
 Use the provided **smakefile**.
 
@@ -25,7 +29,7 @@ CD to the project and type **smake**.
 
 # Features
 
-VControl 1.15 (31.5.2020) (C) APOLLO-Team
+VControl 1.15 (1.6.2020) (C) APOLLO-Team
 
 Command | Description
 ------------ | -------------
