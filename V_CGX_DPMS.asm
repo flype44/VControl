@@ -69,13 +69,14 @@ _v_cgx_dpms_set:
 	cnop 0,4
 
 _CVideoCtrlTagList:
-	DC.L $88002001,0 ; DPMS Level
-	DC.L $00000000,0 ; TAG Done
+	dc.l $88002001,0 ; DPMS Level
+	dc.l $00000000,0 ; TAG Done
 
-	cnop 0,4
+_GFXName:
+	dc.b "graphics.library",0
 
-_GFXName: DC.B "graphics.library",0
-_CGXName: DC.B "cybergraphics.library",0
+_CGXName:
+	dc.b "cybergraphics.library",0
 
 	cnop 0,4
 
