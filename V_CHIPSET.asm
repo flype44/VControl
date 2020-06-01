@@ -103,6 +103,6 @@ _v_chipset_akiko:
 GfxName:
 	dc.b "graphics.library",0
 
-	cnop 0,4
-
 ;----------------------------------------------------------
+
+	cnop 0,4
