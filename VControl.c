@@ -239,7 +239,7 @@ UBYTE * PrintSize(ULONG size, UBYTE * buf)
 {
 	ULONG i = 0;
 	ULONG r = 0;
-	STRPTR units[] = { "B", "KB", "MB", "GB", "TG" };
+	STRPTR units[] = { "B", "KB", "MB", "GB", "TB" };
 	
 	while(size > 1024)
 	{
