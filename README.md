@@ -15,6 +15,14 @@ To compile VControl you need :
 Latest here :
 http://sun.hasenbraten.de/vasm/bin/rel/vasmm68k_mot_os3.lha
 
+# Build instructions
+
+Use the provided **smakefile**.
+
+CD to the project and type **smake**.
+
+<img src="BuildInstructions.png" />
+
 # Features
 
 VControl 1.15 (31.5.2020) (C) APOLLO-Team
