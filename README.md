@@ -2,7 +2,7 @@
 
 (C) Copyright 2016-2020 APOLLO-Team
 
-The purpose of VControl is to bring to the enduser some control on your Vampire Board.
+The purpose of VControl is to bring to the enduser some control over the Vampire boards.
 
 # Compilation
 
