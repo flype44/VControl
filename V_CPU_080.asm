@@ -20,14 +20,14 @@ IllegalInstructionVector EQU $10
 
 _v_cpu_is080:
 	movem.l d1-a6,-(sp)
-	move.l  4.w,a6
+	move.l  $4.w,a6
 	move.w  AttnFlags(a6),d0
 	and.w   #AFF_68010|AFF_68020|AFF_68030|AFF_68040,d0
 	beq.s   .fail
 	jsr     _LVODisable(a6)
 	lea.l   .check(pc),a5
-	jsr     _LVOSupervisor(A6)
-	jsr     _LVOEnable(A6)
+	jsr     _LVOSupervisor(a6)
+	jsr     _LVOEnable(a6)
 	cmp.w   #$0440,d0
 	bne.s   .fail
 	moveq.l #1,d0
