@@ -163,14 +163,14 @@ UBYTE * AttnName[16] = {
 	"882",    //  5
 	"FPU40",  //  6
 	"060",    //  7
-	"BIT8",   //  8
-	"BIT9",   //  9
+	"BIT8",   //  8 (Unused)
+	"BIT9",   //  9 (Unused)
 	"080",    // 10
-	"BIT11",  // 11
-	"BIT12",  // 12 
-	"ADDR32", // 13 (AROS CPU is 32bit)
-	"BIT14",  // 14 (AROS MMU presence)
-	"PRIVATE" // 15 (AROS FPU presence)
+	"BIT11",  // 11 (Unused)
+	"BIT12",  // 12 (Unused)
+	"ADDR32", // 13 (AROS: CPU is 32bit)
+	"BIT14",  // 14 (AROS: MMU presence)
+	"PRIVATE" // 15 (FPU presence)
 };
 
 UBYTE * BoardName[MAXBOARDID][3] = {
@@ -458,12 +458,9 @@ ULONG GetBoard(void)
 	printf("Power  Freq. : %lu Hz\n", SysBase->PowerSupplyFrequency);
 	printf("\n");
 	
-	printf("Video Chip   : %s\n", 
-		(videoChip <= 2) ? VideoName[videoChip] : unknown);
+	printf("Video Chip   : %s\n", (videoChip <= 2) ? VideoName[videoChip] : unknown);
+	printf("Audio Chip   : %s\n", (audioChip <= 1) ? AudioName[audioChip] : unknown);
 	
-	printf("Audio Chip   : %s\n", 
-		(audioChip <= 1) ? AudioName[audioChip] : unknown);
-
 	printf("Akiko Chip   : %s (0x%04x)\n", 
 		((*(volatile UWORD *)0xB80002) == 0xCAFE) ? "Detected" : "Not detected",
 		(*(volatile UWORD *)0xB80002));
@@ -529,9 +526,7 @@ ULONG GetCPU_CPU(void)
 		
 		printf("CPU:  AC68080 @ %lu MHz (x%u) (%lup)\n", 
 			( value * SysBase->ex_EClockFrequency ) / 100000,
-			value, 
-			v_cpu_is2p() + 1
-		);
+			value, v_cpu_is2p() + 1);
 		
 		result = RETURN_OK;
 	}
@@ -555,8 +550,8 @@ ULONG GetCPU_CACR(void)
 
 		printf("CACR: 0x%08x (InstCache: %s) (DataCache: %s)\n", 
 			( value ),
-			( value & (1<<15) ) ? "On" : "Off",
-			( value & (1<<31) ) ? "On" : "Off"
+			( value & (1 << 15) ) ? "On" : "Off",
+			( value & (1 << 31) ) ? "On" : "Off"
 		);
 		
 		result = RETURN_OK;
@@ -581,11 +576,11 @@ ULONG GetCPU_PCR(void)
 		ULONG value = v_cpu_pcr();
 		
 		printf("PCR:  0x%08x (ID: %04x) (REV: %u) (DFP: %s) (ESS: %s)\n", 
-			(   value       ),
-			(   value >> 16 ),
-			(   value >>  8 ) & 0xFF,
-			( ( value >>  1 ) & 1 ) ? "On" : "Off",
-			( ( value >>  0 ) & 1 ) ? "On" : "Off"
+			(  value      ),
+			(  value >> 16),
+			(  value >>  8) & 0xFF,
+			(( value >>  1) & 1) ? "On" : "Off",
+			(( value >>  0) & 1) ? "On" : "Off"
 		);
 		
 		result = RETURN_OK;
@@ -640,7 +635,9 @@ ULONG Detect080(void)
 	ULONG result = RETURN_WARN;
 	
 	if(v_cpu_is080())
+	{
 		result = RETURN_OK;
+	}
 	
 	return(result);
 }
@@ -842,7 +839,7 @@ ULONG SetSuperScalar(ULONG mode)
 			v_cpu_pcr_ess_off();
 		
 		printf("SuperScalar: %s\n", 
-			(ret & (1<<0)) ? "Enabled" : "Disabled");
+			(ret & (1 << 0)) ? "Enabled" : "Disabled");
 		
 		result = RETURN_OK;
 	}
@@ -864,14 +861,14 @@ ULONG SetTurtle(ULONG mode)
 	{
 		ULONG boardId = GetBoardID();
 		
-		if(	boardId == VREG_BOARD_V4 || boardId == VREG_BOARD_V4SA)
+		if(boardId == VREG_BOARD_V4 || boardId == VREG_BOARD_V4SA)
 		{
 			ULONG ret = mode ? 
 				v_cpu_pcr_etu_on() : 
 				v_cpu_pcr_etu_off();
 			
 			printf("Turtle: %s\n", 
-				(ret & (1<<7)) ? "Enabled" : "Disabled");
+				(ret & (1 << 7)) ? "Enabled" : "Disabled");
 		}
 		else
 		{
@@ -880,7 +877,7 @@ ULONG SetTurtle(ULONG mode)
 				v_cpu_cacr_icache_on();
 			
 			printf("Turtle: %s\n", 
-				(ret & (1<<15)) ? "Disabled" : "Enabled");
+				(ret & (1 << 15)) ? "Disabled" : "Enabled");
 		}
 		
 		result = RETURN_OK;
@@ -1012,7 +1009,10 @@ ULONG SetDPMS(ULONG mode)
 	ULONG result = RETURN_WARN;
 	
 	if(mode > 0)
-		mode = 3; // CGX DPMS_ON
+	{
+		// CGX DPMS_ON
+		mode = 3; 
+	}
 	
 	if(v_cgx_dpms_set(mode))
 	{
