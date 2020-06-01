@@ -1,0 +1,191 @@
+@database VControl.guide
+@uthor "flype"
+@(c) "Copyright (c) 2016-2018 APOLLO-Team (flype)"
+@$VER: VControl.guide 1.2 (03/03/2018)
+@font courier.font 13
+@wordwrap
+
+@node Main "VControl Guide"
+
+@{b}@{fg highlight}VControl@{fg text}@{ub} "Vampire Control" Copyright 2016-2018 APOLLO-Team (flype)
+
+A program to control your Apollo 68080 core based accelerator.
+
+    @{"Installation" link Install}  How to install
+    @{"Requirements" link Required}  Minimun requirements
+    @{"Usage       " link Usage}  How to use it
+    @{"History     " link History}  History and old versions
+    @{"Author      " link Author}  Yes I'm...
+    @{"Greetings   " link Greetings}  ... Hi everybody !
+    @{"Copyright   " link Copyright}  Necessary informations
+
+If you are a programmer and interested to help, please @{"contact me" link Author}.
+
+@endnode
+
+@node Install "Installation"
+
+To install the program,
+
+simply move the binary @{b}@{fg highlight}"VControl"@{fg text}@{ub} into your prefered binary directory in path.
+
+@{b}@{fg highlight}C:@{fg text}@{ub} might be your best option.
+
+@next Required
+
+@endnode
+
+@node Required "System's requirements"
+
+@prev Install
+
+@{b}@{fg highlight}VControl@{fg text}@{ub} stands for "Vampire Control".
+
+It obviously requires an Apollo 68080 based accelerator like Vampire 600 or Vampire 500(+).
+
+It will also work on any @{b}Amiga@{ub} or compatible computer with at least Kickstart @{b}3.0@{ub}, 1MB of ram,
+
+a Motorola 68020 or greater processor but will only provide some basic functionnalities not related to the Apollo 68080 core.
+
+A monitor and a keyboard might also be useful =')
+
+@endnode
+
+@node Usage "Program usage"
+
+@prev Required
+
+VControl is a CLI tool which accepts a list of commands to control your Apollo 68080 core based accelerator.
+
+A typical usage in Startup-Sequence would be :
+C:VControl <>NIL: VBRMOVE 1 BLITSYNC 0 SUPERSCALAR 1 TURTLE 0
+
+This command line means :
+
+move VBR to fast (VBRMOVE 1),
+disable blitsync (BLITSYNC 0),
+enable superscalar (SUPERSCALAR 1)
+and disable Turtle Mode (TURTLE 0).
+              
+Available parameters are :
+
+@{b}HELP@{ub} 
+Give you the complete list of available commands.
+
+@{b}BOARD@{ub} (or BO) - 68080 only
+Output Board informations.
+
+@{b}BOARDID@{ub} (or BI) - 68080 only
+Output Board identifier.
+
+@{b}BLITSYNC@{ub} (or BS) - 68080 only
+Changes the BlitSync mode. Options are 0 (Off) and 1 (On).
+
+@{b}CORE@{ub} (or CO) - 68080 only
+Outputs Core Revision String (i.e. 3649)
+
+@{b}CPU@{ub} (or CP) - 68080 only
+Outputs CPU informations
+
+@{b}DETECT@{ub} (or DE) - 68080 only
+Detects compatible board. Might be useful for scripts.
+
+@{b}FPU@{ub} (or FP) - 68080 only
+Change the FPU mode. Options are 0 (Off) and 1 (On)
+BEWARE, it will immediately REBOOT the machine !
+
+@{b}HERTZ@{ub} (or HZ) - 68080 only
+Outputs core frequency in Hertz.
+
+@{b}IDESPEED@{ub} (or ID) - 68080 only
+Changes the IDE speed. Options are 0 (Slow) and 1 (Fast)
+
+@{b}MAPROM@{ub} (or MR) - 68080 only
+Map a ROM file and reboots.
+VControl MAPROM <file.rom>
+Supports 256KB, 512KB and 1MB ROM files.
+
+@{b}NORGB@{ub} (or NR)
+Send standby signal to native Amiga RGB output.
+
+@{b}SDSPEED@{ub} (or SD) - 68080 only
+Changes the SDPort speed. Options are from 0 (Fastest) to 255 (Slowest)
+
+@{b}SUPERSCALAR@{ub} (or SS) - 68080 only
+Changes the SuperScalar mode. Options are 0 (Off) and 1 (On)
+
+@{b}TURTLE@{ub} (or TU) - 68080 only
+Changes the Turtle mode. Options are 0 (Off) and 1 (On)
+
+@{b}VBRMOVE@{ub} (or VB)
+Changes the VBR location. Options are 0 (ChipRAM) and 1 (FastRAM)
+Moving the VBR to FastRAM might give a nice speed-up on some task but might also break compatibility with some old programs.
+
+@{b}VIDEOSLEEP@{ub} (or VS) - 68080 only
+Toggle the SAGA Video DMA Off and On. 
+This option might be helpful with WHDLoad if your monitor searchs for output automatically. Using it, it will disable Digital Output and switch to your Amiga Native output.
+
+@endnode
+
+@node History "VControl ChangeLog"
+
+@prev Usage
+
+@{b}@{fg highlight}VControl 1.3 (MAR 2018)@{fg text}@{ub}
+
+ Added BOARDID feature,
+ to retrieve the Vampire board identifier.
+
+@{b}@{fg highlight}VControl 1.2 (MAR 2018)@{fg text}@{ub}
+
+ Modified the FPU option, 
+ such feature needs a REBOOT.
+
+@{b}@{fg highlight}VControl 1.1 (FEB 2018)@{fg text}@{ub}
+
+ Added MAPROM support.
+ Some cleanups.
+
+@{b}@{fg highlight}VControl 1.0 (FEB 2017)@{fg text}@{ub}
+
+ First released version.
+
+@next Author
+
+@endnode
+
+@node Author "How reach the author"
+
+@prev History
+
+E-Mail address:
+
+    flype44@gmail.com
+
+Coder of @{b}@{fg highlight}VControl@{fg text}@{ub}.
+
+@next Greetings
+
+@endnode
+
+@node Greetings "Some greetings"
+
+@prev History
+
+@{"Author" link Author} greets these people to have helped him during the project development:
+
+@{fg highlight}BigGun@{fg text}, @{fg highlight}Ceaich@{fg text}, @{fg highlight}Majsta@{fg text}, @{fg highlight}Grond@{fg text}, @{fg highlight}Bax@{fg text}, @{fg highlight}ShK@{fg text}, @{fg highlight}Claude@{fg text}, @{fg highlight}TuKo@{fg text}, @{fg highlight}Crom@{fg text}, @{fg highlight}Arczi@{fg text}, @{fg highlight}Cotter@{fg text}, @{fg highlight}Sam@{fg text}, @{fg highlight}Guibrush@{fg text}, @{fg highlight}Pisklak@{fg text}, @{fg highlight}Cgugl@{fg text}, @{fg highlight}Mr-Z@{fg text}, @{fg highlight}Trantor@{fg text}, @{fg highlight}Dessimat0r@{fg text}, @{fg highlight}Marlon@{fg text}, @{fg highlight}XboxOwn@{fg text}, @{fg highlight}Cowdog360@{fg text}, @{fg highlight}Jari@{fg text}, @{fg highlight}CanDoo@{fg text}, @{fg highlight}Mness@{fg text}, @{fg highlight}MetalGuy66@{fg text} and others.
+
+@endnode
+
+@node Copyright "Copyright infos"
+
+@{b}@{fg highlight}VControl@{fg text}@{ub} is freeware.
+
+USE @{b}@{fg highlight}VCONTROL@{fg text}@{ub} AT YOUR OWN RISK, THERE IS NO WARRANTY OF FUNCTIONING. @{"AUTHOR" link Author} DOES NOT ASSUME ANY RESPONSABILITY.
+
+The whole archive of @{b}@{fg highlight}VControl@{fg text}@{ub} or a part of it can't be used for money outside for Apollo 68080 project, anyway it is freely distributable.
+
+@next CopyRight
+
+@endnode
