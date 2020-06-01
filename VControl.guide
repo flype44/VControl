@@ -1,13 +1,13 @@
 @database VControl.guide
-@uthor "flype"
-@(c) "Copyright (c) 2016-2018 APOLLO-Team (flype)"
-@$VER: VControl.guide 1.2 (03/03/2018)
+@author "flype"
+@(c) "Copyright (c) 2016-2020 APOLLO-Team"
+@$VER: VControl.guide 1.5 (01/06/2020)
 @font courier.font 13
 @wordwrap
 
 @node Main "VControl Guide"
 
-@{b}@{fg highlight}VControl@{fg text}@{ub} "Vampire Control" Copyright 2016-2018 APOLLO-Team (flype)
+@{b}@{fg highlight}VControl@{fg text}@{ub} "Vampire Control" Copyright 2016-2020 APOLLO-Team
 
 A program to control your Apollo 68080 core based accelerator.
 
@@ -41,7 +41,7 @@ simply move the binary @{b}@{fg highlight}"VControl"@{fg text}@{ub} into your pr
 
 @{b}@{fg highlight}VControl@{fg text}@{ub} stands for "Vampire Control".
 
-It obviously requires an Apollo 68080 based accelerator like Vampire 600 or Vampire 500(+).
+It obviously requires an Apollo 68080 based accelerator like Vampire 500, 600, 1200 or a V4.
 
 It will also work on any @{b}Amiga@{ub} or compatible computer with at least Kickstart @{b}3.0@{ub}, 1MB of ram,
 
@@ -58,15 +58,14 @@ A monitor and a keyboard might also be useful =')
 VControl is a CLI tool which accepts a list of commands to control your Apollo 68080 core based accelerator.
 
 A typical usage in Startup-Sequence would be :
-C:VControl <>NIL: VBRMOVE 1 BLITSYNC 0 SUPERSCALAR 1 TURTLE 0
+C:VControl <>NIL: VBRMOVE 1 SUPERSCALAR 1 TURTLE 0
 
 This command line means :
 
 move VBR to fast (VBRMOVE 1),
-disable blitsync (BLITSYNC 0),
 enable superscalar (SUPERSCALAR 1)
 and disable Turtle Mode (TURTLE 0).
-              
+
 Available parameters are :
 
 @{b}HELP@{ub} 
@@ -78,11 +77,8 @@ Output Board informations.
 @{b}BOARDID@{ub} (or BI) - 68080 only
 Output Board identifier.
 
-@{b}BLITSYNC@{ub} (or BS) - 68080 only
-Changes the BlitSync mode. Options are 0 (Off) and 1 (On).
-
 @{b}CORE@{ub} (or CO) - 68080 only
-Outputs Core Revision String (i.e. 3649)
+Outputs Core Revision String (i.e. 7380)
 
 @{b}CPU@{ub} (or CP) - 68080 only
 Outputs CPU informations
@@ -92,7 +88,6 @@ Detects compatible board. Might be useful for scripts.
 
 @{b}FPU@{ub} (or FP) - 68080 only
 Change the FPU mode. Options are 0 (Off) and 1 (On)
-BEWARE, it will immediately REBOOT the machine !
 
 @{b}HERTZ@{ub} (or HZ) - 68080 only
 Outputs core frequency in Hertz.
@@ -104,9 +99,7 @@ Changes the IDE speed. Options are 0 (Slow) and 1 (Fast)
 Map a ROM file and reboots.
 VControl MAPROM <file.rom>
 Supports 256KB, 512KB and 1MB ROM files.
-
-@{b}NORGB@{ub} (or NR)
-Send standby signal to native Amiga RGB output.
+BEWARE, it will immediately REBOOT the machine !
 
 @{b}SDSPEED@{ub} (or SD) - 68080 only
 Changes the SDPort speed. Options are from 0 (Fastest) to 255 (Slowest)
