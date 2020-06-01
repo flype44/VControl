@@ -1,0 +1,40 @@
+#################################################
+#
+# SAS/C Makefile for "Vcontrol"
+# for AmigaOS3.X M68K SAS/C 6.59 Compiler
+# 
+# (C) Copyright 2016-2020 APOLLO-Team
+# 
+#################################################
+
+OBJECTS = \
+VControl.o\
+V_CHIPSET.o\
+V_CPU_080.o\
+V_CPU_2P.o\
+V_CPU_CLK.o\
+V_CPU_PCR.o\
+V_CPU_VBR.o\
+V_CPU_CACR.o\
+V_CGX_DPMS.o\
+V_FPU.o\
+V_SERIAL.o\
+V_MAPROM.o
+
+AS=vasm
+ASMFLAGS=-Fhunk -devpac -m68000 -quiet
+ASMINCLUDES=-Isc:include/
+OUTFILE=VControl
+BUILDDEPS=
+CFLAGS=
+
+all: $(OUTFILE)
+
+clean:
+        @delete $(OBJECTS)
+
+.asm.o: $(BUILDDEPS)
+        $(AS) $(ASMFLAGS) $(ASMINCLUDES) -o $@ $*.asm
+
+VControl: $(OBJECTS)
+	sc NOICONS link $(OBJECTS)
