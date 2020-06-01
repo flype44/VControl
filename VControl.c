@@ -33,12 +33,12 @@
 
 #ifndef AFB_68060
 #define AFB_68060 7
-#define AFF_68060 (1<<AFB_68060)
+#define AFF_68060 (1 << AFB_68060)
 #endif
 
 #ifndef AFB_68080
 #define AFB_68080 10
-#define AFF_68080 (1<<AFB_68080)
+#define AFF_68080 (1 << AFB_68080)
 #endif
 
 /**********************************************************
