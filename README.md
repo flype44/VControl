@@ -4,32 +4,17 @@
 
 The purpose of VControl is to bring some valuable informations and controls over the Vampire boards.
 
+
+# Releases
+
+VControl 1.15 (1.6.2020)
+
 Latest official binary releases :
 
 https://www.apollo-accelerators.com/wiki/doku.php/saga:updates
 
-# Build instructions
-
-To compile VControl you need :
-
-**SAS/C** 6.59 for AmigaOS3 M68K
-
-**VASM** 1.8h for AmigaOS3 M68K
-
-Latest here :
-
-http://sun.hasenbraten.de/vasm/bin/rel/vasmm68k_mot_os3.lha
-
-
-Use the provided **smakefile**.
-
-CD to the project and type **smake**.
-
-<img src="BuildInstructions.png" />
 
 # Features
-
-VControl 1.15 (1.6.2020) (C) APOLLO-Team
 
 Command | Description
 ------------ | -------------
@@ -54,6 +39,25 @@ SS=SUPERSCALAR/N | Change the SuperScalar mode. 0=Off, 1=On
 TU=TURTLE/N | Change the Turtle mode. 0=Off, 1=On
 VB=VBRMOVE/N | Change the VBR location. 0=ChipRAM, 1=FastRAM
 MR=MAPROM | Map a ROM file
+
+
+# Build instructions
+
+To compile VControl you need :
+
+**SAS/C** 6.59 for AmigaOS3 M68K
+
+**VASM** 1.8h for AmigaOS3 M68K
+
+Latest here : http://sun.hasenbraten.de/vasm/bin/rel/vasmm68k_mot_os3.lha
+
+
+Use the provided **smakefile**.
+
+CD to the project and type **smake**.
+
+<img src="BuildInstructions.png" />
+
 
 # Screenshots
 
