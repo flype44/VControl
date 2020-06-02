@@ -147,12 +147,12 @@ v_read_sn_v4:
 
 _v_read_serialnumber:
 
-	; uint8_t _v_read_sn(uint8_t *buffer[18])
-	; D0                          A0
+	; uint32_t _v_read_serialnumber(uint8_t *buffer[18])
+	; D0                            A0
 	; 
-	; note:
-	; the provided buffer must be 18-bytes length, and
-	; should be initialized with "0000000000000000-0".
+	; Note:
+	; The provided buffer must be 18-bytes length, and
+	; it should be initialized with "0000000000000000-0".
 
 	movem.l  d2-d7,-(sp)            ; Push
 
