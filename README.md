@@ -52,9 +52,9 @@ To compile VControl you need :
 
 * **VASM** 1.8h for CBM AmigaOS3 M68K http://sun.hasenbraten.de/vasm/bin/rel/vasmm68k_mot_os3.lha
 
-Use the provided **smakefile**.
+* Use the provided **smakefile**.
 
-CD to the project and type **smake**.
+* CD to the project and type **smake**.
 
 <img src="BuildInstructions.png" />
 
