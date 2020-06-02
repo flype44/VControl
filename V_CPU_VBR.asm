@@ -31,14 +31,14 @@ _v_cpu_vbr:
 	move.l   $4.w,a6                     ; SysBase
 	btst     #AFB_68010,AttnFlags+1(a6)  ; Check if 68010+
 	beq.s    .exit                       ; Else, skip
-	lea.l    .supv(pc),a5                ; Code
+	lea.l    .super(pc),a5               ; Code
 	jsr      _LVOSupervisor(a6)          ; Supervisor(code)
 .exit
 	movem.l  (sp)+,a5/a6                 ; Restore registers
 	RTS                                  ; Return
-.supv:
+.super:
 	movec    VBR,d0                      ; Get VBR address
-	rte                                  ; Return Exception
+	RTE                                  ; Return Exception
 
 ;----------------------------------------------------------
 
