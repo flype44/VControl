@@ -16,10 +16,13 @@ https://www.apollo-accelerators.com/wiki/doku.php/saga:updates
 
 # Features
 
+* **/S** means **Switch**. Expect NO argument.
+* **/N** means **Number**. Expect a valid number as argument.
+
 Command | Description
 ------------ | -------------
 HELP/S | This help
-DE=DETECT/S | Return TRUE if AC68080 is detected
+DE=DETECT/S | Return AC68080 detection is $RC
 BO=BOARD/S | Output Board Informations
 BI=BOARDID/S | Output Board Identifier
 BN=BOARDNAME/S | Output Board Name
