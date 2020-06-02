@@ -48,12 +48,9 @@ MR=MAPROM | Map a ROM file
 
 To compile VControl you need :
 
-**SAS/C** 6.59 for AmigaOS3 M68K
+* **SAS/C** 6.59 for CBM AmigaOS3 M68K
 
-**VASM** 1.8h for AmigaOS3 M68K
-
-Latest here : http://sun.hasenbraten.de/vasm/bin/rel/vasmm68k_mot_os3.lha
-
+* **VASM** 1.8h for CBM AmigaOS3 M68K http://sun.hasenbraten.de/vasm/bin/rel/vasmm68k_mot_os3.lha
 
 Use the provided **smakefile**.
 
