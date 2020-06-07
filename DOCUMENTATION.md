@@ -1,6 +1,6 @@
 # Documentation
 
-This article intends to describe all the commands provided in the `VControl` program.
+This article describe all the commands provided in the `VControl` program.
 
 It always refers to the latest version. Take care using latest version in your scripts.
 
