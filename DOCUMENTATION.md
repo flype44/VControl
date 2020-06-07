@@ -61,16 +61,19 @@ OUTPUT :
 * Returns DOS WARN ($RC = 5) if failed.
 
 ```
-C:VControl CORE
+> C:VControl CORE
 Vampire 1200 V2 Apollo rev 7389B x12 (Gold 2.12)
->
+> 
 ```
 
 
 # VControl SETENV
 
-SYNOPSIS:
-This command will creates the `VControl Environment Variables` into ENV:
+SYNOPSIS :
+
+This command will creates the `VControl Environment Variables` into `ENV:`
+
+As a consequency, `ENV:` assign MUST BE initialized before executing this command.
 
 INPUT :
 * None
@@ -128,8 +131,10 @@ ENDIF
 
 # VControl VBRMOVE 0/1
 
-SYNOPSIS:
+SYNOPSIS :
+
 This command change the `Vector Base Register` location.
+
 It is compatible with VBRControl http://aminet.net/package/util/sys/vbrcontrol
 
 INPUT :
@@ -141,8 +146,8 @@ OUTPUT :
 * Returns DOS WARN ($RC = 5) if failed.
 
 ```
-C:VControl VBRMOVE 0 ; Relocate the VBR in CHIP memory (ADDRESS: 0x00000000)
-C:VControl CPU ; Check the effect of the previous command. See VBR line.
+> C:VControl VBRMOVE 0 ; Relocate the VBR in CHIP memory (ADDRESS: 0x00000000)
+> C:VControl CPU ; Check the effect of the previous command. See VBR line.
 Processor informations :
 
 CPU:  AC68080 @ 85 MHz (x12) (2p)
@@ -151,12 +156,12 @@ PCR:  0x04400001 (ID: 0440) (REV: 0) (DFP: Off) (ESS: On)
 VBR:  0x00000000 (Vector base is located in CHIP Ram)
 CACR: 0x80008000 (InstCache: On) (DataCache: On)
 ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
-
+> 
 ```
 
 ```
-C:VControl VBRMOVE 1 ; Relocate the VBR in FAST memory (ADDRESS: NON 0x00000000)
-C:VControl CPU ; Check the effect of the previous command. See VBR line.
+> C:VControl VBRMOVE 1 ; Relocate the VBR in FAST memory (ADDRESS: NON 0x00000000)
+> C:VControl CPU ; Check the effect of the previous command. See VBR line.
 Processor informations :
 
 CPU:  AC68080 @ 85 MHz (x12) (2p)
@@ -165,21 +170,26 @@ PCR:  0x04400001 (ID: 0440) (REV: 0) (DFP: Off) (ESS: On)
 VBR:  0x088599C8 (Vector base is located in FAST Ram)
 CACR: 0x80008000 (InstCache: On) (DataCache: On)
 ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
-
+> 
 ```
 
 
 # VControl MAPROM
 
-SYNOPSIS:
+SYNOPSIS :
+
 This command map a 256KB or 512KB or 1MB ROM file and reboot the system.
+
+This command does a RAW maprom, the input file remains untouched and mapped as is.
 
 INPUT :
 * A valid ROM file
 
 OUTPUT :
-* Reboot the system
+* Reboot the system if successful.
+* Returns DOS WARN ($RC = 5) if failed.
 
 ```
-C:VControl MAPROM=C:Diag.ROM
+> C:VControl MAPROM=C:Diag.ROM
+> 
 ```
