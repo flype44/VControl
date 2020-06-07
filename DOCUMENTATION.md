@@ -59,11 +59,12 @@ For more informations about the `Amiga DOS command line arguments`,
 
 Please refer to the official documentations :
 
-https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#Template
+[AmigaDOS TEMPLATES](https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#Template)
 
-https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#IF
+[AmigaDOS IF/ELSE](https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#IF)
 
-https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Using_Scripts
+[AmigaDOS SCRIPTS](https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Using_Scripts)
+
 
 **EXAMPLES :**
 
