@@ -640,8 +640,8 @@ It changes the VESA `Display Power Management Signaling` (DPMS) level, through t
 
 **INPUT :**
 
-* DPMS=0 : Turn ON the display.
-* DPMS=1 : Turn OFF the display.
+* `DPMS=0` : Turn ON the display.
+* `DPMS=1` : Turn OFF the display.
 
 **OUTPUT :**
 
