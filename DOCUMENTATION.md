@@ -350,18 +350,18 @@ Some of them are controllable from `VControl`, eg. FPU, SuperScalar, Turtle, Vec
 **DETAILS :**
 
 ```
-* **CPU**:  Model @ Frequency (Multiplier) (Pipe Count)
-* **FPU**:  Detection and Status
-* **PCR**:  Processor Control Register
-	* **ID**:  Processor Identifier
-	* **REV**: Processor Revision
-	* **DFP**: Disable Floating Point bit
-	* **ESS**: Enable SuperScalar bit
-* **VBR**:  Vector Base Register
-* **CACR**: Cache Control Register
-	* **InstCache**: Instruction Cache bit
-	* **DataCache**: Data Cache bit
-* **ATTN**: Exec -> AttnFlags bits
+* CPU:  Model @ Frequency (Multiplier) (Pipe Count)
+* FPU:  Detection and Status
+* PCR:  Processor Control Register
+	* ID:  Processor Identifier
+	* REV: Processor Revision
+	* DFP: Disable Floating Point bit
+	* ESS: Enable SuperScalar bit
+* VBR:  Vector Base Register
+* CACR: Cache Control Register
+	* InstCache: Instruction Cache bit
+	* DataCache: Data Cache bit
+* ATTN: Exec -> AttnFlags bits
 ```
 
 **EXAMPLES :**
