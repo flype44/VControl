@@ -73,7 +73,9 @@ https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Using_Scripts
 
 ```
 > C:VControl
+> C:VControl ?
 > C:VControl HELP
+> VERSION C:VControl FULL
 > 
 ```
 
