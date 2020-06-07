@@ -98,46 +98,86 @@ ENDIF
 
 # VControl BOARD
 
-SYNOPSIS :
+**SYNOPSIS :**
 
-INPUT :
+Description.
 
-OUTPUT :
+**INPUT :**
 
-EXAMPLES :
+* None
+
+**OUTPUT :**
+
+* None
+
+**EXAMPLES :**
+
+```
+...
+```
 
 
 # VControl BOARDID
 
 **SYNOPSIS :**
 
+Description.
+
 **INPUT :**
+
+* None
 
 **OUTPUT :**
 
+* None
+
 **EXAMPLES :**
+
+```
+...
+```
 
 
 # VControl BOARDNAME
 
 **SYNOPSIS :**
 
+Description.
+
 **INPUT :**
+
+* None
 
 **OUTPUT :**
 
+* None
+
 **EXAMPLES :**
+
+```
+...
+```
 
 
 # VControl BOARDSERIAL
 
 **SYNOPSIS :**
 
+Description.
+
 **INPUT :**
+
+* None
 
 **OUTPUT :**
 
+* None
+
 **EXAMPLES :**
+
+```
+...
+```
 
 
 # VControl CORE
@@ -210,44 +250,84 @@ ENDIF
 
 **SYNOPSIS :**
 
+Description.
+
 **INPUT :**
+
+* None
 
 **OUTPUT :**
 
+* None
+
 **EXAMPLES :**
+
+```
+...
+```
 
 
 # VControl HERTZ
 
 **SYNOPSIS :**
 
+Description.
+
 **INPUT :**
+
+* None
 
 **OUTPUT :**
 
+* None
+
 **EXAMPLES :**
+
+```
+...
+```
 
 
 # VControl MEMLIST
 
 **SYNOPSIS :**
 
+Description.
+
 **INPUT :**
+
+* None
 
 **OUTPUT :**
 
+* None
+
 **EXAMPLES :**
+
+```
+...
+```
 
 
 # VControl MODULES
 
 **SYNOPSIS :**
 
+Description.
+
 **INPUT :**
+
+* None
 
 **OUTPUT :**
 
+* None
+
 **EXAMPLES :**
+
+```
+...
+```
 
 
 # VControl SETENV
@@ -336,69 +416,126 @@ ENDIF
 
 **SYNOPSIS :**
 
+Description.
+
 **INPUT :**
+
+* None
 
 **OUTPUT :**
 
+* None
+
 **EXAMPLES :**
 
+```
+...
+```
 
 
 # VControl AKIKO
 
 **SYNOPSIS :**
 
+Description.
+
 **INPUT :**
 
-OUTPUT :
+* None
 
-EXAMPLES :
+**OUTPUT :**
 
+* None
+
+**EXAMPLES :**
+
+```
+...
+```
 
 
 # VControl DPMS
 
 **SYNOPSIS :**
 
+Description.
+
 **INPUT :**
+
+* None
 
 **OUTPUT :**
 
+* None
+
 **EXAMPLES :**
 
+```
+...
+```
 
 
 # VControl FPU
 
 **SYNOPSIS :**
 
+Description.
+
 **INPUT :**
+
+* None
 
 **OUTPUT :**
 
+* None
+
 **EXAMPLES :**
 
+```
+...
+```
 
 
 # VControl IDESPEED
 
 **SYNOPSIS :**
 
+Description.
+
 **INPUT :**
+
+* None
 
 **OUTPUT :**
 
+* None
+
 **EXAMPLES :**
 
+```
+...
+```
 
 
 # VControl SDCLOCKSPEED
 
-**SYNOPSIS:**
+**SYNOPSIS :**
+
+Description.
 
 **INPUT :**
 
+* None
+
 **OUTPUT :**
+
+* None
+
+**EXAMPLES :**
+
+```
+...
+```
 
 
 # VControl SUPERSCALAR
