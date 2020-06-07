@@ -50,6 +50,16 @@ TU=TURTLE/N | Change the Turtle mode. 0=Off, 1=On
 VB=VBRMOVE/N | Change the VBR location. 0=ChipRAM, 1=FastRAM
 MR=MAPROM | Map a ROM file
 
+NOTE :
+
+For more informations about the Amiga DOS command line arguments, please refer to the official documentations :
+
+https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#Template
+
+https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#IF
+
+https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Using_Scripts
+
 
 # VControl CORE
 
@@ -76,6 +86,42 @@ Vampire 1200 V2 Apollo rev 7389B x12 (Gold 2.12)
 > 
 ```
 
+
+# VControl CORE
+
+SYNOPSIS:
+
+This command parse the `Revision Number` contained into the Vampire `Core Revision String` from its internal Flash chip.
+
+The `Core Revision String` is only present in the official AmigaOS Flash Binary cores provided by the APOLLO-Team.
+
+This means this feature can **NOT** work on cores provided in the `Quartus .JIC` forms.
+
+INPUT :
+
+* None
+
+OUTPUT :
+
+* Returns DOS OK ($RC = 0) if successful.
+* Returns DOS WARN ($RC = 5) if failed.
+
+```
+> C:VControl COREREV
+7389
+> 
+```
+
+```
+C:VControl COREREV >ENV:REVISION
+IF NOT WARN
+	IF $REVISION NOT GE 7389
+		ECHO "Core is NOT up to date"
+	ELSE
+		ECHO "Core is up to date"
+	ENDIF
+ENDIF
+```
 
 # VControl SETENV
 
