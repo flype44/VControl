@@ -2,6 +2,11 @@
 
 Below are all the supported commands.
 
+**WARNING** :
+
+This documentation is still Work In Progress.
+
+
 ```HELP/S            This help
 DE=DETECT/S       Return TRUE if AC68080 is detected
 BO=BOARD/S        Output Board Informations
@@ -32,7 +37,6 @@ MR=MAPROM         Map a ROM file
 
 Below are concrete examples where/when/how to use VControl.
 
-_WARNING_: This documentation is still Work In Progress.
 
 
 # HOW TO : VControl SETENV
