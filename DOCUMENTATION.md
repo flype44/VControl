@@ -46,7 +46,12 @@ MR=MAPROM         Map a ROM file
 # VControl CORE
 
 SYNOPSIS:
+
 This command reads the Vampire Core Revision String from its internal Flash chip.
+
+The `Core Revision String` is only present in the official AmigaOS Flash Binary cores provided by the APOLLO-Team.
+
+This means this feature can **NOT** work on cores provided in the `Quartus .JIC` forms.
 
 INPUT :
 * None
@@ -54,11 +59,6 @@ INPUT :
 OUTPUT :
 * Returns DOS OK ($RC = 0) if successful.
 * Returns DOS WARN ($RC = 5) if failed.
-
-
-WARNING:
-
-The `Core Revision String` is only present in the official AmigaOS Flash Binary cores provided by the APOLLO-Team
 
 ```
 C:VControl CORE
