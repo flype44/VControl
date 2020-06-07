@@ -697,10 +697,10 @@ NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 
 **INPUT :**
 
-* IDESPEED=0 : PIO `Mode 0` → Very old hard disks and CD/DVD drives. Default at boot.
-* IDESPEED=1 : PIO `Mode 4` → Most hard disks and CD/DVD drives, and for very old CompactFlash cards.
-* IDESPEED=2 : PIO `Mode 5` → Most CompactFlash cards.
-* IDESPEED=3 : PIO `Mode 6` → Fast CompactFlash cards.
+* `IDESPEED=0` : PIO Mode 0 → Very old hard disks and CD/DVD drives. Default at boot.
+* `IDESPEED=1` : PIO Mode 4 → Most hard disks and CD/DVD drives, and for very old CompactFlash cards.
+* `IDESPEED=2` : PIO Mode 5 → Most CompactFlash cards.
+* `IDESPEED=3` : PIO Mode 6 → Fast CompactFlash cards.
 
 **OUTPUT :**
 
@@ -716,7 +716,8 @@ It should be added at the beginning of `S:Startup-Sequence` so that `FastIDE` is
 **EXAMPLES :**
 
 ```
-C:VControl IDESPEED=2
+> C:VControl IDESPEED=2
+> 
 ```
 
 
@@ -753,8 +754,8 @@ When enabled, the processor works faster, whenever appliable, and even more with
 
 **INPUT :**
 
-* SUPERSCALAR=0 : Disable the processor SUPERSCALAR mode (1 pipe mode).
-* SUPERSCALAR=1 : Enable the processor SUPERSCALAR mode (2 pipes mode).
+* `SUPERSCALAR=0` : Disable the processor SUPERSCALAR mode (1 pipe mode).
+* `SUPERSCALAR=1` : Enable the processor SUPERSCALAR mode (2 pipes mode).
 
 **OUTPUT :**
 
@@ -806,8 +807,8 @@ It eventually helps compatibility when launching old Amiga demos and games.
 
 **INPUT :**
 
-* TURTLE=0 : Disable the TURTLE slow mode.
-* TURTLE=1 : Enable the TURTLE slow mode.
+* `TURTLE=0` : Disable the TURTLE slow mode.
+* `TURTLE=1` : Enable the TURTLE slow mode.
 
 **OUTPUT :**
 
@@ -846,8 +847,8 @@ When the processor vectors are moved to FAST memory, it is supposed to increase 
 
 **INPUT :**
 
-* VBRMOVE=0 : Chip RAM
-* VBRMOVE=1 : Fast RAM
+* `VBRMOVE=0` : Chip RAM
+* `VBRMOVE=1` : Fast RAM
 
 **OUTPUT :**
 
