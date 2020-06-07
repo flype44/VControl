@@ -26,3 +26,60 @@ TU=TURTLE/N       Change the Turtle mode. 0=Off, 1=On
 VB=VBRMOVE/N      Change the VBR location. 0=ChipRAM, 1=FastRAM
 MR=MAPROM         Map a ROM file
 ```
+
+
+# Examples
+
+Below are concrete examples where/when/how to use VControl.
+
+_WARNING_: This documentation is still Work In Progress.
+
+
+# HOW TO : VControl SETENV
+
+This command will creates the Environment Variables into ENV:
+If succesful, it returns OK ($RC = 0). Else WARN ($RC = 5).
+
+* $VCoreRev
+* $VCoreFreq
+* $VCoreMult
+* $VBoardID
+* $VBoardName
+
+Below is an example of how to use `VControl SETENV`.
+
+```
+C:VControl SE >NIL:
+
+IF NOT WARN
+
+	ECHO $VBoardName
+
+	IF $VBoardID EQ 6
+		ECHO "Enjoy your Vampire V1200"
+	ENDIF
+
+	IF $VCoreRev NOT GE 7390
+		ECHO "Core is out dated, please download latest"
+	ELSE
+		ECHO "Core is up to date"
+	ENDIF
+
+ENDIF
+```
+
+```
+IF $VBoardID EQ 0
+		ECHO "Vampire NOT detected"
+ELSE
+		ECHO "Vampire detected"
+ENDIF
+```
+
+```
+IF $VBoardID GT 0
+		ECHO "Vampire detected"
+ELSE
+		ECHO "Vampire NOT detected"
+ENDIF
+```
