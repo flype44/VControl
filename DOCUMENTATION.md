@@ -335,7 +335,9 @@ ENDIF
 
 **SYNOPSIS :**
 
-Description.
+This command collects and output informations about the Apollo Core 68080 processor, such as the CPU frequency, the FPU presence, the registers status, and more.
+
+Some of them are controllable from `VControl`, eg. FPU, SuperScalar, Turtle, VectorBase.
 
 **INPUT :**
 
@@ -343,12 +345,37 @@ Description.
 
 **OUTPUT :**
 
-* None
+* Print out informations about the Apollo Core 68080 processor.
+
+**DETAILS :**
+
+```
+* **CPU**:  Model @ Frequency (Multiplier) (Pipe Count)
+* **FPU**:  Detection and Status
+* **PCR**:  Processor Control Register
+	* **ID**:  Processor Identifier
+	* **REV**: Processor Revision
+	* **DFP**: Disable Floating Point bit
+	* **ESS**: Enable SuperScalar bit
+* **VBR**:  Vector Base Register
+* **CACR**: Cache Control Register
+	* **InstCache**: Instruction Cache bit
+	* **DataCache**: Data Cache bit
+* **ATTN**: Exec -> AttnFlags bits
+```
 
 **EXAMPLES :**
 
 ```
-...
+> C:VControl CPU
+Processor informations :
+
+CPU:  AC68080 @ 85 MHz (x12) (1p)
+FPU:  Is working.
+PCR:  0x04400001 (ID: 0440) (REV: 0) (DFP: Off) (ESS: On)
+VBR:  0x00000000 (Vector base is located in CHIP Ram)
+CACR: 0x80008000 (InstCache: On) (DataCache: On)
+ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
 ```
 
 
