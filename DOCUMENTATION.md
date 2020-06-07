@@ -108,7 +108,7 @@ ENDIF
 
 **SYNOPSIS :**
 
-Description.
+This command collects and output informations about the Vampire Board.
 
 **INPUT :**
 
@@ -116,12 +116,32 @@ Description.
 
 **OUTPUT :**
 
-* None
+* Print out informations about the Vampire Board.
 
 **EXAMPLES :**
 
 ```
-...
+C:VControl BOARD
+Board informations :
+
+Product-ID   : 6
+Product-Name : Vampire V1200
+Serial-Number: XXXXXXXXXXXXXXXX-X
+Designer     : Majsta
+Manufaturer  : APOLLO-Team (C)
+
+EClock Freq. : 7.09379 Hz (PAL)
+VBlank Freq. : 50 Hz
+Power  Freq. : 50 Hz
+
+Video Chip   : AGA Lisa (4203)
+Audio Chip   : Paula (8364 rev0)
+Akiko Chip   : Not detected (0x0000)
+Akiko C2P    : Uninitialized (0x00000000)
+
+Chip Memory  :   2.0 MB
+Fast Memory  : 126.5 MB
+Slow Memory  : 512.0 KB
 ```
 
 
@@ -129,7 +149,17 @@ Description.
 
 **SYNOPSIS :**
 
-Description.
+This command retrieve the Vampire `Board Identifier` model.
+
+List of the Vampire `Board Identifiers` :
+
+* 1 = V600
+* 2 = V500
+* 3 = V4 Accelerator
+* 4 = V666
+* 5 = V4 StandAlone
+* 6 = V1200
+* 7 = V4000
 
 **INPUT :**
 
@@ -137,12 +167,21 @@ Description.
 
 **OUTPUT :**
 
-* None
+* $RC = Vampire `Board Identifier` model (numeric).
 
 **EXAMPLES :**
 
 ```
-...
+C:VControl BOARDID
+> Echo $RC
+6
+```
+
+```
+C:VControl BOARDID >ENV:IDENTIFIER
+IF $IDENTIFIER EQ 6
+	ECHO "You have a V1200"
+ENDIF
 ```
 
 
