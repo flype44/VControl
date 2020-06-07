@@ -59,11 +59,11 @@ For more informations about the `Amiga DOS command line arguments`,
 
 Please refer to the official documentations :
 
-[AmigaDOS TEMPLATES](https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#Template)
+[AmigaDOS: TEMPLATES](https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#Template)
 
-[AmigaDOS IF/ELSE](https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#IF)
+[AmigaDOS: IF/ELSE](https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#IF)
 
-[AmigaDOS SCRIPTS](https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Using_Scripts)
+[AmigaDOS: SCRIPTS](https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Using_Scripts)
 
 
 **EXAMPLES :**
@@ -593,9 +593,8 @@ This may be needed when the graphics.library fail to detect the Akiko chip durin
 
 The graphics.library `WriteChunkyPixels()` function can benefits of such hardware, when detected and enabled.
 
-More information here :
+More information [here](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_3._guide/node033C.html).
 
-http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_3._guide/node033C.html
 
 **INPUT :**
 
@@ -651,9 +650,7 @@ It changes the VESA `Display Power Management Signaling` (DPMS) level, through t
 
 The Vampire P96 GFX Driver support the DPMS signals.
 
-Recommended tool : `DPMSManager` for energy-saving.
-
-http://aminet.net/package/util/blank/DPMSManager
+Recommended tool : [DPMSManager](http://aminet.net/package/util/blank/DPMSManager) for energy-saving.
 
 However, one may need to disable the display MANUALLY for various reasons, such as benchmarkings.
 
@@ -856,7 +853,7 @@ When the processor vectors are moved to FAST memory, it is supposed to increase 
 
 **NOTE :**
 
-This command is compatible with `VBRControl` http://aminet.net/package/util/sys/vbrcontrol
+This command is compatible with [VBRControl](http://aminet.net/package/util/sys/vbrcontrol).
 
 **EXAMPLES :**
 
