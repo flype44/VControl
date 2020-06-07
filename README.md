@@ -9,14 +9,13 @@ The purpose of VControl is to bring some valuable informations and controls over
 
 VControl 1.15 (1.6.2020)
 
-Latest official binary releases :
-
-https://www.apollo-accelerators.com/wiki/doku.php/saga:updates
+Latest official binary releases : [Download](https://www.apollo-accelerators.com/wiki/doku.php/saga:updates)
 
 
 # Features
 
-[RTFM !](DOCUMENTATION.md#documentation)
+Latest official documentation : [Open](DOCUMENTATION.md#documentation)
+
 
 Command | Description
 ------------ | -------------
@@ -51,7 +50,7 @@ To compile VControl you need :
 
 * **SAS/C** 6.59 for CBM AmigaOS3 M68K
 
-* **VASM** 1.8h for CBM AmigaOS3 M68K http://sun.hasenbraten.de/vasm/bin/rel/vasmm68k_mot_os3.lha
+* **VASM** 1.8h for CBM AmigaOS3 M68K [Download](http://sun.hasenbraten.de/vasm/bin/rel/vasmm68k_mot_os3.lha)
 
 * Use the provided **smakefile**.
 
