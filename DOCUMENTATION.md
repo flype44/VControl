@@ -28,27 +28,27 @@ Command | Description
 ------------ | -------------
 [HELP/S](#supported-commands) | This help
 [DE=DETECT/S](#vcontrol-detect) | Return AC68080 detection is $RC
-[BO=BOARD/S](#) | Output Board Informations
-[BI=BOARDID/S](#) | Output Board Identifier
-[BN=BOARDNAME/S](#) | Output Board Name
-[SN=BOARDSERIAL/S](#) | Output Board Serial Number
-[CO=CORE/S](#) | Output Core Revision String
-[CR=COREREV/S](#) | Output Core Revision Number
-[CP=CPU/S](#) | Output CPU informations
-[HZ=HERTZ/S](#) | Output CPU Frequency (Hertz)
-[ML=MEMLIST/S](#) | Output Memory list
-[MO=MODULES/S](#) | Output Modules list
-[SE=SETENV/S](#) | Create Environment Variables
-[AF=ATTNFLAGS/S](#) | Change the AttnFlags (Force 080's)
-[AK=AKIKO/S](#) | Change the GfxBase->ChunkyToPlanarPtr()
-[DP=DPMS/N](#) | Change the DPMS mode. 0=Off, 1=On
-[FP=FPU/N](#) | Change the FPU mode. 0=Off, 1=On
-[ID=IDESPEED/N](#) | Change the IDE speed. 0=Slow, 1=Fast, 2=Faster, 3=Fastest
-[SD=SDCLOCKDIV/N](#) | Change the SDPort Clock Divider. 0=Fastest, 255=Slowest
-[SS=SUPERSCALAR/N](#) | Change the SuperScalar mode. 0=Off, 1=On
-[TU=TURTLE/N](#) | Change the Turtle mode. 0=Off, 1=On
-[VB=VBRMOVE/N](#) | Change the VBR location. 0=ChipRAM, 1=FastRAM
-[MR=MAPROM](#) | Map a ROM file
+[BO=BOARD/S](#vcontrol-board) | Output Board Informations
+[BI=BOARDID/S](#vcontrol-boardid) | Output Board Identifier
+[BN=BOARDNAME/S](#vcontrol-boardname) | Output Board Name
+[SN=BOARDSERIAL/S](#vcontrol-boardserial) | Output Board Serial Number
+[CO=CORE/S](#vcontrol-core) | Output Core Revision String
+[CR=COREREV/S](#vcontrol-corerev) | Output Core Revision Number
+[CP=CPU/S](#vcontrol-cpu) | Output CPU informations
+[HZ=HERTZ/S](#vcontrol-hertz) | Output CPU Frequency (Hertz)
+[ML=MEMLIST/S](#vcontrol-memlist) | Output Memory list
+[MO=MODULES/S](#vcontrol-modules) | Output Modules list
+[SE=SETENV/S](#vcontrol-setenv) | Create Environment Variables
+[AF=ATTNFLAGS/S](#vcontrol-attnflags) | Change the AttnFlags (Force 080's)
+[AK=AKIKO/S](#vcontrol-akiko) | Change the GfxBase->ChunkyToPlanarPtr()
+[DP=DPMS/N](#vcontrol-dpms) | Change the DPMS mode. 0=Off, 1=On
+[FP=FPU/N](#vcontrol-fpu) | Change the FPU mode. 0=Off, 1=On
+[ID=IDESPEED/N](#vcontrol-idespeed) | Change the IDE speed. 0=Slow, 1=Fast, 2=Faster, 3=Fastest
+[SD=SDCLOCKDIV/N](#vcontrol-sdclockdiv) | Change the SDPort Clock Divider. 0=Fastest, 255=Slowest
+[SS=SUPERSCALAR/N](#vcontrol-superscalar) | Change the SuperScalar mode. 0=Off, 1=On
+[TU=TURTLE/N](#vcontrol-turtle) | Change the Turtle mode. 0=Off, 1=On
+[VB=VBRMOVE/N](#vcontrol-vbrmove) | Change the VBR location. 0=ChipRAM, 1=FastRAM
+[MR=MAPROM](#vcontrol-maprom) | Map a ROM file
 
 NOTE :
 
