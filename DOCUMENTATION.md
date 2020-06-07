@@ -88,7 +88,7 @@ OUTPUT :
 
 RESULTS :
 
-Variable Name | Description
+Variable | Description
 ------------ | -------------
 $VCoreRev | Core Revision Number (eg. 7589)
 $VCoreFreq | Core CPU Frequency (eg. 78 MHz)
