@@ -383,7 +383,11 @@ ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
 
 **SYNOPSIS :**
 
-Description.
+This command determines the frequency (in MHz) of the `Apollo Core 68080` processor.
+
+On contrary to the usual Hardware method, this command use a `Software method` to determine the frequency.
+
+It calculate the real number of processor cycles occured in 1 second, using the AC68080 `Clock-Cycle Register`.
 
 **INPUT :**
 
@@ -391,12 +395,20 @@ Description.
 
 **OUTPUT :**
 
-* None
+* Returns DOS OK ($RC = 0) if successful.
+* Returns DOS WARN ($RC = 5) if failed.
+* A string representing the frequency and multiplier of the processor.
+
+**NOTE :**
+
+This command takes 1 second to execute (blocking), on purpose.
 
 **EXAMPLES :**
 
 ```
-...
+> C:VControl HERTZ
+AC68080 @ 85 MHz (x12)
+>
 ```
 
 
