@@ -462,6 +462,8 @@ This command will creates the `VControl Environment Variables` into `ENV:`
 
 As a consequency, `ENV:` assign **MUST** be initialized before executing this command.
 
+Those variables are intended to make life easier for scripting usages.
+
 **INPUT :**
 
 * None
@@ -476,21 +478,26 @@ As a consequency, `ENV:` assign **MUST** be initialized before executing this co
 Variable | Description | Example
 ------------ | ------------ | ------------
 $VCoreRev | Core Revision Number | 7589
-$VCoreFreq | Core CPU Frequency | 78
-$VCoreMult | Core CPU Multiplier | 11
+$VCoreFreq | Core CPU Frequency | 85
+$VCoreMult | Core CPU Multiplier | 12
 $VBoardID | Board Identifier model | 6
 $VBoardName | Board Short Name | V1200
+
+**NOTE :**
+
+The variables are created **ONLY** if a Vampire is detected.
 
 **EXAMPLES :**
 
 ```
-> C:VControl SE
+> C:VControl SETENV
 > Echo AC68080 @ $VCoreFreq MHz (x$VCoreMult)
 AC68080 @ 85 MHz (x12)
+> 
 ```
 
 ```
-C:VControl SE >NIL:
+C:VControl SETENV >NIL:
 
 IF NOT WARN
 
