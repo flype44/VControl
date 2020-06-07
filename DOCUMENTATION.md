@@ -12,6 +12,9 @@ It always refers to the latest version. Take care using latest version in your s
 
 This documentation is still heavily in `Work In Progress` status.
 
+
+# Releases
+
 Latest `VControl` binaries are officially distributed from here :
 
 https://www.apollo-accelerators.com/wiki/doku.php/saga:updates
@@ -21,7 +24,7 @@ Latest `Vampire Cores` are officially distributed from here :
 https://www.apollo-accelerators.com/wiki/doku.php/vampire:accelerator_core_updates
 
 
-# Supported Commands
+# Commands
 
 Below are all the supported commands.
 
@@ -30,7 +33,7 @@ Below are all the supported commands.
 
 Command | Description
 ------------ | -------------
-[HELP/S](#supported-commands) | This help
+[HELP/S](#commands) | This help
 [DE=DETECT/S](#vcontrol-detect) | Return AC68080 detection is $RC
 [BO=BOARD/S](#vcontrol-board) | Output Board Informations
 [BI=BOARDID/S](#vcontrol-boardid) | Output Board Identifier
