@@ -473,13 +473,13 @@ As a consequency, `ENV:` assign **MUST** be initialized before executing this co
 
 **RESULTS :**
 
-Variable | Description
------------- | -------------
-$VCoreRev | Core Revision Number (eg. 7589)
-$VCoreFreq | Core CPU Frequency (eg. 78 MHz)
-$VCoreMult | Core CPU Multiplier (eg. x11)
-$VBoardID | Board Identifier model (eg. 6)
-$VBoardName | Board Short Name (eg. V1200)
+Variable | Description | Example
+------------ | ------------ | ------------
+$VCoreRev | Core Revision Number | 7589
+$VCoreFreq | Core CPU Frequency | 78
+$VCoreMult | Core CPU Multiplier | 11
+$VBoardID | Board Identifier model | 6
+$VBoardName | Board Short Name | V1200
 
 **EXAMPLES :**
 
@@ -819,7 +819,11 @@ Turtle: Enabled.
 
 **SYNOPSIS :**
 
-This command change the processor `Vector Base Register` location. The processor vectors will be moved to a new location, either in CHIP memory (VBRMOVE=0) or in FAST memory (VBRMOVE=1). When the processor vectors are moved to FAST memory, it is supposed to increase the system speed, a little.
+This command change the processor `Vector Base Register` location.
+
+The processor vectors will be moved to a new location, either in CHIP memory (VBRMOVE=0) or in FAST memory (VBRMOVE=1).
+
+When the processor vectors are moved to FAST memory, it is supposed to increase the system speed, a little.
 
 **INPUT :**
 
@@ -872,7 +876,7 @@ ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
 
 This command map a `256KB` or `512KB` or `1MB` valid ROM file and REBOOT the system.
 
-This command does a RAW maprom, the input file content remains unchecked, untouched and mapped as is.
+It does a RAW maprom, the input file content remains unchecked, untouched and mapped as is.
 
 **INPUT :**
 
