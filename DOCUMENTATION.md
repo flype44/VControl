@@ -54,9 +54,11 @@ The `Core Revision String` is only present in the official AmigaOS Flash Binary 
 This means this feature can **NOT** work on cores provided in the `Quartus .JIC` forms.
 
 INPUT :
+
 * None
 
 OUTPUT :
+
 * Returns DOS OK ($RC = 0) if successful.
 * Returns DOS WARN ($RC = 5) if failed.
 
@@ -76,11 +78,15 @@ This command will creates the `VControl Environment Variables` into `ENV:`
 As a consequency, `ENV:` assign MUST BE initialized before executing this command.
 
 INPUT :
+
 * None
 
 OUTPUT :
+
 * Returns DOS OK ($RC = 0) if successful.
 * Returns DOS WARN ($RC = 5) if failed.
+
+RESULTS :
 
 Variable Name | Description
 ------------ | -------------
@@ -142,10 +148,12 @@ When the processor vectors are moved to FAST memory, it is supposed to increase 
 NOTE: It is compatible with VBRControl http://aminet.net/package/util/sys/vbrcontrol
 
 INPUT :
+
 * VBRMOVE=0 : Chip RAM
 * VBRMOVE=1 : Fast RAM
 
 OUTPUT :
+
 * Returns DOS OK ($RC = 0) if successful.
 * Returns DOS WARN ($RC = 5) if failed.
 
@@ -182,16 +190,27 @@ ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
 
 SYNOPSIS :
 
-This command map a 256KB or 512KB or 1MB ROM file and reboot the system.
+This command map a 256KB or 512KB or 1MB valid ROM file and REBOOT the system.
 
-This command does a RAW maprom, the input file remains untouched and mapped as is.
+This command does a RAW maprom, the input file content remains unchecked, untouched and mapped as is.
 
 INPUT :
+
 * A valid ROM file
 
 OUTPUT :
+
 * Reboot the system if successful.
 * Returns DOS WARN ($RC = 5) if failed.
+
+NOTE :
+
+* The mapped ROM will survive from a `WARM REBOOT`.
+
+* The mapped ROM will NOT survive from a `POWER OFF`.
+
+* Shutdown the system if the mapped ROM gives troubles.
+
 
 ```
 > C:VControl MAPROM=C:Diag.ROM
