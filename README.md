@@ -2,7 +2,7 @@
 
 (C) Copyright 2016-2020 APOLLO-Team
 
-The purpose of VControl is to bring some valuable informations and controls over the Vampire boards.
+The purpose of `VControl` is to bring some valuable informations and controls over the Vampire boards.
 
 
 # Releases
@@ -48,13 +48,13 @@ MR=MAPROM | Map a ROM file
 
 To compile VControl you need :
 
-* **SAS/C** 6.59 for CBM AmigaOS3 M68K
+* `SAS/C` 6.59 for CBM AmigaOS3 M68K
 
-* **VASM** 1.8h for CBM AmigaOS3 M68K [Download](http://sun.hasenbraten.de/vasm/bin/rel/vasmm68k_mot_os3.lha)
+* `VASM` 1.8h for CBM AmigaOS3 M68K [Download](http://sun.hasenbraten.de/vasm/bin/rel/vasmm68k_mot_os3.lha)
 
-* Use the provided **smakefile**.
+* Use the provided `smakefile`.
 
-* CD to the project and type **smake**.
+* `CD` to the project and type `smake`.
 
 <img src="BuildInstructions.png" />
 
