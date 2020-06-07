@@ -24,8 +24,8 @@ Latest `Vampire` cores are officially distributed from [here](https://www.apollo
 
 Below are all the supported commands.
 
-* `/S` means **Switch**. Expect NO argument.
-* `/N` means **Number**. Expect a valid number as argument.
+* `/S` means `Switch`. Expect NO argument.
+* `/N` means `Number`. Expect a valid number as argument.
 
 Command | Description
 ------------ | -------------
