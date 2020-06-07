@@ -61,6 +61,37 @@ https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#IF
 https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Using_Scripts
 
 
+# VControl DETECT
+
+SYNOPSIS:
+
+This command proceed a true `Apollo Core 68080` detection by checking the presence of the processor `PCR` register and the associated revision word (which should be `0x0440` for a 68080 CPU). As a consequence, this command does not rely on any Operating System prerequisites (such as the Exec->AttnFlags, or presence of some kickstart modules).
+
+INPUT :
+
+* None
+
+OUTPUT :
+
+* Returns DOS OK ($RC = 0) if detected.
+* Returns DOS WARN ($RC = 5) if not detected.
+
+```
+> C:VControl DETECT
+> Echo $RC
+0
+```
+
+```
+C:VControl DETECT
+IF WARN
+	ECHO "AC68080 NOT detected"
+ELSE
+	ECHO "AC68080 detected"
+ENDIF
+```
+
+
 # VControl CORE
 
 SYNOPSIS:
@@ -87,11 +118,11 @@ Vampire 1200 V2 Apollo rev 7389B x12 (Gold 2.12)
 ```
 
 
-# VControl CORE
+# VControl COREREV
 
 SYNOPSIS:
 
-This command parse the `Revision Number` contained into the Vampire `Core Revision String` from its internal Flash chip.
+This command parse the `Revision Number` contained into the Vampire `Core Revision String`.
 
 The `Core Revision String` is only present in the official AmigaOS Flash Binary cores provided by the APOLLO-Team.
 
