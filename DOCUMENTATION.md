@@ -203,7 +203,7 @@ ENDIF
 
 **SYNOPSIS :**
 
-Description.
+This command ouput the Vampire Board short name based on the `Board Identifier` model.
 
 **INPUT :**
 
@@ -211,12 +211,21 @@ Description.
 
 **OUTPUT :**
 
-* None
+* Print out the Vampire Board short name
 
 **EXAMPLES :**
 
 ```
-...
+> C:VControl BOARDNAME
+V1200
+>
+```
+
+```
+> C:VControl BOARDNAME >ENV:NAME
+> Echo $NAME
+V1200
+>
 ```
 
 
@@ -224,7 +233,7 @@ Description.
 
 **SYNOPSIS :**
 
-Description.
+This command retrieve the Vampire Board `Serial Number`.
 
 **INPUT :**
 
@@ -232,12 +241,27 @@ Description.
 
 **OUTPUT :**
 
-* None
+* Print out the Vampire Board `Serial Number`.
+
+**NOTE :**
+
+Implemented and works for `V500`, `V600`, `V1200`.
+
+Implemented and **NOT** works for `V4`, for now.
 
 **EXAMPLES :**
 
 ```
-...
+> C:VControl BOARDSERIAL
+XXXXXXXXXXXXXXX-X
+>
+```
+
+```
+> C:VControl BOARDSERIAL >ENV:SERIAL
+> Echo $SERIAL
+XXXXXXXXXXXXXXX-X
+>
 ```
 
 
