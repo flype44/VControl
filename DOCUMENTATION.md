@@ -201,7 +201,7 @@ ENDIF
 
 **SYNOPSIS :**
 
-This command ouput the Vampire Board short name based on the `Board Identifier` model.
+This command ouput the Vampire `Board Short Name` based on the `Board Identifier` model.
 
 **INPUT :**
 
