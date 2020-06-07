@@ -501,7 +501,19 @@ ENDIF
 
 **SYNOPSIS :**
 
-Description.
+This command change the Operating System `Exec -> AttnFlags` in order to forces the usual AC68080's.
+
+It can be handy when MapROM'ing some ROM which do not initialize the AC68080 Exec flags.
+
+Those flags are forced :
+
+* AFF_68010
+* AFF_68020
+* AFF_68030
+* AFF_68040
+* AFF_68080
+
+(!) This function is reserved for testings and may change in future (!)
 
 **INPUT :**
 
@@ -509,12 +521,14 @@ Description.
 
 **OUTPUT :**
 
-* None
+* Returns DOS OK ($RC = 0).
 
 **EXAMPLES :**
 
 ```
-...
+> C:VControl ATTNFLAGS
+AttnFlags : 0x847f
+>
 ```
 
 
@@ -522,7 +536,15 @@ Description.
 
 **SYNOPSIS :**
 
-Description.
+This command check the presence of the `CD32 Akiko Chip`, check if the graphics.library is `V40+`, and update the `GfxBase -> ChunkyToPlanarPtr` address if necessary.
+
+This may be needed when the graphics.library fail to detect the Akiko chip during the boot process.
+
+The graphics.library `WriteChunkyPixels()` function can benefits of such hardware, when detected and enabled.
+
+More information here :
+
+http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_3._guide/node033C.html
 
 **INPUT :**
 
@@ -530,12 +552,29 @@ Description.
 
 **OUTPUT :**
 
-* None
+* Returns DOS OK ($RC = 0) if successful.
+* Returns DOS WARN ($RC = 5) if failed (Akiko Chip or V40 not found).
+
+**NOTE :**
+
+Theorically, it's only aiming `AGA` Amiga machines.
+
+Currentely compatible with the `Vampire V4` model.
+
+Planned for the `Vampire V1200` in future core.
 
 **EXAMPLES :**
 
 ```
-...
+> C:VControl AKIKO
+V40+ GfxBase->ChunkyToPlanarPtr() initialized.
+> 
+```
+
+```
+> C:VControl AKIKO
+V40+ or Akiko not detected
+> 
 ```
 
 
