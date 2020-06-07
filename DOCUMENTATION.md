@@ -178,6 +178,13 @@ C:VControl BOARDID
 ```
 
 ```
+C:VControl BOARDID
+IF $RC EQ 6
+	ECHO "You have a V1200"
+ENDIF
+```
+
+```
 C:VControl BOARDID >ENV:IDENTIFIER
 IF $IDENTIFIER EQ 6
 	ECHO "You have a V1200"
