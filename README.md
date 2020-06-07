@@ -38,7 +38,7 @@ FPU | Change the FPU mode
 IDESPEED | Change the IDE speed
 SDCLOCKDIV | Change the SDPort Clock Divider
 SUPERSCALAR | Change the SuperScalar mode
-TURTLE/N | Change the Turtle mode
+TURTLE | Change the Turtle mode
 VBRMOVE | Change the VBR location
 MAPROM | Map a ROM file
 
