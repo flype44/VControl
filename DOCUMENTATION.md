@@ -62,6 +62,9 @@ https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#IF
 
 https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Using_Scripts
 
+```
+> C:VControl HELP
+> 
 
 # VControl DETECT
 
