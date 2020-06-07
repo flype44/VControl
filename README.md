@@ -16,8 +16,7 @@ https://www.apollo-accelerators.com/wiki/doku.php/saga:updates
 
 # Features
 
-* **/S** means **Switch**. Expect NO argument.
-* **/N** means **Number**. Expect a valid number as argument.
+[RTFM !](DOCUMENTATION.md#documentation)
 
 Command | Description
 ------------ | -------------
