@@ -17,7 +17,7 @@ This documentation is still heavily in `Work In Progress` status.
 
 Latest `VControl` binaries are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/saga:updates). 
 
-Latest `Vampire Cores` are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/vampire:accelerator_core_updates). 
+Latest `Vampire` cores are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/vampire:accelerator_core_updates). 
 
 
 # Commands
