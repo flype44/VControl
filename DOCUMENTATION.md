@@ -472,6 +472,12 @@ $VBoardName | Board Short Name (eg. V1200)
 **EXAMPLES :**
 
 ```
+> C:VControl SE
+> Echo AC68080 @ $VCoreFreq MHz (x$VCoreMult)
+AC68080 @ 85 MHz (x12)
+```
+
+```
 C:VControl SE >NIL:
 
 IF NOT WARN
