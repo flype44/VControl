@@ -46,7 +46,7 @@ MR=MAPROM | Map a ROM file
 
 # Build instructions
 
-To compile VControl you need :
+To compile `VControl` you need :
 
 * `SAS/C` 6.59 for CBM AmigaOS3 M68K
 
