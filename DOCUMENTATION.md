@@ -52,7 +52,9 @@ Command | Description
 
 NOTE :
 
-For more informations about the Amiga DOS command line arguments, please refer to the official documentations :
+For more informations about the `Amiga DOS command line arguments`, 
+
+Please refer to the official documentations :
 
 https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#Template
 
@@ -63,7 +65,7 @@ https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Using_Scripts
 
 # VControl DETECT
 
-SYNOPSIS:
+SYNOPSIS :
 
 This command proceed a true `Apollo Core 68080` detection by checking the presence of the processor `PCR` register and the associated revision word (which should be `0x0440` for a 68080 CPU). As a consequence, this command does not rely on any Operating System prerequisites (such as the Exec->AttnFlags, or presence of some kickstart modules).
 
@@ -75,6 +77,8 @@ OUTPUT :
 
 * Returns DOS OK ($RC = 0) if detected.
 * Returns DOS WARN ($RC = 5) if not detected.
+
+EXAMPLES :
 
 ```
 > C:VControl DETECT
@@ -92,9 +96,53 @@ ENDIF
 ```
 
 
+# VControl BOARD
+
+SYNOPSIS :
+
+INPUT :
+
+OUTPUT :
+
+EXAMPLES :
+
+
+# VControl BOARDID
+
+SYNOPSIS :
+
+INPUT :
+
+OUTPUT :
+
+EXAMPLES :
+
+
+# VControl BOARDNAME
+
+SYNOPSIS :
+
+INPUT :
+
+OUTPUT :
+
+EXAMPLES :
+
+
+# VControl BOARDSERIAL
+
+SYNOPSIS :
+
+INPUT :
+
+OUTPUT :
+
+EXAMPLES :
+
+
 # VControl CORE
 
-SYNOPSIS:
+SYNOPSIS :
 
 This command reads the Vampire `Core Revision String` from its internal Flash chip.
 
@@ -111,6 +159,8 @@ OUTPUT :
 * Returns DOS OK ($RC = 0) if successful.
 * Returns DOS WARN ($RC = 5) if failed.
 
+EXAMPLES :
+
 ```
 > C:VControl CORE
 Vampire 1200 V2 Apollo rev 7389B x12 (Gold 2.12)
@@ -120,7 +170,7 @@ Vampire 1200 V2 Apollo rev 7389B x12 (Gold 2.12)
 
 # VControl COREREV
 
-SYNOPSIS:
+SYNOPSIS :
 
 This command parse the `Revision Number` contained into the Vampire `Core Revision String`.
 
@@ -136,6 +186,8 @@ OUTPUT :
 
 * Returns DOS OK ($RC = 0) if successful.
 * Returns DOS WARN ($RC = 5) if failed.
+
+EXAMPLES :
 
 ```
 > C:VControl COREREV
@@ -153,6 +205,50 @@ IF NOT WARN
 	ENDIF
 ENDIF
 ```
+
+# VControl CPU
+
+SYNOPSIS :
+
+INPUT :
+
+OUTPUT :
+
+EXAMPLES :
+
+
+# VControl HERTZ
+
+SYNOPSIS :
+
+INPUT :
+
+OUTPUT :
+
+EXAMPLES :
+
+
+# VControl MEMLIST
+
+SYNOPSIS :
+
+INPUT :
+
+OUTPUT :
+
+EXAMPLES :
+
+
+# VControl MODULES
+
+SYNOPSIS :
+
+INPUT :
+
+OUTPUT :
+
+EXAMPLES :
+
 
 # VControl SETENV
 
@@ -181,7 +277,7 @@ $VCoreMult | Core CPU Multiplier (eg. x11)
 $VBoardID | Board Identifier model (eg. 6)
 $VBoardName | Board Short Name (eg. V1200)
 
-Below are some examples of how to use those variables.
+EXAMPLES :
 
 ```
 C:VControl SE >NIL:
@@ -235,6 +331,169 @@ ELSE
 ENDIF
 ```
 
+
+# VControl ATTNFLAGS
+
+SYNOPSIS :
+
+INPUT :
+
+OUTPUT :
+
+EXAMPLES :
+
+
+
+# VControl AKIKO
+
+SYNOPSIS :
+
+INPUT :
+
+OUTPUT :
+
+EXAMPLES :
+
+
+
+# VControl DPMS
+
+SYNOPSIS :
+
+INPUT :
+
+OUTPUT :
+
+EXAMPLES :
+
+
+
+# VControl FPU
+
+SYNOPSIS :
+
+INPUT :
+
+OUTPUT :
+
+EXAMPLES :
+
+
+
+# VControl IDESPEED
+
+SYNOPSIS :
+
+INPUT :
+
+OUTPUT :
+
+EXAMPLES :
+
+
+
+# VControl SDCLOCKSPEED
+
+SYNOPSIS:
+
+INPUT :
+
+OUTPUT :
+
+
+# VControl SUPERSCALAR
+
+SYNOPSIS :
+
+This command enable or disable the so-called Apollo Core `SUPERSCALAR` mode (Default is Enabled).
+
+SuperScalar is processor feature which allow to execute 2 instructions per fetch, through a 2nd pipe.
+
+When enabled, the processor works faster, whenever appliable, and even more with programs compiled for (When compiled for MC68060).
+
+INPUT :
+
+* SUPERSCALAR=0 : Disable the processor SUPERSCALAR mode (1 pipe mode).
+* SUPERSCALAR=1 : Enable the processor SUPERSCALAR mode (2 pipes mode).
+
+OUTPUT :
+
+* Returns DOS OK ($RC = 0) if successful.
+* Returns DOS WARN ($RC = 5) if failed.
+
+EXAMPLES :
+
+```
+> C:VControl SUPERSCALAR 0 ; Disable SuperScalar.
+SuperScalar: Disabled.
+> C:VControl CPU ; Check the effect of the previous command. See PCR line.
+Processor informations :
+
+CPU:  AC68080 @ 85 MHz (x12) (1p)
+FPU:  Is working.
+PCR:  0x04400000 (ID: 0440) (REV: 0) (DFP: Off) (ESS: Off)
+VBR:  0x00000000 (Vector base is located in CHIP Ram)
+CACR: 0x80008000 (InstCache: On) (DataCache: On)
+ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
+> 
+```
+
+```
+> C:VControl SUPERSCALAR 1 ; Enable SuperScalar.
+SuperScalar: Enabled.
+> C:VControl CPU ; Check the effect of the previous command. See PCR line.
+Processor informations :
+
+CPU:  AC68080 @ 85 MHz (x12) (1p)
+FPU:  Is working.
+PCR:  0x04400001 (ID: 0440) (REV: 0) (DFP: Off) (ESS: On)
+VBR:  0x00000000 (Vector base is located in CHIP Ram)
+CACR: 0x80008000 (InstCache: On) (DataCache: On)
+ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
+> 
+```
+
+
+# VControl TURTLE
+
+SYNOPSIS :
+
+This command enable or disable the so-called Apollo Core `TURTLE` mode.
+
+This feature intends to **HEAVILY** slowdown the processor execution in order to approximate the `MC68000` / `MC68020` speed.
+
+It eventually helps compatibility when launching old Amiga demos and games.
+
+INPUT :
+
+* TURTLE=0 : Disable the TURTLE slow mode.
+* TURTLE=1 : Enable the TURTLE slow mode.
+
+OUTPUT :
+
+* Returns DOS OK ($RC = 0) if successful.
+* Returns DOS WARN ($RC = 5) if failed.
+
+EXAMPLES :
+
+```
+> C:VControl TURTLE 0
+Turtle: Disabled.
+> 
+```
+
+```
+> C:VControl TURTLE 1
+Turtle: Enabled.
+> 
+```
+
+```
+> C:VControl TURTLE 1 >NIL:
+> 
+```
+
+
 # VControl VBRMOVE
 
 SYNOPSIS :
@@ -255,8 +514,10 @@ NOTE :
 
 This command is compatible with `VBRControl` http://aminet.net/package/util/sys/vbrcontrol
 
+EXAMPLES :
+
 ```
-> C:VControl VBRMOVE 0 ; Relocate the VBR in CHIP memory (ADDRESS: 0x00000000)
+> C:VControl VBRMOVE 0 ; Relocate the VBR in CHIP memory.
 > C:VControl CPU ; Check the effect of the previous command. See VBR line.
 Processor informations :
 
@@ -270,7 +531,7 @@ ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
 ```
 
 ```
-> C:VControl VBRMOVE 1 ; Relocate the VBR in FAST memory (ADDRESS: NON 0x00000000)
+> C:VControl VBRMOVE 1 ; Relocate the VBR in FAST memory.
 > C:VControl CPU ; Check the effect of the previous command. See VBR line.
 Processor informations :
 
@@ -309,6 +570,7 @@ NOTE :
 
 * Shutdown the system if the mapped ROM gives troubles.
 
+EXAMPLES :
 
 ```
 > C:VControl MAPROM=C:Diag.ROM
