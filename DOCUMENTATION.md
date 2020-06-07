@@ -24,8 +24,8 @@ Latest `Vampire` cores are officially distributed from [here](https://www.apollo
 
 Below are all the supported commands.
 
-* **/S** means **Switch**. Expect NO argument.
-* **/N** means **Number**. Expect a valid number as argument.
+* `/S` means **Switch**. Expect NO argument.
+* `/N` means **Number**. Expect a valid number as argument.
 
 Command | Description
 ------------ | -------------
@@ -159,12 +159,12 @@ This command retrieve the Vampire `Board Identifier` model.
 
 List of the Vampire `Board Identifiers` :
 
-* `1` = V600
-* `2` = V500
-* `3` = V4 Accelerator
-* `4` = V666
-* `5` = V4 StandAlone
-* `6` = V1200
+* `1` : V600
+* `2` : V500
+* `3` : V4 Accelerator
+* `4` : V666
+* `5` : V4 StandAlone
+* `6` : V1200
 
 **INPUT :**
 
