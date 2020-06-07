@@ -253,14 +253,14 @@ Implemented and **NOT** works for `V4`, for now.
 
 ```
 > C:VControl BOARDSERIAL
-XXXXXXXXXXXXXXX-X
+0x26F0A280C118B206-4
 >
 ```
 
 ```
 > C:VControl BOARDSERIAL >ENV:SERIAL
 > Echo $SERIAL
-XXXXXXXXXXXXXXX-X
+0x26F0A280C118B206-4
 >
 ```
 
@@ -543,20 +543,30 @@ Description.
 
 **SYNOPSIS :**
 
-Description.
+This command tells the Graphics Driver to turn On/Off the monitor or TV that is connected to the Vampire Digital Video Out.
+
+It changes the VESA `Display Power Management Signaling` (DPMS) level, through the CGX API -> CVideoCtrlTagList().
 
 **INPUT :**
 
-* None
+* DPMS=0 : Turn ON the display.
+* DPMS=1 : Turn OFF the display.
 
 **OUTPUT :**
 
-* None
+* Returns DOS OK ($RC = 0) if successful.
+* Returns DOS WARN ($RC = 5) if failed (No compatible CGX API).
 
 **EXAMPLES :**
 
 ```
-...
+> C:VControl DPMS 0 ; Turn ON the display
+> 
+```
+
+```
+> C:VControl DPMS 1 ; Turn OFF the display
+> 
 ```
 
 
