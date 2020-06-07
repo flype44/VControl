@@ -50,7 +50,7 @@ Command | Description
 [VB=VBRMOVE/N](#vcontrol-vbrmove) | Change the VBR location. 0=ChipRAM, 1=FastRAM
 [MR=MAPROM](#vcontrol-maprom) | Map a ROM file
 
-NOTE :
+**NOTE :**
 
 For more informations about the `Amiga DOS command line arguments`, 
 
@@ -65,20 +65,20 @@ https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Using_Scripts
 
 # VControl DETECT
 
-SYNOPSIS :
+**SYNOPSIS :**
 
 This command proceed a true `Apollo Core 68080` detection by checking the presence of the processor `PCR` register and the associated revision word (which should be `0x0440` for a 68080 CPU). As a consequence, this command does not rely on any Operating System prerequisites (such as the Exec->AttnFlags, or presence of some kickstart modules).
 
-INPUT :
+**INPUT :**
 
 * None
 
-OUTPUT :
+**OUTPUT :**
 
 * Returns DOS OK ($RC = 0) if detected.
 * Returns DOS WARN ($RC = 5) if not detected.
 
-EXAMPLES :
+**EXAMPLES :**
 
 ```
 > C:VControl DETECT
@@ -109,40 +109,40 @@ EXAMPLES :
 
 # VControl BOARDID
 
-SYNOPSIS :
+**SYNOPSIS :**
 
-INPUT :
+**INPUT :**
 
-OUTPUT :
+**OUTPUT :**
 
-EXAMPLES :
+**EXAMPLES :**
 
 
 # VControl BOARDNAME
 
-SYNOPSIS :
+**SYNOPSIS :**
 
-INPUT :
+**INPUT :**
 
-OUTPUT :
+**OUTPUT :**
 
-EXAMPLES :
+**EXAMPLES :**
 
 
 # VControl BOARDSERIAL
 
-SYNOPSIS :
+**SYNOPSIS :**
 
-INPUT :
+**INPUT :**
 
-OUTPUT :
+**OUTPUT :**
 
-EXAMPLES :
+**EXAMPLES :**
 
 
 # VControl CORE
 
-SYNOPSIS :
+**SYNOPSIS :**
 
 This command reads the Vampire `Core Revision String` from its internal Flash chip.
 
@@ -150,16 +150,16 @@ The `Core Revision String` is only present in the official AmigaOS Flash Binary 
 
 This means this feature can **NOT** work on cores provided in the `Quartus .JIC` forms.
 
-INPUT :
+**INPUT :**
 
 * None
 
-OUTPUT :
+**OUTPUT :**
 
 * Returns DOS OK ($RC = 0) if successful.
 * Returns DOS WARN ($RC = 5) if failed.
 
-EXAMPLES :
+**EXAMPLES :**
 
 ```
 > C:VControl CORE
@@ -170,7 +170,7 @@ Vampire 1200 V2 Apollo rev 7389B x12 (Gold 2.12)
 
 # VControl COREREV
 
-SYNOPSIS :
+**SYNOPSIS :**
 
 This command parse the `Revision Number` contained into the Vampire `Core Revision String`.
 
@@ -178,16 +178,16 @@ The `Core Revision String` is only present in the official AmigaOS Flash Binary 
 
 This means this feature can **NOT** work on cores provided in the `Quartus .JIC` forms.
 
-INPUT :
+**INPUT :**
 
 * None
 
-OUTPUT :
+**OUTPUT :**
 
 * Returns DOS OK ($RC = 0) if successful.
 * Returns DOS WARN ($RC = 5) if failed.
 
-EXAMPLES :
+**EXAMPLES :**
 
 ```
 > C:VControl COREREV
@@ -208,66 +208,66 @@ ENDIF
 
 # VControl CPU
 
-SYNOPSIS :
+**SYNOPSIS :**
 
-INPUT :
+**INPUT :**
 
-OUTPUT :
+**OUTPUT :**
 
-EXAMPLES :
+**EXAMPLES :**
 
 
 # VControl HERTZ
 
-SYNOPSIS :
+**SYNOPSIS :**
 
-INPUT :
+**INPUT :**
 
-OUTPUT :
+**OUTPUT :**
 
-EXAMPLES :
+**EXAMPLES :**
 
 
 # VControl MEMLIST
 
-SYNOPSIS :
+**SYNOPSIS :**
 
-INPUT :
+**INPUT :**
 
-OUTPUT :
+**OUTPUT :**
 
-EXAMPLES :
+**EXAMPLES :**
 
 
 # VControl MODULES
 
-SYNOPSIS :
+**SYNOPSIS :**
 
-INPUT :
+**INPUT :**
 
-OUTPUT :
+**OUTPUT :**
 
-EXAMPLES :
+**EXAMPLES :**
 
 
 # VControl SETENV
 
-SYNOPSIS :
+**SYNOPSIS :**
 
 This command will creates the `VControl Environment Variables` into `ENV:`
 
 As a consequency, `ENV:` assign **MUST** be initialized before executing this command.
 
-INPUT :
+**INPUT :**
 
 * None
 
-OUTPUT :
+**OUTPUT :**
 
 * Returns DOS OK ($RC = 0) if successful.
 * Returns DOS WARN ($RC = 5) if failed.
 
-RESULTS :
+**RESULTS :**
 
 Variable | Description
 ------------ | -------------
@@ -277,7 +277,7 @@ $VCoreMult | Core CPU Multiplier (eg. x11)
 $VBoardID | Board Identifier model (eg. 6)
 $VBoardName | Board Short Name (eg. V1200)
 
-EXAMPLES :
+**EXAMPLES :**
 
 ```
 C:VControl SE >NIL:
@@ -334,21 +334,21 @@ ENDIF
 
 # VControl ATTNFLAGS
 
-SYNOPSIS :
+**SYNOPSIS :**
 
-INPUT :
+**INPUT :**
 
-OUTPUT :
+**OUTPUT :**
 
-EXAMPLES :
+**EXAMPLES :**
 
 
 
 # VControl AKIKO
 
-SYNOPSIS :
+**SYNOPSIS :**
 
-INPUT :
+**INPUT :**
 
 OUTPUT :
 
@@ -358,70 +358,70 @@ EXAMPLES :
 
 # VControl DPMS
 
-SYNOPSIS :
+**SYNOPSIS :**
 
-INPUT :
+**INPUT :**
 
-OUTPUT :
+**OUTPUT :**
 
-EXAMPLES :
+**EXAMPLES :**
 
 
 
 # VControl FPU
 
-SYNOPSIS :
+**SYNOPSIS :**
 
-INPUT :
+**INPUT :**
 
-OUTPUT :
+**OUTPUT :**
 
-EXAMPLES :
+**EXAMPLES :**
 
 
 
 # VControl IDESPEED
 
-SYNOPSIS :
+**SYNOPSIS :**
 
-INPUT :
+**INPUT :**
 
-OUTPUT :
+**OUTPUT :**
 
-EXAMPLES :
+**EXAMPLES :**
 
 
 
 # VControl SDCLOCKSPEED
 
-SYNOPSIS:
+**SYNOPSIS:**
 
-INPUT :
+**INPUT :**
 
-OUTPUT :
+**OUTPUT :**
 
 
 # VControl SUPERSCALAR
 
-SYNOPSIS :
+**SYNOPSIS :**
 
 This command enable or disable the so-called Apollo Core `SUPERSCALAR` mode (Default is Enabled).
 
-SuperScalar is processor feature which allow to execute 2 instructions per fetch, through a 2nd pipe.
+SuperScalar is processor feature which allow to `execute 2 instructions` per fetch, through a `2nd pipe`.
 
 When enabled, the processor works faster, whenever appliable, and even more with programs compiled for (When compiled for MC68060).
 
-INPUT :
+**INPUT :**
 
 * SUPERSCALAR=0 : Disable the processor SUPERSCALAR mode (1 pipe mode).
 * SUPERSCALAR=1 : Enable the processor SUPERSCALAR mode (2 pipes mode).
 
-OUTPUT :
+**OUTPUT :**
 
 * Returns DOS OK ($RC = 0) if successful.
 * Returns DOS WARN ($RC = 5) if failed.
 
-EXAMPLES :
+**EXAMPLES :**
 
 ```
 > C:VControl SUPERSCALAR 0 ; Disable SuperScalar.
@@ -456,7 +456,7 @@ ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
 
 # VControl TURTLE
 
-SYNOPSIS :
+**SYNOPSIS :**
 
 This command enable or disable the so-called Apollo Core `TURTLE` mode.
 
@@ -464,17 +464,17 @@ This feature intends to **HEAVILY** slowdown the processor execution in order to
 
 It eventually helps compatibility when launching old Amiga demos and games.
 
-INPUT :
+**INPUT :**
 
 * TURTLE=0 : Disable the TURTLE slow mode.
 * TURTLE=1 : Enable the TURTLE slow mode.
 
-OUTPUT :
+**OUTPUT :**
 
 * Returns DOS OK ($RC = 0) if successful.
 * Returns DOS WARN ($RC = 5) if failed.
 
-EXAMPLES :
+**EXAMPLES :**
 
 ```
 > C:VControl TURTLE 0
@@ -496,25 +496,25 @@ Turtle: Enabled.
 
 # VControl VBRMOVE
 
-SYNOPSIS :
+**SYNOPSIS :**
 
 This command change the processor `Vector Base Register` location. The processor vectors will be moved to a new location, either in CHIP memory (VBRMOVE=0) or in FAST memory (VBRMOVE=1). When the processor vectors are moved to FAST memory, it is supposed to increase the system speed, a little.
 
-INPUT :
+**INPUT :**
 
 * VBRMOVE=0 : Chip RAM
 * VBRMOVE=1 : Fast RAM
 
-OUTPUT :
+**OUTPUT :**
 
 * Returns DOS OK ($RC = 0) if successful.
 * Returns DOS WARN ($RC = 5) if failed.
 
-NOTE :
+**NOTE :**
 
 This command is compatible with `VBRControl` http://aminet.net/package/util/sys/vbrcontrol
 
-EXAMPLES :
+**EXAMPLES :**
 
 ```
 > C:VControl VBRMOVE 0 ; Relocate the VBR in CHIP memory.
@@ -547,22 +547,22 @@ ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
 
 # VControl MAPROM
 
-SYNOPSIS :
+**SYNOPSIS :**
 
 This command map a `256KB` or `512KB` or `1MB` valid ROM file and REBOOT the system.
 
 This command does a RAW maprom, the input file content remains unchecked, untouched and mapped as is.
 
-INPUT :
+**INPUT :**
 
 * A valid ROM file
 
-OUTPUT :
+**OUTPUT :**
 
 * Reboot the system if successful.
 * Returns DOS WARN ($RC = 5) if failed.
 
-NOTE :
+**NOTE :**
 
 * The mapped ROM will survive from a `WARM REBOOT`.
 
@@ -570,7 +570,7 @@ NOTE :
 
 * Shutdown the system if the mapped ROM gives troubles.
 
-EXAMPLES :
+**EXAMPLES :**
 
 ```
 > C:VControl MAPROM=C:Diag.ROM
