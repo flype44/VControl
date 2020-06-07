@@ -1,5 +1,9 @@
 # Documentation
 
+This article intends to describe all the commands provided in the `VControl` program.
+
+It always refers to the latest version. Take care using latest version in your scripts.
+
 **WARNING** :
 
 This documentation is still heavily in `Work In Progress` status.
@@ -47,7 +51,7 @@ MR=MAPROM         Map a ROM file
 
 SYNOPSIS:
 
-This command reads the Vampire Core Revision String from its internal Flash chip.
+This command reads the Vampire `Core Revision String` from its internal Flash chip.
 
 The `Core Revision String` is only present in the official AmigaOS Flash Binary cores provided by the APOLLO-Team.
 
@@ -75,7 +79,7 @@ SYNOPSIS :
 
 This command will creates the `VControl Environment Variables` into `ENV:`
 
-As a consequency, `ENV:` assign MUST BE initialized before executing this command.
+As a consequency, `ENV:` assign **MUST** be initialized before executing this command.
 
 INPUT :
 
@@ -139,7 +143,7 @@ ENDIF
 
 SYNOPSIS :
 
-This command change the processor `Vector Base Register` location. The processor vectors will be moved to a new location, either in CHIP memory (VBRMOVE=0) or in FAST memory (VBRMOVE=1). When the processor vectors are moved to FAST memory, it is supposed to increase the system speed.
+This command change the processor `Vector Base Register` location. The processor vectors will be moved to a new location, either in CHIP memory (VBRMOVE=0) or in FAST memory (VBRMOVE=1). When the processor vectors are moved to FAST memory, it is supposed to increase the system speed, a little.
 
 INPUT :
 
@@ -153,7 +157,7 @@ OUTPUT :
 
 NOTE :
 
-This command is compatible with VBRControl http://aminet.net/package/util/sys/vbrcontrol
+This command is compatible with `VBRControl` http://aminet.net/package/util/sys/vbrcontrol
 
 ```
 > C:VControl VBRMOVE 0 ; Relocate the VBR in CHIP memory (ADDRESS: 0x00000000)
@@ -188,7 +192,7 @@ ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
 
 SYNOPSIS :
 
-This command map a 256KB or 512KB or 1MB valid ROM file and REBOOT the system.
+This command map a `256KB` or `512KB` or `1MB` valid ROM file and REBOOT the system.
 
 This command does a RAW maprom, the input file content remains unchecked, untouched and mapped as is.
 
