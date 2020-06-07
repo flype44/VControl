@@ -2,7 +2,7 @@
 
 (C) Copyright 2016-2020 APOLLO-Team
 
-The purpose of `VControl` is to bring some valuable informations and controls over the Vampire boards.
+The purpose of `VControl` is to bring some valuable informations and controls over the `Vampire` boards.
 
 
 # Releases
