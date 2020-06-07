@@ -694,8 +694,6 @@ Description.
 This command change the Vampire `FastIDE` mode for faster-than-legacy `IDE` devices reads.
 
 NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
-NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
-NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 
 **INPUT :**
 
