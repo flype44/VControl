@@ -691,20 +691,32 @@ Description.
 
 **SYNOPSIS :**
 
-Description.
+This command change the Vampire `FastIDE` mode for faster-than-legacy `IDE` devices reads.
+
+CAUTION: NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 
 **INPUT :**
 
-* None
+* IDESPEED=0 → PIO Mode 0: For very old hard disks and CD/DVD drives. Default at boot.
+* IDESPEED=1 → PIO Mode 4: For most hard disks and CD/DVD drives, and for very old CompactFlash cards.
+* IDESPEED=2 → PIO Mode 5: For most CompactFlash cards.
+* IDESPEED=3 → PIO Mode 6: For fast CompactFlash cards.
 
 **OUTPUT :**
 
-* None
+* Returns DOS OK ($RC = 0) if successful.
+* Returns DOS WARN ($RC = 5) if failed.
+
+**NOTE :**
+
+This command applies only on compatible Vampire board, with an embedded `FastIDE` slot.
+
+It should be added at the beginning of `S:Startup-Sequence` so that `FastIDE` is enabled on every boot.
 
 **EXAMPLES :**
 
 ```
-...
+C:VControl IDESPEED=2
 ```
 
 
