@@ -70,16 +70,16 @@ ENDIF
 
 ```
 IF $VBoardID EQ 0
-		ECHO "Vampire NOT detected"
+	ECHO "Vampire NOT detected"
 ELSE
-		ECHO "Vampire detected"
+	ECHO "Vampire detected"
 ENDIF
 ```
 
 ```
 IF $VBoardID GT 0
-		ECHO "Vampire detected"
+	ECHO "Vampire detected"
 ELSE
-		ECHO "Vampire NOT detected"
+	ECHO "Vampire NOT detected"
 ENDIF
 ```
