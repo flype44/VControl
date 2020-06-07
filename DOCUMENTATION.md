@@ -1,5 +1,9 @@
 # Documentation
 
+(C) Copyright 2016-2020 APOLLO-Team
+
+The purpose of `VControl` is to bring some valuable informations and controls over the Vampire boards.
+
 This article describe all the commands provided in the `VControl` program.
 
 It always refers to the latest version. Take care using latest version in your scripts.
