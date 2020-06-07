@@ -26,12 +26,14 @@ DE=DETECT/S | Return AC68080 detection is $RC
 BO=BOARD/S | Output Board Informations
 BI=BOARDID/S | Output Board Identifier
 BN=BOARDNAME/S | Output Board Name
-SN=SERIALNUMBER/S | Output Board Serial Number
+SN=BOARDSERIAL/S | Output Board Serial Number
 CO=CORE/S | Output Core Revision String
+CR=COREREV/S | Output Core Revision Number
 CP=CPU/S | Output CPU informations
 HZ=HERTZ/S | Output CPU Frequency (Hertz)
 ML=MEMLIST/S | Output Memory list
 MO=MODULES/S | Output Modules list
+SE=SETENV/S | Create Environment Variables
 AF=ATTNFLAGS/S | Change the AttnFlags (Force 080's)
 AK=AKIKO/S | Change the GfxBase->ChunkyToPlanarPtr()
 DP=DPMS/N | Change the DPMS mode. 0=Off, 1=On
