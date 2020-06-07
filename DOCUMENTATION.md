@@ -1,6 +1,8 @@
 # Documentation
 
-Below are all the supported commands.
+**WARNING** :
+
+This documentation is still heavily in `Work In Progress` status.
 
 Latest `VControl` binaries are officially distributed from here :
 
@@ -11,11 +13,9 @@ Latest `Vampire Cores` are officially distributed from here :
 https://www.apollo-accelerators.com/wiki/doku.php/vampire:accelerator_core_updates
 
 
-**WARNING** :
-
-This documentation is still heavily in `Work In Progress` status.
-
 # Supported Commands
+
+Below are all the supported commands.
 
 ```HELP/S            This help
 DE=DETECT/S       Return TRUE if AC68080 is detected
@@ -43,12 +43,7 @@ MR=MAPROM         Map a ROM file
 ```
 
 
-# Examples
-
-Below are concrete examples where/when/how to use VControl.
-
-
-# HOW TO : VControl CORE
+# VControl CORE
 
 SYNOPSIS:
 This command reads the Vampire Core Revision String from its internal Flash chip.
@@ -72,7 +67,7 @@ Vampire 1200 V2 Apollo rev 7389B x12 (Gold 2.12)
 ```
 
 
-# HOW TO : VControl SETENV
+# VControl SETENV
 
 SYNOPSIS:
 This command will creates the `VControl Environment Variables` into ENV:
@@ -130,7 +125,51 @@ ELSE
 ENDIF
 ```
 
-# HOW TO : VControl MAPROM
+
+# VControl VBRMOVE 0/1
+
+SYNOPSIS:
+This command change the `Vector Base Register` location.
+It is compatible with VBRControl http://aminet.net/package/util/sys/vbrcontrol
+
+INPUT :
+* VBRMOVE=0 : Chip RAM
+* VBRMOVE=1 : Fast RAM
+
+OUTPUT :
+* Returns DOS OK ($RC = 0) if successful.
+* Returns DOS WARN ($RC = 5) if failed.
+
+```
+C:VControl VBRMOVE 0 ; Relocate the VBR in CHIP memory (ADDRESS: 0x00000000)
+C:VControl CPU ; Check the effect of the previous command. See VBR line.
+Processor informations :
+
+CPU:  AC68080 @ 85 MHz (x12) (2p)
+FPU:  Is working.
+PCR:  0x04400001 (ID: 0440) (REV: 0) (DFP: Off) (ESS: On)
+VBR:  0x00000000 (Vector base is located in CHIP Ram)
+CACR: 0x80008000 (InstCache: On) (DataCache: On)
+ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
+
+```
+
+```
+C:VControl VBRMOVE 1 ; Relocate the VBR in FAST memory (ADDRESS: NON 0x00000000)
+C:VControl CPU ; Check the effect of the previous command. See VBR line.
+Processor informations :
+
+CPU:  AC68080 @ 85 MHz (x12) (2p)
+FPU:  Is working.
+PCR:  0x04400001 (ID: 0440) (REV: 0) (DFP: Off) (ESS: On)
+VBR:  0x088599C8 (Vector base is located in FAST Ram)
+CACR: 0x80008000 (InstCache: On) (DataCache: On)
+ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
+
+```
+
+
+# VControl MAPROM
 
 SYNOPSIS:
 This command map a 256KB or 512KB or 1MB ROM file and reboot the system.
