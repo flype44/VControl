@@ -132,7 +132,7 @@ Board informations :
 
 Product-ID   : 6
 Product-Name : Vampire V1200
-Serial-Number: XXXXXXXXXXXXXXXX-X
+Serial-Number: 0000000000000000-0
 Designer     : Majsta
 Manufaturer  : APOLLO-Team (C)
 
@@ -159,13 +159,12 @@ This command retrieve the Vampire `Board Identifier` model.
 
 List of the Vampire `Board Identifiers` :
 
-* 1 = V600
-* 2 = V500
-* 3 = V4 Accelerator
-* 4 = V666
-* 5 = V4 StandAlone
-* 6 = V1200
-* 7 = V4000
+* `1` = V600
+* `2` = V500
+* `3` = V4 Accelerator
+* `4` = V666
+* `5` = V4 StandAlone
+* `6` = V1200
 
 **INPUT :**
 
