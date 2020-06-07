@@ -2,10 +2,20 @@
 
 Below are all the supported commands.
 
+Latest `VControl` binaries are officially distributed from here :
+
+https://www.apollo-accelerators.com/wiki/doku.php/saga:updates
+
+Latest `Vampire Cores` are officially distributed from here :
+
+https://www.apollo-accelerators.com/wiki/doku.php/vampire:accelerator_core_updates
+
+
 **WARNING** :
 
-This documentation is still Work In Progress.
+This documentation is still heavily in `Work In Progress` status.
 
+# Supported Commands
 
 ```HELP/S            This help
 DE=DETECT/S       Return TRUE if AC68080 is detected
@@ -38,19 +48,51 @@ MR=MAPROM         Map a ROM file
 Below are concrete examples where/when/how to use VControl.
 
 
+# HOW TO : VControl CORE
+
+SYNOPSIS:
+This command reads the Vampire Core Revision String from its internal Flash chip.
+
+INPUT :
+* None
+
+OUTPUT :
+* Returns DOS OK ($RC = 0) if successful.
+* Returns DOS WARN ($RC = 5) if failed.
+
+
+WARNING:
+
+The `Core Revision String` is only present in the official AmigaOS Flash Binary cores provided by the APOLLO-Team
+
+```
+C:VControl CORE
+Vampire 1200 V2 Apollo rev 7389B x12 (Gold 2.12)
+>
+```
+
 
 # HOW TO : VControl SETENV
 
-This command will creates the Environment Variables into ENV:
-If succesful, it returns OK ($RC = 0). Else WARN ($RC = 5).
+SYNOPSIS:
+This command will creates the `VControl Environment Variables` into ENV:
 
-* $VCoreRev
-* $VCoreFreq
-* $VCoreMult
-* $VBoardID
-* $VBoardName
+INPUT :
+* None
 
-Below is an example of how to use `VControl SETENV`.
+OUTPUT :
+* Returns DOS OK ($RC = 0) if successful.
+* Returns DOS WARN ($RC = 5) if failed.
+
+Variable Name | Description
+------------ | -------------
+$VCoreRev | Core Revision Number (eg. 7589)
+$VCoreFreq | Core CPU Frequency (eg. 78 MHz)
+$VCoreMult | Core CPU Multiplier (eg. x11)
+$VBoardID | Board Identifier model (eg. 6)
+$VBoardName | Board Short Name (eg. V1200)
+
+Below are some examples of how to use those variables.
 
 ```
 C:VControl SE >NIL:
@@ -86,4 +128,19 @@ IF $VBoardID GT 0
 ELSE
 	ECHO "Vampire NOT detected"
 ENDIF
+```
+
+# HOW TO : VControl MAPROM
+
+SYNOPSIS:
+This command map a 256KB or 512KB or 1MB ROM file and reboot the system.
+
+INPUT :
+* A valid ROM file
+
+OUTPUT :
+* Reboot the system
+
+```
+C:VControl MAPROM=C:Diag.ROM
 ```
