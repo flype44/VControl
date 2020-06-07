@@ -629,18 +629,23 @@ It changes the VESA `Display Power Management Signaling` (DPMS) level, through t
 * Returns DOS OK ($RC = 0) if successful.
 * Returns DOS WARN ($RC = 5) if failed (No compatible CGX API).
 
+**NOTE :**
+
+The Vampire P96 GFX Driver support the DPMS signals.
+
+Recommended tool : `DPMSManager` for energy-saving.
+
+http://aminet.net/package/util/blank/DPMSManager
+
+However, one may need to disable the display MANUALLY for various reasons, such as benchmarkings.
+
 **EXAMPLES :**
 
 ```
-> C:VControl DPMS 0 ; Turn ON the display
-> 
+C:VControl DPMS 1 ; Turn OFF the display
+C:MyBenchmarkTool
+C:VControl DPMS 0 ; Turn ON the display
 ```
-
-```
-> C:VControl DPMS 1 ; Turn OFF the display
-> 
-```
-
 
 # VControl FPU
 
