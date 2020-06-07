@@ -129,13 +129,17 @@ ENDIF
 ```
 
 
-# VControl VBRMOVE 0/1
+# VControl VBRMOVE
 
 SYNOPSIS :
 
-This command change the `Vector Base Register` location.
+This command change the processor `Vector Base Register` location.
 
-It is compatible with VBRControl http://aminet.net/package/util/sys/vbrcontrol
+The processor vectors will be moved to a new location, either in CHIP memory (VBRMOVE=0) or in FAST memory (VBRMOVE=1).
+
+When the processor vectors are moved to FAST memory, it is supposed to increase the system speed.
+
+NOTE: It is compatible with VBRControl http://aminet.net/package/util/sys/vbrcontrol
 
 INPUT :
 * VBRMOVE=0 : Chip RAM
