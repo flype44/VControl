@@ -715,7 +715,7 @@ It changes the VESA `Display Power Management Signaling` (DPMS) level by calling
 
 **NOTE :**
 
-The Vampire P96 GFX Driver support the DPMS signals.
+The Vampire P96 Graphics Driver support the `DPMS` signals.
 
 Recommended tool : [DPMSManager](http://aminet.net/package/util/blank/DPMSManager) for energy-saving.
 
@@ -733,9 +733,7 @@ C:VControl DPMS 0 ; Turn ON the display
 
 **SYNOPSIS :**
 
-This command switchs the `FPU` On/Off by using the `vampiresupport.resource`.
-
-In essence, the FPU Off needs to be done as early as possible in the `S:startup-sequence`, preferably before the `SetPatch` command.
+This command switchs the `FPU` On/Off by using the dedicated API from `vampiresupport.resource`.
 
 **INPUT :**
 
@@ -749,9 +747,13 @@ In essence, the FPU Off needs to be done as early as possible in the `S:startup-
 
 **NOTE :**
 
-CAUTION :
+This setting is reset to `0` after a reboot.
 
-This command can be called realtime from CLI, but it will results in fooling the OS math libraries. Warned!
+In essence, the FPU Off needs to be done as early as possible in the `S:Startup-Sequence`, preferably before the `SetPatch` command.
+
+When executed from the Workbench, various malfunctions may/will happen.
+
+For instance, the OS math libraries may/will not work properly.
 
 **EXAMPLES :**
 
@@ -855,6 +857,10 @@ When enabled, the processor works faster, whenever appliable, and even more with
 * Returns `OK` ($RC = 0) if successful.
 * Returns `WARN` ($RC = 5) if failed.
 
+**NOTE :**
+
+This setting is **NOT** reset to `0` after a reboot.
+
 **EXAMPLES :**
 
 ```
@@ -908,6 +914,10 @@ It eventually helps compatibility when launching old Amiga demos and games.
 * Returns `OK` ($RC = 0) if successful.
 * Returns `WARN` ($RC = 5) if failed.
 
+**NOTE :**
+
+This setting is reset to `0` after a reboot.
+
 **EXAMPLES :**
 
 ```
@@ -949,6 +959,8 @@ When the processor vectors are moved to FAST memory, it is supposed to increase 
 * Returns `WARN` ($RC = 5) if failed.
 
 **NOTE :**
+
+This setting is reset to `0` after a reboot.
 
 This command is compatible with [VBRControl](http://aminet.net/package/util/sys/vbrcontrol).
 
