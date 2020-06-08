@@ -4,7 +4,7 @@
 
 The purpose of `VControl` is to bring some valuable informations and controls over the `Vampire` boards.
 
-This article describe all the commands provided in the `VControl` program.
+This article describes all the commands provided in the `VControl` program.
 
 It always refers to the latest version. Take care using latest version in your scripts.
 
@@ -81,7 +81,7 @@ Please refer to the official documentations :
 
 **SYNOPSIS :**
 
-This command proceed a true `Apollo Core 68080` detection.
+This command proceeds a true `Apollo Core 68080` detection.
 
 It checks the presence of the processor `PCR` register and the associated revision word (which should be `0x0440` for a 68080 CPU).
 
@@ -119,7 +119,7 @@ ENDIF
 
 **SYNOPSIS :**
 
-This command collects and output informations about the Vampire Board.
+This command collects and outputs informations about the Vampire Board.
 
 **INPUT :**
 
@@ -163,7 +163,7 @@ Slow Memory  : 512.0 KB
 
 **SYNOPSIS :**
 
-This command retrieve the Vampire `Board Identifier` model.
+This command retrieves the Vampire `Board Identifier` model.
 
 List of the Vampire `Board Identifiers` :
 
@@ -221,7 +221,7 @@ ENDIF
 
 **SYNOPSIS :**
 
-This command ouput the Vampire `Board Short Name` based on the `Board Identifier` model.
+This command ouputs the Vampire `Board Short Name` based on the `Board Identifier` model.
 
 **INPUT :**
 
@@ -260,7 +260,7 @@ ENDIF
 
 **SYNOPSIS :**
 
-This command retrieve the Vampire `Board Serial Number`.
+This command retrieves the Vampire `Board Serial Number`.
 
 **INPUT :**
 
@@ -366,7 +366,7 @@ ENDIF
 
 **SYNOPSIS :**
 
-This command collects and output informations about the Apollo Core 68080 processor, such as the CPU frequency, the FPU presence, the registers status, and more.
+This command collects and outputs informations about the Apollo Core 68080 processor, such as the CPU frequency, the FPU presence, the registers status, and more.
 
 Some of them are controllable from `VControl`, eg. FPU, SuperScalar, Turtle, VectorBase.
 
@@ -421,7 +421,7 @@ This command determines the frequency (in MHz) of the `Apollo Core 68080` proces
 
 On contrary to the usual Hardware method, this command use a `Software method` to determine the frequency.
 
-It calculate the real number of processor cycles occured in 1 second, using the AC68080 `Clock-Cycle Register`.
+It calculates the real number of processor cycles occured in 1 second, using the AC68080 `Clock-Cycle Register`.
 
 **INPUT :**
 
@@ -454,7 +454,7 @@ This command displays all the memory nodes found into the AmigaOS `Exec -> MemLi
 
 It gives quite similar informations than `C:ShowConfig`.
 
-It should never fail since Exec it always available.
+It should never fails since Exec is always available.
 
 **INPUT :**
 
@@ -483,7 +483,7 @@ $00200000: VmpireChipMMem     -11 $00200020 $00b7ffff $0703 (  9.5 MB)
 
 This command enumerates a number of vampire-related system modules running.
 
-It should never fail since Exec it always available.
+It should never fails since Exec is always available.
 
 The enumerated modules are of different kinds :
 
@@ -618,7 +618,7 @@ ENDIF
 
 **SYNOPSIS :**
 
-This command change the Operating System `Exec -> AttnFlags` in order to forces the usual AC68080's.
+This command changes the Operating System `Exec -> AttnFlags` in order to forces the usual AC68080's.
 
 It can be handy when MapROM'ing some ROM which do not initialize the AC68080 Exec flags.
 
@@ -653,13 +653,13 @@ AttnFlags : 0x847f
 
 **SYNOPSIS :**
 
-This command check the presence of the `CD32 Akiko Chip`, check if the graphics.library is `V40+`, and update the `GfxBase -> ChunkyToPlanarPtr` address if necessary.
+This command checks the presence of the `CD32 Akiko Chip`, check if the graphics.library is `V40+`, and update the `GfxBase -> ChunkyToPlanarPtr` address if necessary.
 
 This may be needed when the graphics.library fail to detect the Akiko chip during the boot process.
 
 The graphics.library `WriteChunkyPixels()` function can benefits of such hardware, when detected and enabled.
 
-More information [here](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_3._guide/node033C.html).
+More informations [here](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_3._guide/node033C.html).
 
 
 **INPUT :**
@@ -732,7 +732,7 @@ C:VControl DPMS 0 ; Turn ON the display
 
 **SYNOPSIS :**
 
-This command switch the `FPU` On/Off by using the `vampiresupport.resource`.
+This command switchs the `FPU` On/Off by using the `vampiresupport.resource`.
 
 In essence, the FPU Off needs to be done as early as possible in the `S:startup-sequence`, preferably before the `SetPatch` command.
 
@@ -765,7 +765,7 @@ C:SetPatch
 
 **SYNOPSIS :**
 
-This command change the Vampire `FastIDE` mode for faster-than-legacy `IDE` devices reads.
+This command changes the Vampire `FastIDE` mode for faster-than-legacy `IDE` devices reads.
 
 NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 
@@ -800,7 +800,7 @@ FastIDE mode = 0x8000 (Faster).
 
 **SYNOPSIS :**
 
-This command change the Vampire `SDPort` speed.
+This command changes the Vampire `SDPort` speed.
 
 The nominal speed of the `SDPort` is based on the actual Vampire Core frequency, which is represented by the value `0`.
 
@@ -834,9 +834,9 @@ SDPort Clock Divider = 1 (Fastest=0, 255=Slowest).
 
 **SYNOPSIS :**
 
-This command enable or disable the so-called Apollo Core `SUPERSCALAR` mode (Default is Enabled).
+This command enables or disables the so-called Apollo Core `SUPERSCALAR` mode (Default is Enabled).
 
-SuperScalar is processor feature which allow to `execute 2 instructions` per fetch, through a `2nd pipe`.
+SuperScalar is a processor feature which allows to `execute 2 instructions` per fetch, through a `2nd pipe`.
 
 When enabled, the processor works faster, whenever appliable, and even more with programs compiled for (When compiled for MC68060).
 
@@ -887,7 +887,7 @@ ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
 
 **SYNOPSIS :**
 
-This command enable or disable the so-called Apollo Core `TURTLE` mode.
+This command enables or disables the so-called Apollo Core `TURTLE` mode.
 
 This feature intends to **HEAVILY** slowdown the processor execution in order to approximate the `MC68000` / `MC68020` speed.
 
@@ -927,7 +927,7 @@ Turtle: Enabled.
 
 **SYNOPSIS :**
 
-This command change the processor `Vector Base Register` location.
+This command changes the processor `Vector Base Register` location.
 
 The processor vectors will be moved to a new location, either in CHIP memory (VBRMOVE=0) or in FAST memory (VBRMOVE=1).
 
@@ -982,7 +982,7 @@ ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
 
 **SYNOPSIS :**
 
-This command map a `256KB` or `512KB` or `1MB` valid ROM file and REBOOT the system.
+This command maps a `256KB` or `512KB` or `1MB` valid ROM file and REBOOTs the system.
 
 It does a RAW maprom, the input file content remains unchecked, untouched and mapped as is.
 
@@ -992,7 +992,7 @@ It does a RAW maprom, the input file content remains unchecked, untouched and ma
 
 **OUTPUT :**
 
-* Reboot the system if successful.
+* Reboots the system if successful.
 * Returns `WARN` ($RC = 5) if failed.
 
 **NOTE :**
