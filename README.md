@@ -2,7 +2,7 @@
 
 (C) Copyright 2016-2020 APOLLO-Team
 
-The purpose of `VControl` is to bring some valuable informations and controls over the `Vampire` boards.
+The purpose of `VControl` is to bring some valuable information and control over the `Vampire` boards.
 
 
 # Releases
@@ -20,13 +20,13 @@ Latest official documentation : [Open](DOCUMENTATION.md#documentation)
 Command | Description
 ------------ | -------------
 DETECT | Detect the AC68080
-BOARD | Output Board Informations
+BOARD | Output Board Information
 BOARDID | Output Board Identifier
 BOARDNAME | Output Board Name
 BOARDSERIAL | Output Board Serial Number
 CORE | Output Core Revision String
 COREREV | Output Core Revision Number
-CPU | Output CPU informations
+CPU | Output CPU information
 HERTZ | Output CPU Frequency
 MEMLIST | Output Memory list
 MODULES | Output Modules list
