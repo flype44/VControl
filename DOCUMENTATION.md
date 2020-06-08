@@ -19,6 +19,7 @@ Latest `VControl` binaries are officially distributed from [here](https://www.ap
 
 Latest `Vampire` cores are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/vampire:accelerator_core_updates). 
 
+Additional support and guidelines for `VControl` can be found [here](https://www.apollo-accelerators.com/wiki/doku.php/system_tools:vcontrol).
 
 # Commands
 
@@ -767,6 +768,8 @@ C:SetPatch
 
 This command changes the Vampire `FastIDE` mode for faster-than-legacy `IDE` devices reads.
 
+It applies only on compatible Vampire boards, with an embedded `FastIDE` slot.
+
 NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 
 **INPUT :**
@@ -783,7 +786,7 @@ NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 
 **NOTE :**
 
-This command applies only on compatible Vampire board, with an embedded `FastIDE` slot.
+This setting is reset to `0` after every reboot.
 
 It should be added at the beginning of `S:Startup-Sequence` so that `FastIDE` is enabled on every boot.
 
@@ -806,6 +809,8 @@ The nominal speed of the `SDPort` is based on the actual Vampire Core frequency,
 
 To decrease that speed, the `SDPort` can use a fraction (divider) of the Core frequency.
 
+It applies only on compatible Vampire boards, with an embedded `SDPort` slot.
+
 NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 
 **INPUT :**
@@ -819,7 +824,7 @@ NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 
 **NOTE :**
 
-This command applies only on compatible Vampire board, with an embedded `SDPort` slot.
+This setting is reset to `0` after every reboot.
 
 **EXAMPLES :**
 
