@@ -211,7 +211,7 @@ ULONG Help(void)
 	"BN=BOARDNAME/S    Output Board Name\n"
 	"SN=SERIALNUMBER/S Output Board Serial Number\n\n"
 	"CO=CORE/S         Output Core Revision String\n"
-	"CP=CPU/S          Output CPU information\n"
+	"CP=CPU/S          Output CPU Information\n"
 	"HZ=HERTZ/S        Output CPU Frequency (Hertz)\n\n"
 	"ML=MEMLIST/S      Output Memory list\n"
 	"MO=MODULES/S      Output Modules list\n\n"
