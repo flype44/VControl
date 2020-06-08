@@ -302,7 +302,7 @@ This command reads the Vampire `Core Revision String` from its internal Flash ch
 
 The `Core Revision String` is only present in the official AmigaOS Flash Binary cores provided by the APOLLO-Team.
 
-This means this feature can **NOT** work on cores provided in the `Quartus .JIC` forms.
+This feature can **NOT** work on cores provided in the `Quartus .JIC` forms.
 
 **INPUT :**
 
