@@ -483,6 +483,8 @@ $00200000: VmpireChipMMem     -11 $00200020 $00b7ffff $0703 (  9.5 MB)
 
 This command enumerates a number of vampire-related system modules running.
 
+It should never fail since Exec it always available.
+
 The enumerated modules are of different kinds :
 
 * Exec -> DeviceList
@@ -497,8 +499,7 @@ The enumerated modules are of different kinds :
 
 **OUTPUT :**
 
-* Returns `OK` ($RC = 0) if successful.
-* Returns `DOS` WARN ($RC = 5) if failed.
+* Returns `OK` ($RC = 0).
 
 **NOTES :**
 
