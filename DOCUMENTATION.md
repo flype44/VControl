@@ -2,7 +2,7 @@
 
 (C) Copyright 2016-2020 APOLLO-Team
 
-The purpose of `VControl` is to bring some valuable informations and controls over the `Vampire` boards.
+The purpose of `VControl` is to bring some valuable information and control over the `Vampire` boards.
 
 This article describes all the commands provided in the `VControl` program.
 
@@ -31,13 +31,13 @@ Command | Description
 ------------ | -------------
 [HELP/S](#commands) | This help
 [DE=DETECT/S](#vcontrol-detect) | Return AC68080 detection is $RC
-[BO=BOARD/S](#vcontrol-board) | Output Board Informations
+[BO=BOARD/S](#vcontrol-board) | Output Board Information
 [BI=BOARDID/S](#vcontrol-boardid) | Output Board Identifier
 [BN=BOARDNAME/S](#vcontrol-boardname) | Output Board Name
 [SN=BOARDSERIAL/S](#vcontrol-boardserial) | Output Board Serial Number
 [CO=CORE/S](#vcontrol-core) | Output Core Revision String
 [CR=COREREV/S](#vcontrol-corerev) | Output Core Revision Number
-[CP=CPU/S](#vcontrol-cpu) | Output CPU informations
+[CP=CPU/S](#vcontrol-cpu) | Output CPU information
 [HZ=HERTZ/S](#vcontrol-hertz) | Output CPU Frequency (Hertz)
 [ML=MEMLIST/S](#vcontrol-memlist) | Output Memory list
 [MO=MODULES/S](#vcontrol-modules) | Output Modules list
@@ -55,7 +55,7 @@ Command | Description
 
 **NOTE :**
 
-For more informations about the `Amiga DOS` command line arguments and scriptings, 
+For more information about the `Amiga DOS` command line arguments and scriptings, 
 
 Please refer to the official documentations :
 
@@ -119,7 +119,7 @@ ENDIF
 
 **SYNOPSIS :**
 
-This command collects and outputs informations about the Vampire Board.
+This command collects and outputs information about the Vampire Board.
 
 **INPUT :**
 
@@ -129,7 +129,7 @@ This command collects and outputs informations about the Vampire Board.
 
 * Returns `OK` ($RC = 0) if successful.
 * Returns `WARN` ($RC = 5) if failed.
-* Print out informations about the Vampire Board.
+* Print out information about the Vampire Board.
 
 **EXAMPLES :**
 
@@ -366,7 +366,7 @@ ENDIF
 
 **SYNOPSIS :**
 
-This command collects and outputs informations about the Apollo Core 68080 processor, such as the CPU frequency, the FPU presence, the registers status, and more.
+This command collects and outputs information about the Apollo Core 68080 processor, such as the CPU frequency, the FPU presence, the registers status, and more.
 
 Some of them are controllable from `VControl`, eg. FPU, SuperScalar, Turtle, VectorBase.
 
@@ -378,7 +378,7 @@ Some of them are controllable from `VControl`, eg. FPU, SuperScalar, Turtle, Vec
 
 * Returns `OK` ($RC = 0) if successful.
 * Returns `WARN` ($RC = 5) if failed.
-* Print out informations about the Apollo Core 68080 processor.
+* Print out information about the Apollo Core 68080 processor.
 
 **DETAILS :**
 
@@ -452,7 +452,7 @@ AC68080 @ 85 MHz (x12)
 
 This command displays all the memory nodes found into the AmigaOS `Exec -> MemList`.
 
-It gives quite similar informations than `C:ShowConfig`.
+It gives quite similar information than `C:ShowConfig`.
 
 It should never fails since Exec is always available.
 
