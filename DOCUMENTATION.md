@@ -81,7 +81,11 @@ Please refer to the official documentations :
 
 **SYNOPSIS :**
 
-This command proceed a true `Apollo Core 68080` detection by checking the presence of the processor `PCR` register and the associated revision word (which should be `0x0440` for a 68080 CPU). As a consequence, this command does not rely on any Operating System prerequisites (such as the Exec->AttnFlags, or presence of some kickstart modules).
+This command proceed a true `Apollo Core 68080` detection.
+
+It checks the presence of the processor `PCR` register and the associated revision word (which should be `0x0440` for a 68080 CPU).
+
+It does not rely on any Operating System prerequisites (such as the Exec->AttnFlags, or presence of some kickstart modules).
 
 **INPUT :**
 
@@ -98,6 +102,7 @@ This command proceed a true `Apollo Core 68080` detection by checking the presen
 > C:VControl DETECT
 > Echo $RC
 0
+> 
 ```
 
 ```
@@ -122,6 +127,8 @@ This command collects and output informations about the Vampire Board.
 
 **OUTPUT :**
 
+* Returns `OK` ($RC = 0) if successful.
+* Returns `WARN` ($RC = 5) if failed.
 * Print out informations about the Vampire Board.
 
 **EXAMPLES :**
@@ -148,6 +155,7 @@ Akiko C2P    : Uninitialized (0x00000000)
 Chip Memory  :   2.0 MB
 Fast Memory  : 126.5 MB
 Slow Memory  : 512.0 KB
+> 
 ```
 
 
@@ -159,6 +167,7 @@ This command retrieve the Vampire `Board Identifier` model.
 
 List of the Vampire `Board Identifiers` :
 
+* `0` : Unidentified
 * `1` : V600
 * `2` : V500
 * `3` : V4 Accelerator
@@ -172,7 +181,8 @@ List of the Vampire `Board Identifiers` :
 
 **OUTPUT :**
 
-* $RC = Vampire `Board Identifier` model (numeric).
+* Returns the Vampire `Board Identifier` ($RC).
+* If `$RC` is `0`, it means no Vampire hardware detected.
 
 **EXAMPLES :**
 
@@ -180,12 +190,22 @@ List of the Vampire `Board Identifiers` :
 C:VControl BOARDID
 > Echo $RC
 6
+> 
 ```
 
 ```
 C:VControl BOARDID
-IF $RC EQ 6
-	ECHO "You have a V1200"
+IF $RC EQ 2
+	ECHO "You have a V500"
+ENDIF
+```
+
+```
+C:VControl BOARDID
+IF $RC GT 0
+	ECHO "Vampire board detected"
+ELSE
+	ECHO "Vampire board NOT detected"
 ENDIF
 ```
 
@@ -209,7 +229,9 @@ This command ouput the Vampire `Board Short Name` based on the `Board Identifier
 
 **OUTPUT :**
 
-* Print out the Vampire Board short name
+* Returns `OK` ($RC = 0) if successful.
+* Returns `WARN` ($RC = 5) if failed.
+* Print out the Vampire `Board Short Name`.
 
 **EXAMPLES :**
 
@@ -226,12 +248,19 @@ V1200
 >
 ```
 
+```
+C:VControl BOARDNAME >ENV:NAME
+IF NOT WARN
+	ECHO $NAME
+ENDIF
+```
+
 
 # VControl BOARDSERIAL
 
 **SYNOPSIS :**
 
-This command retrieve the Vampire Board `Serial Number`.
+This command retrieve the Vampire `Board Serial Number`.
 
 **INPUT :**
 
@@ -239,7 +268,9 @@ This command retrieve the Vampire Board `Serial Number`.
 
 **OUTPUT :**
 
-* Print out the Vampire Board `Serial Number`.
+* Returns `OK` ($RC = 0) if successful.
+* Returns `WARN` ($RC = 5) if failed.
+* Print out the Vampire `Board Serial Number`.
 
 **NOTE :**
 
@@ -252,14 +283,14 @@ Implemented and **NOT** works for `V4`, for now.
 ```
 > C:VControl BOARDSERIAL
 0x26F0A280C118B206-4
->
+> 
 ```
 
 ```
 > C:VControl BOARDSERIAL >ENV:SERIAL
 > Echo $SERIAL
 0x26F0A280C118B206-4
->
+> 
 ```
 
 
@@ -279,8 +310,9 @@ This means this feature can **NOT** work on cores provided in the `Quartus .JIC`
 
 **OUTPUT :**
 
-* Returns DOS OK ($RC = 0) if successful.
-* Returns DOS WARN ($RC = 5) if failed.
+* Returns `OK` ($RC = 0) if successful.
+* Returns `WARN` ($RC = 5) if failed.
+* Print out the Core Revision String.
 
 **EXAMPLES :**
 
@@ -295,7 +327,7 @@ Vampire 1200 V2 Apollo rev 7389B x12 (Gold 2.12)
 
 **SYNOPSIS :**
 
-This command parse the `Revision Number` contained into the Vampire `Core Revision String`.
+This command parse the `Revision Number` found into the Vampire `Core Revision String`.
 
 The `Core Revision String` is only present in the official AmigaOS Flash Binary cores provided by the APOLLO-Team.
 
@@ -307,8 +339,9 @@ This means this feature can **NOT** work on cores provided in the `Quartus .JIC`
 
 **OUTPUT :**
 
-* Returns DOS OK ($RC = 0) if successful.
-* Returns DOS WARN ($RC = 5) if failed.
+* Returns `OK` ($RC = 0) if successful.
+* Returns `WARN` ($RC = 5) if failed.
+* Print out the Core Revision Number.
 
 **EXAMPLES :**
 
@@ -343,6 +376,8 @@ Some of them are controllable from `VControl`, eg. FPU, SuperScalar, Turtle, Vec
 
 **OUTPUT :**
 
+* Returns `OK` ($RC = 0) if successful.
+* Returns `WARN` ($RC = 5) if failed.
 * Print out informations about the Apollo Core 68080 processor.
 
 **DETAILS :**
@@ -374,6 +409,7 @@ PCR:  0x04400001 (ID: 0440) (REV: 0) (DFP: Off) (ESS: On)
 VBR:  0x00000000 (Vector base is located in CHIP Ram)
 CACR: 0x80008000 (InstCache: On) (DataCache: On)
 ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
+> 
 ```
 
 
@@ -393,9 +429,9 @@ It calculate the real number of processor cycles occured in 1 second, using the 
 
 **OUTPUT :**
 
-* Returns DOS OK ($RC = 0) if successful.
-* Returns DOS WARN ($RC = 5) if failed.
-* A string representing the frequency and multiplier of the processor.
+* Returns `OK` ($RC = 0) if successful.
+* Returns `WARN` ($RC = 5) if failed.
+* Print out a string representing the frequency and multiplier of the processor.
 
 **NOTE :**
 
@@ -406,7 +442,7 @@ This command takes 1 second to execute (blocking), on purpose.
 ```
 > C:VControl HERTZ
 AC68080 @ 85 MHz (x12)
->
+> 
 ```
 
 
@@ -414,7 +450,11 @@ AC68080 @ 85 MHz (x12)
 
 **SYNOPSIS :**
 
-Description.
+This command displays all the memory nodes found into the AmigaOS `Exec -> MemList`.
+
+It gives quite similar informations than `C:ShowConfig`.
+
+It should never fail since Exec it always available.
 
 **INPUT :**
 
@@ -422,12 +462,18 @@ Description.
 
 **OUTPUT :**
 
-* None
+* Returns `OK` ($RC = 0).
 
 **EXAMPLES :**
 
 ```
-...
+> C:VControl MEMLIST
+Address    Name               Pri Lower     Upper     Attrs
+$01000000: VampireFastMem      64 $01000020 $1fffffff $0505 (496.0 MB)
+$00c00000: memory              -5 $00c00020 $00d7ffff $0705 (  1.5 MB)
+$00004000: chip memory        -10 $00004020 $001fffff $0703 (  2.0 MB)
+$00200000: VmpireChipMMem     -11 $00200020 $00b7ffff $0703 (  9.5 MB)
+> 
 ```
 
 
@@ -435,7 +481,15 @@ Description.
 
 **SYNOPSIS :**
 
-Description.
+This command enumerates a number of vampire-related system modules running.
+
+The enumerated modules are of different kinds :
+
+* Exec -> DeviceList
+* Exec -> LibList
+* Exec -> ResourceList
+* Exec -> Residents
+* Exec -> Message Ports
 
 **INPUT :**
 
@@ -443,12 +497,24 @@ Description.
 
 **OUTPUT :**
 
-* None
+* Returns `OK` ($RC = 0) if successful.
+* Returns `DOS` WARN ($RC = 5) if failed.
+
+**NOTES :**
+
+(!) This function is experimental and may change in future (!)
 
 **EXAMPLES :**
 
 ```
-...
+> C:VControl MODULES
+Address    Name                   Version
+$010620c4: 68040.library          37.40
+$00e001be: VampireFastMem         40.00
+$011be704: vampiregfx.card        01.28
+$00e001a4: VampireSupport         40.00
+$010172e4: vampire.resource       45.03
+>
 ```
 
 
@@ -468,8 +534,8 @@ Those variables are intended to make life easier for scripting usages.
 
 **OUTPUT :**
 
-* Returns DOS OK ($RC = 0) if successful.
-* Returns DOS WARN ($RC = 5) if failed.
+* Returns `OK` ($RC = 0) if successful.
+* Returns `DOS` WARN ($RC = 5) if failed.
 
 **RESULTS :**
 
@@ -563,7 +629,7 @@ Those flags are forced :
 * AFF_68040
 * AFF_68080
 
-(!) This function is reserved for testings and may change in future (!)
+(!) This function is experimental and may change in future (!)
 
 **INPUT :**
 
@@ -571,14 +637,14 @@ Those flags are forced :
 
 **OUTPUT :**
 
-* Returns DOS OK ($RC = 0).
+* Returns `OK` ($RC = 0).
 
 **EXAMPLES :**
 
 ```
 > C:VControl ATTNFLAGS
 AttnFlags : 0x847f
->
+> 
 ```
 
 
@@ -601,8 +667,8 @@ More information [here](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Au
 
 **OUTPUT :**
 
-* Returns DOS OK ($RC = 0) if successful.
-* Returns DOS WARN ($RC = 5) if failed (Akiko Chip or V40 not found).
+* Returns `OK` ($RC = 0) if successful.
+* Returns `WARN` ($RC = 5) if failed (Akiko Chip or V40 not found).
 
 **NOTE :**
 
@@ -622,7 +688,7 @@ V40+ GfxBase->ChunkyToPlanarPtr() initialized.
 
 ```
 > C:VControl AKIKO
-V40+ or Akiko not detected
+V40+ or Akiko not detected.
 > 
 ```
 
@@ -633,7 +699,7 @@ V40+ or Akiko not detected
 
 This command tells the Graphics Driver to turn On/Off the monitor or TV that is connected to the Vampire Digital Video Out.
 
-It changes the VESA `Display Power Management Signaling` (DPMS) level, through the CGX API -> CVideoCtrlTagList().
+It changes the VESA `Display Power Management Signaling` (DPMS) level by calling the CGX API -> CVideoCtrlTagList().
 
 **INPUT :**
 
@@ -642,8 +708,8 @@ It changes the VESA `Display Power Management Signaling` (DPMS) level, through t
 
 **OUTPUT :**
 
-* Returns DOS OK ($RC = 0) if successful.
-* Returns DOS WARN ($RC = 5) if failed (No compatible CGX API).
+* Returns `OK` ($RC = 0) if successful.
+* Returns `WARN` ($RC = 5) if failed (No compatible CGX API).
 
 **NOTE :**
 
@@ -665,22 +731,34 @@ C:VControl DPMS 0 ; Turn ON the display
 
 **SYNOPSIS :**
 
-Description.
+This command switch the `FPU` On/Off by using the `vampiresupport.resource`.
+
+In essence, the FPU Off needs to be done as early as possible in the `S:startup-sequence`, preferably before the `SetPatch` command.
 
 **INPUT :**
 
-* None
+* `FPU=0` : Switch ON the FPU.
+* `FPU=1` : Switch OFF the FPU.
 
 **OUTPUT :**
 
-* None
+* Returns `OK` ($RC = 0) if successful.
+* Returns `WARN` ($RC = 5) if failed (`vampiresupport.resource` not found).
+
+**NOTE :**
+
+CAUTION :
+
+This command can be called realtime from CLI, but it will results in fooling the OS math libraries. Warned!
 
 **EXAMPLES :**
 
 ```
-...
+;
+C:VControl FPU=0
+C:SetPatch
+;
 ```
-
 
 # VControl IDESPEED
 
@@ -699,8 +777,8 @@ NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 
 **OUTPUT :**
 
-* Returns DOS OK ($RC = 0) if successful.
-* Returns DOS WARN ($RC = 5) if failed.
+* Returns `OK` ($RC = 0) if successful.
+* Returns `WARN` ($RC = 5) if failed.
 
 **NOTE :**
 
@@ -712,28 +790,42 @@ It should be added at the beginning of `S:Startup-Sequence` so that `FastIDE` is
 
 ```
 > C:VControl IDESPEED=2
+FastIDE mode = 0x8000 (Faster).
 > 
 ```
 
 
-# VControl SDCLOCKSPEED
+# VControl SDCLOCKDIV
 
 **SYNOPSIS :**
 
-Description.
+This command change the Vampire `SDPort` speed.
+
+The nominal speed of the `SDPort` is based on the actual Vampire Core frequency, which is represented by the value `0`.
+
+To decrease that speed, the `SDPort` can use a fraction (divider) of the Core frequency.
+
+NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 
 **INPUT :**
 
-* None
+* A valid numeric value, between `0` (fastest) and `255` (slowest).
 
 **OUTPUT :**
 
-* None
+* Returns `OK` ($RC = 0) if successful.
+* Returns `WARN` ($RC = 5) if failed.
+
+**NOTE :**
+
+This command applies only on compatible Vampire board, with an embedded `SDPort` slot.
 
 **EXAMPLES :**
 
 ```
-...
+> C:VControl SDCLOCKDIV=1
+SDPort Clock Divider = 1 (Fastest=0, 255=Slowest).
+> 
 ```
 
 
@@ -754,8 +846,8 @@ When enabled, the processor works faster, whenever appliable, and even more with
 
 **OUTPUT :**
 
-* Returns DOS OK ($RC = 0) if successful.
-* Returns DOS WARN ($RC = 5) if failed.
+* Returns `OK` ($RC = 0) if successful.
+* Returns `WARN` ($RC = 5) if failed.
 
 **EXAMPLES :**
 
@@ -807,8 +899,8 @@ It eventually helps compatibility when launching old Amiga demos and games.
 
 **OUTPUT :**
 
-* Returns DOS OK ($RC = 0) if successful.
-* Returns DOS WARN ($RC = 5) if failed.
+* Returns `OK` ($RC = 0) if successful.
+* Returns `WARN` ($RC = 5) if failed.
 
 **EXAMPLES :**
 
@@ -847,8 +939,8 @@ When the processor vectors are moved to FAST memory, it is supposed to increase 
 
 **OUTPUT :**
 
-* Returns DOS OK ($RC = 0) if successful.
-* Returns DOS WARN ($RC = 5) if failed.
+* Returns `OK` ($RC = 0) if successful.
+* Returns `WARN` ($RC = 5) if failed.
 
 **NOTE :**
 
@@ -900,7 +992,7 @@ It does a RAW maprom, the input file content remains unchecked, untouched and ma
 **OUTPUT :**
 
 * Reboot the system if successful.
-* Returns DOS WARN ($RC = 5) if failed.
+* Returns `WARN` ($RC = 5) if failed.
 
 **NOTE :**
 
