@@ -135,7 +135,7 @@ This command collects and outputs information about the Vampire Board.
 
 ```
 C:VControl BOARD
-Board informations :
+Board information :
 
 Product-ID   : 6
 Product-Name : Vampire V1200
@@ -298,9 +298,9 @@ Implemented and **NOT** works for `V4`, for now.
 
 **SYNOPSIS :**
 
-This command reads the Vampire `Core Revision String` from its internal Flash chip.
+This command reads the Vampire Core `Revision String` from its internal Flash chip.
 
-The `Core Revision String` is only present in the official AmigaOS Flash Binary cores provided by the APOLLO-Team.
+The Core `Revision String` is only present in the official AmigaOS Flash Binary cores provided by the APOLLO-Team.
 
 This feature can **NOT** work on cores provided in the `Altera Quartus .JIC` forms (when flashed with an `USB-Blaster` device).
 
@@ -312,7 +312,7 @@ This feature can **NOT** work on cores provided in the `Altera Quartus .JIC` for
 
 * Returns `OK` ($RC = 0) if successful.
 * Returns `WARN` ($RC = 5) if failed.
-* Print out the Core Revision String.
+* Print out the Core `Revision String`.
 
 **EXAMPLES :**
 
@@ -327,9 +327,9 @@ Vampire 1200 V2 Apollo rev 7389B x12 (Gold 2.12)
 
 **SYNOPSIS :**
 
-This command parse the `Revision Number` found into the Vampire `Core Revision String`.
+This command parses the `Revision Number` found into the Vampire Core `Revision String`.
 
-The `Core Revision String` is only present in the official AmigaOS Flash Binary cores provided by the APOLLO-Team.
+The Core `Revision String` is only present in the official AmigaOS Flash Binary cores provided by the APOLLO-Team.
 
 This means this feature can **NOT** work on cores provided in the `Quartus .JIC` forms (when flashed with an `USB-Blaster` device).
 
@@ -341,7 +341,7 @@ This means this feature can **NOT** work on cores provided in the `Quartus .JIC`
 
 * Returns `OK` ($RC = 0) if successful.
 * Returns `WARN` ($RC = 5) if failed.
-* Print out the Core Revision Number.
+* Print out the Core `Revision Number`.
 
 **EXAMPLES :**
 
@@ -366,7 +366,7 @@ ENDIF
 
 **SYNOPSIS :**
 
-This command collects and outputs information about the Apollo Core 68080 processor, such as the CPU frequency, the FPU presence, the registers status, and more.
+This command collects and outputs information about the Apollo Core `68080` processor, such as the CPU frequency, the FPU presence, the registers status, and more.
 
 Some of them are controllable from `VControl`, eg. FPU, SuperScalar, Turtle, VectorBase.
 
@@ -378,7 +378,7 @@ Some of them are controllable from `VControl`, eg. FPU, SuperScalar, Turtle, Vec
 
 * Returns `OK` ($RC = 0) if successful.
 * Returns `WARN` ($RC = 5) if failed.
-* Print out information about the Apollo Core 68080 processor.
+* Print out information about the Apollo Core `68080` processor.
 
 **DETAILS :**
 
@@ -401,7 +401,7 @@ Some of them are controllable from `VControl`, eg. FPU, SuperScalar, Turtle, Vec
 
 ```
 > C:VControl CPU
-Processor informations :
+Processor information :
 
 CPU:  AC68080 @ 85 MHz (x12) (1p)
 FPU:  Is working.
@@ -417,11 +417,11 @@ ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
 
 **SYNOPSIS :**
 
-This command determines the frequency (in MHz) of the `Apollo Core 68080` processor.
+This command determines the frequency (in MHz) of the Apollo Core `68080` processor.
 
-On contrary to the usual Hardware method, this command use a `Software method` to determine the frequency.
+On contrary to the usual `Hardware` method, this command use a `Software` method to determine the frequency.
 
-It calculates the real number of processor cycles occured in 1 second, using the AC68080 `Clock-Cycle Register`.
+It calculates the real number of processor cycles occured in 1 second, using the 68080 `Clock-Cycle Register`.
 
 **INPUT :**
 
@@ -431,7 +431,7 @@ It calculates the real number of processor cycles occured in 1 second, using the
 
 * Returns `OK` ($RC = 0) if successful.
 * Returns `WARN` ($RC = 5) if failed.
-* Print out a string representing the frequency and multiplier of the processor.
+* Print out a string representing the `frequency` and `multiplier` of the processor.
 
 **NOTE :**
 
@@ -523,7 +523,7 @@ $010172e4: vampire.resource       45.03
 
 **SYNOPSIS :**
 
-This command will creates the `VControl Environment Variables` into `ENV:`
+This command creates the `VControl Environment Variables` into `ENV:`
 
 As a consequency, `ENV:` assign **MUST** be initialized before executing this command.
 
@@ -618,7 +618,7 @@ ENDIF
 
 **SYNOPSIS :**
 
-This command changes the Operating System `Exec -> AttnFlags` in order to forces the usual AC68080's.
+This command changes the Operating System `Exec -> AttnFlags` in order to forces the usual 68080 ones.
 
 It can be handy when MapROM'ing some ROM which do not initialize the AC68080 Exec flags.
 
