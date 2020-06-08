@@ -206,12 +206,12 @@ ULONG Help(void)
 	"\n\n"
 	"HELP/S            This help\n\n"
 	"DE=DETECT/S       Return TRUE if AC68080 is detected\n\n"
-	"BO=BOARD/S        Output Board Informations\n"
+	"BO=BOARD/S        Output Board Information\n"
 	"BI=BOARDID/S      Output Board Identifier\n"
 	"BN=BOARDNAME/S    Output Board Name\n"
 	"SN=SERIALNUMBER/S Output Board Serial Number\n\n"
 	"CO=CORE/S         Output Core Revision String\n"
-	"CP=CPU/S          Output CPU informations\n"
+	"CP=CPU/S          Output CPU information\n"
 	"HZ=HERTZ/S        Output CPU Frequency (Hertz)\n\n"
 	"ML=MEMLIST/S      Output Memory list\n"
 	"MO=MODULES/S      Output Modules list\n\n"
@@ -425,7 +425,7 @@ ULONG GetBoard(void)
 	ULONG totalFast = AvailMem(MEMF_TOTAL | MEMF_FAST);
 	ULONG totalSlow = AvailMem(MEMF_TOTAL | MEMF_FAST | MEMF_24BITDMA);
 	
-	printf("Board informations:\n\n");
+	printf("Board information:\n\n");
 	
 	if(v_cpu_is080())
 	{
@@ -650,7 +650,7 @@ ULONG Detect080(void)
 
 ULONG GetCPU(void)
 {
-	printf("Processor informations:\n\n");
+	printf("Processor information:\n\n");
 	
 	GetCPU_CPU();
 	GetCPU_FPU();
