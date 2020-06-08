@@ -55,15 +55,15 @@ Command | Description
 
 **NOTE :**
 
-For more informations about the `Amiga DOS command line arguments`, 
+For more informations about the `Amiga DOS` command line arguments and scriptings, 
 
 Please refer to the official documentations :
 
-[AmigaDOS: TEMPLATES](https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#Template)
+[AmigaDOS: Templates](https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#Template)
 
-[AmigaDOS: IF/ELSE](https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#IF)
+[AmigaDOS: If/Else/Endif](https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#IF)
 
-[AmigaDOS: SCRIPTS](https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Using_Scripts)
+[AmigaDOS: Using Scripts](https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Using_Scripts)
 
 
 **EXAMPLES :**
