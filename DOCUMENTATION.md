@@ -85,7 +85,7 @@ This command proceeds a true `Apollo Core 68080` detection.
 
 It checks the presence of the processor `PCR` register and the associated revision word (which should be `0x0440` for a 68080 CPU).
 
-It does not rely on any Operating System prerequisites (such as the Exec->AttnFlags, or presence of some kickstart modules).
+It does not rely on any Operating System prerequisites (such as the Exec->AttnFlags, or the presence of some kickstart modules).
 
 **INPUT :**
 
