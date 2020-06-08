@@ -93,8 +93,8 @@ It does not rely on any Operating System prerequisites (such as the Exec->AttnFl
 
 **OUTPUT :**
 
-* Returns DOS OK ($RC = 0) if detected.
-* Returns DOS WARN ($RC = 5) if not detected.
+* Returns `OK` ($RC = 0) if successful.
+* Returns `WARN` ($RC = 5) if failed.
 
 **EXAMPLES :**
 
