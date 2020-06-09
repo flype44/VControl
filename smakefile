@@ -16,7 +16,6 @@ V_CPU_CLK.o\
 V_CPU_PCR.o\
 V_CPU_VBR.o\
 V_CPU_CACR.o\
-V_CGX_DPMS.o\
 V_FPU.o\
 V_SERIAL.o\
 V_MAPROM.o
