@@ -58,7 +58,7 @@ To compile `VControl` you need :
 
 * `BoardsLib Developer Kit` [Download](http://aminet.net/dev/misc/CGraphX-DevKit.lha)
 
-  Copy `BoardsLib/Developer/include/c/` folders to the `SC:include/`
+  Copy `BoardsLib/Developer/include/c/` folders to `SC:include/`
 
 * `CyberGraph Developer Kit` [Download](http://aminet.net/util/libs/BoardsLib.lha)
 
