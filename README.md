@@ -50,23 +50,23 @@ To compile `VControl` you need :
 
 * `SAS/C` 6.59 for CBM AmigaOS3 M68K
 
-  _Install and ensure all assets are properly accessible_
+  Install and ensure all assets are properly accessible.
 
 * `VASM` 1.8h for CBM AmigaOS3 M68K [Download](http://sun.hasenbraten.de/vasm/bin/rel/vasmm68k_mot_os3.lha)
 
-  _Install and ensure vasmm68k_mot is properly accessible_
+  Install and ensure `vasmm68k_mot` is properly accessible (in `C:` for example).
 
 * `BoardsLib Developer Kit` [Download](http://aminet.net/dev/misc/CGraphX-DevKit.lha)
 
-  _Copy BoardsLib/Developer/include/c/ folders to SC:include/_
+  Copy `BoardsLib/Developer/include/c/` folders to the `SC:include/`
 
 * `CyberGraph Developer Kit` [Download](http://aminet.net/util/libs/BoardsLib.lha)
 
-  _Copy CGraphX/C/Include/ folders to SC:include/_
+  Copy `CGraphX/C/Include/` folders to `SC:include/`
 
 * Use the provided `smakefile`.
 
-  _CD to the project and type "smake"_
+  `CD` to the project and type `smake`.
 
 <img src="BuildInstructions.png" />
 
