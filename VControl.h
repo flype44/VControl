@@ -1,7 +1,7 @@
 #ifndef __VCONTROL_H__
 #define __VCONTROL_H__
 
-#define APP_VSTRING "$VER: VControl 1.15 (1.6.2020) (C) APOLLO-Team"
+#define APP_VSTRING "$VER: VControl 1.16 (9.6.2020) (C) APOLLO-Team"
 
 /*****************************************************************
  * VAMPIRE HARDWARE
@@ -29,11 +29,8 @@
 
 #define ASM __asm __saveds 
 
-ULONG ASM v_chipset_akiko(void);
 ULONG ASM v_chipset_audio_rev(void);
 ULONG ASM v_chipset_video_rev(void);
-
-ULONG ASM v_cgx_dpms_set(register __d0 ULONG mode);
 
 ULONG ASM v_cpu_multiplier(void);
 

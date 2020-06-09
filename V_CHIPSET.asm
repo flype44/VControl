@@ -1,6 +1,5 @@
 ;----------------------------------------------------------
 	
-	XDEF    _v_chipset_akiko
 	XDEF    _v_chipset_audio_rev
 	XDEF    _v_chipset_video_rev
 
@@ -9,10 +8,6 @@
 	include	exec/funcdef.i
 	include	exec/exec.i
 	include	exec/exec_lib.i
-
-;----------------------------------------------------------
-
-gb_ChunkyToPlanarPtr EQU 508 ; gfxbase v40
 
 ;----------------------------------------------------------
 
@@ -72,37 +67,3 @@ _v_chipset_video_rev:
 
 	cnop 0,4
 
-_v_chipset_akiko:
-	;
-	; Detect AKIKO presence 
-	; Check graphics V40
-	; Set graphics -> C2P address
-	; 
-	movem.l a6,-(sp)                           ; push
-	cmpi.w  #$CAFE,$B80002                     ; akiko id value
-	bne.s   .failure                           ; akiko detected ?
-	lea.l   GfxName(pc),a1                     ; name
-	moveq.l #40,d0                             ; version
-	move.l  $4.w,a6                            ; sysbase
-	jsr     _LVOOpenLibrary(a6)                ; openlib(a1,d0)
-	tst.l   d0                                 ; success ?
-	beq.s   .failure                           ; skip if < v40
-	move.l  d0,a1                              ; gfxbase
-	move.l  #$B80038,gb_ChunkyToPlanarPtr(a1)  ; akiko c2p address
-	jsr     _LVOCloseLibrary(a6)               ; closelib(a1)
-	moveq.l #1,d0                              ; success
-	movem.l (sp)+,a6                           ; pop
-	rts                                        ; return
-.failure
-	moveq.l #0,d0                              ; error
-	movem.l (sp)+,a6                           ; pop
-	rts                                        ; return
-
-	cnop 0,4
-
-GfxName:
-	dc.b "graphics.library",0
-
-;----------------------------------------------------------
-
-	cnop 0,4

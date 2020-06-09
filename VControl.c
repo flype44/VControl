@@ -1,7 +1,7 @@
 /**********************************************************
  * 
  * Project: VControl
- * Version: 1.15
+ * Version: 1.16
  * Author:  flype
  * 
  * Copyright (C) 2016-2020 APOLLO-Team
@@ -21,9 +21,14 @@
 #include <intuition/screens.h>
 #include <graphics/gfxbase.h>
 #include <hardware/custom.h>
+#include <libraries/expansion.h>
+#include <libraries/configvars.h>
+#include <cybergraphics/cybergraphics.h>
 
 #include <proto/dos.h>
 #include <proto/exec.h>
+#include <proto/expansion.h>
+#include <proto/cybergraphics.h>
 
 #include "VControl.h"
 
@@ -69,22 +74,16 @@ typedef struct {
 } Module;
 
 Module Modules[] = {
-	{ MODULE_LIBRARY,  "68040.library"     , 0, 0, 0 },
-	{ MODULE_DEVICE,   "ahi.device"        , 0, 0, 0 },
-	{ MODULE_LIBRARY,  "bsdsocket.library" , 0, 0, 0 },
-	{ MODULE_LIBRARY,  "exec.library"      , 0, 0, 0 },
-	{ MODULE_RESIDENT, "hrtmon"            , 0, 0, 0 },
-	{ MODULE_LIBRARY,  "i2c.library"       , 0, 0, 0 },
-	{ MODULE_RESOURCE, "processor.resource", 0, 0, 0 },
-	{ MODULE_LIBRARY,  "rtg.library"       , 0, 0, 0 },
-	{ MODULE_DEVICE,   "scsi.device"       , 0, 0, 0 },
-	{ MODULE_DEVICE,   "sagasd.device"     , 0, 0, 0 },
-	{ MODULE_RESIDENT, "VampireFastMem"    , 0, 0, 0 },
-	{ MODULE_LIBRARY,  "vampiregfx.card"   , 0, 0, 0 },
-	{ MODULE_RESIDENT, "VampireSupport"    , 0, 0, 0 },
-	{ MODULE_RESOURCE, "vampire.resource"  , 0, 0, 0 },
-	{ MODULE_MSGPORT,  "FBlit"             , 0, 0, 0 },
-	{ MODULE_MSGPORT,  "MCP"               , 0, 0, 0 },
+	{ MODULE_LIBRARY,  "68040.library"           , 0, 0, 0 },
+	{ MODULE_RESIDENT, "680x0.library"           , 0, 0, 0 },
+	{ MODULE_LIBRARY,  "vampiregfx.card"         , 0, 0, 0 },
+	{ MODULE_RESIDENT, "VampireBoot"             , 0, 0, 0 },
+	{ MODULE_RESIDENT, "VampireFastMem"          , 0, 0, 0 },
+	{ MODULE_RESIDENT, "VampireSupport"          , 0, 0, 0 },
+	{ MODULE_RESOURCE, "vampire.resource"        , 0, 0, 0 },
+	{ MODULE_RESOURCE, "vampiresupport.resource" , 0, 0, 0 },
+	{ MODULE_RESOURCE, "processor.resource"      , 0, 0, 0 },
+	{ MODULE_DEVICE,   "sagasd.device"           , 0, 0, 0 },
 };
 
 #define TEMPLATE "\
@@ -94,18 +93,21 @@ AK=AKIKO/S,\
 BO=BOARD/S,\
 BI=BOARDID/S,\
 BN=BOARDNAME/S,\
+SN=BOARDSERIAL/S,\
 CO=CORE/S,\
+CR=COREREV/S,\
 CP=CPU/S,\
+HZ=CPUHERTZ/S,\
 DE=DETECT/S,\
 DP=DPMS/N,\
 FP=FPU/N,\
-HZ=HERTZ/S,\
 ID=IDESPEED/N,\
 MR=MAPROM,\
 ML=MEMLIST/S,\
 MO=MODULES/S,\
+CD=CONFIGDEV/S,\
 SD=SDCLOCKDIV/N,\
-SN=SERIALNUMBER/S,\
+SE=SETENV/S,\
 SS=SUPERSCALAR/N,\
 TU=TURTLE/N,\
 VB=VBRMOVE/N"
@@ -117,18 +119,21 @@ typedef enum {
 	OPT_BOARD,
 	OPT_BOARDID,
 	OPT_BOARDNAME,
+	OPT_BOARDSERIAL,
 	OPT_COREREVSTRING,
+	OPT_COREREVNUMBER,
 	OPT_CPU,
+	OPT_CPUHERTZ,
 	OPT_DETECT,
 	OPT_DPMS,
 	OPT_FPU,
-	OPT_HERTZ,
 	OPT_IDESPEED,
 	OPT_MAPROM,
 	OPT_MEMLIST,
 	OPT_MODULES,
+	OPT_CONFIGDEV,
 	OPT_SDCLOCKDIV,
-	OPT_SERIALNUMBER,
+	OPT_SETENV,
 	OPT_SUPERSCALAR,
 	OPT_TURTLE,
 	OPT_VBRMOVE,
@@ -136,7 +141,7 @@ typedef enum {
 } OPT_ARGS;
 
 #define MAXBOARDID  (10)
-#define MAXMODULES  (16)
+#define MAXMODULES  (10)
 #define MAXFILESIZE (13)
 
 /**********************************************************
@@ -168,8 +173,8 @@ UBYTE * AttnName[16] = {
 	"080",    // 10
 	"BIT11",  // 11 (Unused)
 	"BIT12",  // 12 (Unused)
-	"ADDR32", // 13 (AROS: CPU is 32bit)
-	"BIT14",  // 14 (AROS: MMU presence)
+	"ADDR32", // 13 (CPU is 32bit)
+	"BIT14",  // 14 (MMU presence)
 	"PRIVATE" // 15 (FPU presence)
 };
 
@@ -185,6 +190,9 @@ UBYTE * BoardName[MAXBOARDID][3] = {
    { "Vampire VCD32",          "VCD32", "Majsta"  },  // 0x08
    { "Unknown",                "N/A",   "Unknown" }   // 0x09
 };
+
+struct Library* CyberGfxBase;
+struct Library* ExpansionBase;
 
 extern struct ExecBase *SysBase;
 extern struct DOSBase  *DOSBase;
@@ -209,12 +217,15 @@ ULONG Help(void)
 	"BO=BOARD/S        Output Board Information\n"
 	"BI=BOARDID/S      Output Board Identifier\n"
 	"BN=BOARDNAME/S    Output Board Name\n"
-	"SN=SERIALNUMBER/S Output Board Serial Number\n\n"
+	"SN=BOARDSERIAL/S  Output Board Serial Number\n\n"
 	"CO=CORE/S         Output Core Revision String\n"
+	"CR=COREREV/S      Output Core Revision Number\n"
 	"CP=CPU/S          Output CPU Information\n"
 	"HZ=HERTZ/S        Output CPU Frequency (Hertz)\n\n"
 	"ML=MEMLIST/S      Output Memory list\n"
 	"MO=MODULES/S      Output Modules list\n\n"
+	"CD=CONFIGDEV/S    Output AutoConfig Devices list\n\n"
+	"SE=SETENV/S       Create Environment Variables\n\n"
 	"AF=ATTNFLAGS/S    Change the AttnFlags (Force 080's)\n"
 	"AK=AKIKO/S        Change the GfxBase->ChunkyToPlanarPtr()\n"
 	"DP=DPMS/N         Change the DPMS mode. 0=Off, 1=On\n"
@@ -305,7 +316,7 @@ ULONG GetBoardFreqHW(void)
 	
 	if(v_cpu_is080())
 	{
-		result = ((*(volatile UWORD *)VREG_BOARD) & 0xff);
+		result = ((*(volatile UWORD*)VREG_BOARD) & 0xff);
 	}
 	
 	return(result);
@@ -323,11 +334,11 @@ ULONG GetBoardFreqSW(void)
 
 	if(v_cpu_is080())
 	{
-		ULONG multiplier = v_cpu_multiplier();
+		ULONG n = v_cpu_multiplier();
 		
 		printf("AC68080 @ %u MHz (x%u)\n",
-			( multiplier * SysBase->ex_EClockFrequency ) / 100000, 
-			( multiplier )
+			( n * SysBase->ex_EClockFrequency ) / 100000, 
+			( n )
 		);
 		
 		result = RETURN_OK;
@@ -348,7 +359,7 @@ ULONG GetBoardID(void)
 	
 	if(v_cpu_is080())
 	{
-		result = ((*(volatile UWORD *)VREG_BOARD) >> 8);
+		result = ((*(volatile UWORD*)VREG_BOARD) >> 8);
 	}
 	
 	return(result);
@@ -366,11 +377,11 @@ ULONG GetBoardName(void)
 	
 	if(v_cpu_is080())
 	{
-		ULONG boardId = ((*(volatile UWORD *)VREG_BOARD) >> 8);
+		ULONG n = ((*(volatile UWORD*)VREG_BOARD) >> 8);
 		
-		if(boardId < MAXBOARDID)
+		if(n < MAXBOARDID)
 		{
-			printf("%s\n", BoardName[boardId][BOARD_SHORTNAME]);
+			printf("%s\n", BoardName[n][BOARD_SHORTNAME]);
 			result = RETURN_OK;
 		}
 	}
@@ -384,17 +395,17 @@ ULONG GetBoardName(void)
  ** 
  **********************************************************/
 
-ULONG GetBoardSerial(void)
+ULONG GetBoardSerialNumber(void)
 {
 	ULONG result = RETURN_WARN;
 	
 	if(v_cpu_is080())
 	{
-		STRPTR serialnum = "XXXXXXXXXXXXXXXX-XX";
+		STRPTR s = "XXXXXXXXXXXXXXXX-XX";
 		
-		if(v_read_serialnumber(serialnum))
+		if(v_read_serialnumber(s))
 		{
-			printf("%s\n", serialnum);
+			printf("%s\n", s);
 			result = RETURN_OK;
 		}
 	}
@@ -462,8 +473,8 @@ ULONG GetBoard(void)
 	printf("Audio Chip   : %s\n", (audioChip <= 1) ? AudioName[audioChip] : unknown);
 	
 	printf("Akiko Chip   : %s (0x%04x)\n", 
-		((*(volatile UWORD *)0xB80002) == 0xCAFE) ? "Detected" : "Not detected",
-		(*(volatile UWORD *)0xB80002));
+		((*(volatile UWORD*)0xB80002) == 0xCAFE) ? "Detected" : "Not detected",
+		(*(volatile UWORD*)0xB80002));
 	
 	printf("Akiko C2P    : %s (0x%08lx)\n", 
 		GfxBase->ChunkyToPlanarPtr ? "Initialized" : "Uninitialized",
@@ -481,6 +492,35 @@ ULONG GetBoard(void)
 
 /**********************************************************
  ** 
+ ** GetCoreRevisionNumber()
+ ** 
+ **********************************************************/
+
+ULONG GetCoreRevisionNumber(void)
+{
+	ULONG result = RETURN_WARN;
+	
+	if(v_cpu_is080())
+	{
+		UBYTE buf[256];
+		
+		if(v_read_revisionstring(buf) && buf[0] == 'V')
+		{
+			STRPTR s = strstr(buf, "rev ");
+			
+			if(s)
+			{
+				printf("%ld\n", atoi(s + 4));
+				result = RETURN_OK;
+			}
+		}
+	}
+	
+	return(result);
+}
+
+/**********************************************************
+ ** 
  ** GetCoreRevisionString()
  ** 
  **********************************************************/
@@ -491,19 +531,12 @@ ULONG GetCoreRevisionString(void)
 	
 	if(v_cpu_is080())
 	{
-		UBYTE rev[256];
+		UBYTE buf[256];
 		
-		if(v_read_revisionstring(rev))
+		if(v_read_revisionstring(buf) && buf[0] == 'V')
 		{
-			if(rev[0] == 'V')
-			{
-				printf(rev);
-				result = RETURN_OK;
-			}
-			else
-			{
-				printf("Undefined.\n");
-			}
+			printf(buf);
+			result = RETURN_OK;
 		}
 	}
 	
@@ -522,11 +555,11 @@ ULONG GetCPU_CPU(void)
 	
 	if(v_cpu_is080())
 	{
-		UWORD value = ((*(volatile UWORD *)VREG_BOARD) & 0xff);
+		UWORD n = ((*(volatile UWORD*)VREG_BOARD) & 0xff);
 		
 		printf("CPU:  AC68080 @ %lu MHz (x%u) (%lup)\n", 
-			( value * SysBase->ex_EClockFrequency ) / 100000,
-			value, v_cpu_is2p() + 1);
+			( n * SysBase->ex_EClockFrequency ) / 100000,
+			n, v_cpu_is2p() + 1);
 		
 		result = RETURN_OK;
 	}
@@ -546,12 +579,12 @@ ULONG GetCPU_CACR(void)
 	
 	if((SysBase->AttnFlags & (1 << AFB_68020)) > 0)
 	{
-		ULONG value = v_cpu_cacr();
+		ULONG n = v_cpu_cacr();
 
 		printf("CACR: 0x%08x (InstCache: %s) (DataCache: %s)\n", 
-			( value ),
-			( value & (1 << 15) ) ? "On" : "Off",
-			( value & (1 << 31) ) ? "On" : "Off"
+			( n ),
+			( n & (1 << 15) ) ? "On" : "Off",
+			( n & (1 << 31) ) ? "On" : "Off"
 		);
 		
 		result = RETURN_OK;
@@ -573,14 +606,14 @@ ULONG GetCPU_PCR(void)
 	if(	((SysBase->AttnFlags & (1 << AFB_68060)) > 0) ||
 		((SysBase->AttnFlags & (1 << AFB_68080)) > 0))
 	{
-		ULONG value = v_cpu_pcr();
+		ULONG n = v_cpu_pcr();
 		
 		printf("PCR:  0x%08x (ID: %04x) (REV: %u) (DFP: %s) (ESS: %s)\n", 
-			(  value      ),
-			(  value >> 16),
-			(  value >>  8) & 0xFF,
-			(( value >>  1) & 1) ? "On" : "Off",
-			(( value >>  0) & 1) ? "On" : "Off"
+			(  n      ),
+			(  n >> 16),
+			(  n >>  8) & 0xff,
+			(( n >>  1) & 1) ? "On" : "Off",
+			(( n >>  0) & 1) ? "On" : "Off"
 		);
 		
 		result = RETURN_OK;
@@ -601,10 +634,10 @@ ULONG GetCPU_VBR(void)
 	
 	if((SysBase->AttnFlags & (1 << AFB_68010)) > 0)
 	{
-		ULONG value = v_cpu_vbr();
+		ULONG n = v_cpu_vbr();
 		
 		printf("VBR:  0x%08x (Vector base is located in %s)\n", 
-			value, value ? "FAST Ram" : "CHIP Ram");
+			n, n ? "FAST Ram" : "CHIP Ram");
 		
 		result = RETURN_OK;
 	}
@@ -701,6 +734,7 @@ ULONG EnumMemList(void)
 	struct MemHeader * mh;
 	UBYTE memsize[MAXFILESIZE];
 	
+	printf("Memory information:\n\n");
 	printf("%-11s%-18s%-4s%-10s%-10s%-6s\n", 
 		"Address",
 		"Name",
@@ -726,6 +760,8 @@ ULONG EnumMemList(void)
 			mh->mh_Attributes,
 			memsize);
 	}
+	
+	printf("\n");
 	
 	return(RETURN_OK);
 }
@@ -778,7 +814,12 @@ ULONG EnumModules(void)
 {
 	int i;
 	
-	printf("%-11s%-20s%-8s\n", "Address", "Name", "Version");
+	printf("Modules information:\n\n");
+	
+	printf("%-11s%-25s%-8s\n", 
+		"Address", 
+		"Name", 
+		"Version");
 	
 	for(i = 0; i < MAXMODULES; i++)
 	{
@@ -809,15 +850,83 @@ ULONG EnumModules(void)
 		
 		if(m.addr)
 		{
-			printf("$%08lx: %-19s %02ld.%02ld\n", 
-				m.addr, m.name, m.ver, m.rev);
+			printf("$%08lx: %-24s %02ld.%02ld\n", 
+				m.addr, 
+				m.name, 
+				m.ver, 
+				m.rev);
 		}
 		else
 		{
 			printf("$%08lx: %-19s NOT LOADED!\n", 
-				0, m.name);
+				0, 
+				m.name);
 		}
 	}
+	
+	printf("\n");
+	
+	return(RETURN_OK);
+}
+
+/**********************************************************
+ ** 
+ ** EnumConfigDevs()
+ ** 
+ **********************************************************/
+
+ULONG EnumConfigDevs(void)
+{
+	printf("Expansion information:\n\n");
+	
+	printf("%s    %s %s %s %s %s %s\n", 
+		"Address",
+		"BoardAddr",
+		"BoardSize",
+		"Type",
+		"Manufacturer",
+		"Product",
+		"Description");
+	
+	if(ExpansionBase = OpenLibrary(EXPANSIONNAME, 0L))
+	{
+		struct ConfigDev* cd = NULL;
+		
+		while(cd = FindConfigDev(cd, -1, -1))
+		{
+			UBYTE boardDesc[256];
+			UBYTE boardSize[MAXFILESIZE];
+			
+			PrintSize(cd->cd_BoardSize, boardSize);
+			
+			if(cd->cd_Rom.er_Manufacturer == 5016 && 
+			   cd->cd_Rom.er_Product < MAXBOARDID)
+			{
+				sprintf(boardDesc, "%s @ %s", 
+					BoardName[cd->cd_Rom.er_Product][BOARD_DESIGNER],
+					BoardName[cd->cd_Rom.er_Product][BOARD_FULLNAME]);
+			}
+			else
+			{
+				sprintf(boardDesc, "%s @ %s", 
+					BoardName[0][BOARD_DESIGNER],
+					BoardName[0][BOARD_FULLNAME]);
+			}
+			
+			printf("$%08lx: $%08lx %9s 0x%02x 0x%04x       0x%02x    %s\n", 
+				cd, 
+				cd->cd_BoardAddr, 
+				boardSize, 
+				cd->cd_Rom.er_Type,
+				cd->cd_Rom.er_Manufacturer,
+				cd->cd_Rom.er_Product,
+				boardDesc);
+		}
+		
+		CloseLibrary(ExpansionBase);
+	}
+	
+	printf("\n");
 	
 	return(RETURN_OK);
 }
@@ -834,12 +943,12 @@ ULONG SetSuperScalar(ULONG mode)
 	
 	if(v_cpu_is080())
 	{
-		ULONG ret = mode ? 
+		ULONG n = mode ? 
 			v_cpu_pcr_ess_on() : 
 			v_cpu_pcr_ess_off();
 		
 		printf("SuperScalar: %s\n", 
-			(ret & (1 << 0)) ? "Enabled" : "Disabled");
+			(n & (1 << 0)) ? "Enabled" : "Disabled");
 		
 		result = RETURN_OK;
 	}
@@ -863,21 +972,25 @@ ULONG SetTurtle(ULONG mode)
 		
 		if(boardId == VREG_BOARD_V4 || boardId == VREG_BOARD_V4SA)
 		{
-			ULONG ret = mode ? 
+			// V4: PCR method
+			
+			ULONG n = mode ? 
 				v_cpu_pcr_etu_on() : 
 				v_cpu_pcr_etu_off();
 			
 			printf("Turtle: %s\n", 
-				(ret & (1 << 7)) ? "Enabled" : "Disabled");
+				(n & (1 << 7)) ? "Enabled" : "Disabled");
 		}
 		else
 		{
-			ULONG ret = mode ? 
+			// V2: CACR method
+			
+			ULONG n = mode ? 
 				v_cpu_cacr_icache_off() : 
 				v_cpu_cacr_icache_on();
 			
 			printf("Turtle: %s\n", 
-				(ret & (1 << 15)) ? "Disabled" : "Enabled");
+				(n & (1 << 15)) ? "Disabled" : "Enabled");
 		}
 		
 		result = RETURN_OK;
@@ -1008,14 +1121,18 @@ ULONG SetDPMS(ULONG mode)
 {
 	ULONG result = RETURN_WARN;
 	
-	if(mode > 0)
+	if(CyberGfxBase = OpenLibrary(CYBERGFXNAME, 0))
 	{
-		// CGX DPMS_ON
-		mode = 3; 
-	}
-	
-	if(v_cgx_dpms_set(mode))
-	{
+		struct TagItem tags[1];
+		struct View* view = GfxBase->ActiView;
+		struct ViewPort* viewPort = view->ViewPort;
+
+		tags[0].ti_Tag  = SETVC_DPMSLevel;
+		tags[0].ti_Data = mode ? DPMS_OFF : DPMS_ON;
+		
+		CVideoCtrlTagList(viewPort, tags);
+		CloseLibrary(CyberGfxBase);
+		CyberGfxBase = NULL;
 		result = RETURN_OK;
 	}
 	
@@ -1032,14 +1149,22 @@ ULONG SetAkiko(void)
 {
 	ULONG result = RETURN_WARN;
 	
-	if(v_chipset_akiko())
+	if(GfxBase->LibNode.lib_Version >= 40)
 	{
-		printf("V40+ GfxBase->ChunkyToPlanarPtr() initialized.\n");
-		result = RETURN_OK;
+		if(*(volatile UWORD*)0xB80002 == 0xCAFE)
+		{
+			GfxBase->ChunkyToPlanarPtr = (ULONG*)0xB80038;
+			printf("GfxBase->ChunkyToPlanarPtr initialized.\n");
+			result = RETURN_OK;
+		}
+		else
+		{
+			printf("Akiko Chip not detected !\n");
+		}
 	}
 	else
 	{
-		printf("V40+ or Akiko not detected !\n");
+		printf("Graphics.library V40+ not detected !\n");
 	}
 	
 	return(result);
@@ -1136,6 +1261,76 @@ ULONG MapROM(STRPTR filename)
 
 /**********************************************************
  ** 
+ ** SetEnvVars()
+ ** 
+ **********************************************************/
+
+ULONG SE_GetBoardId(void) {
+	ULONG result = ((*(volatile UWORD*)VREG_BOARD) >> 8);
+	return(result);
+}
+
+STRPTR SE_GetBoardName(void) {
+	ULONG result = ((*(volatile UWORD*)VREG_BOARD) >> 8);
+	return(BoardName[result < MAXBOARDID ? result : 0][BOARD_SHORTNAME]);
+}
+
+ULONG SE_GetCoreRevision(void) {
+	UBYTE buffer[256];
+	if(v_read_revisionstring(buffer) && buffer[0] == 'V')
+		return((ULONG)atoi(strstr(buffer, "rev ") + 4));
+	return(0);
+}
+
+ULONG SE_GetCoreMultiplier(void) {
+	ULONG result = ((*(volatile UWORD*)VREG_BOARD) & 0xff);
+	return(result);
+}
+
+ULONG SE_GetCoreFrequency(void) {
+	ULONG result = ((*(volatile UWORD *)VREG_BOARD) & 0xff);
+	return(result * SysBase->ex_EClockFrequency / 100000);
+}
+
+ULONG SetEnvVars(void)
+{
+	ULONG result = 0;
+	
+	if(v_cpu_is080())
+	{
+		UBYTE buf[256];
+		
+		sprintf(buf, "%ld", SE_GetCoreRevision());
+		if(SetVar("VCoreRev", (STRPTR)buf, -1, LV_VAR+GVF_GLOBAL_ONLY))
+			result++;
+		
+		sprintf(buf, "%ld", SE_GetCoreMultiplier());
+		if(SetVar("VCoreMult", (STRPTR)buf, -1, LV_VAR+GVF_GLOBAL_ONLY))
+			result++;
+		
+		sprintf(buf, "%ld", SE_GetCoreFrequency());
+		if(SetVar("VCoreFreq", (STRPTR)buf, -1, LV_VAR+GVF_GLOBAL_ONLY))
+			result++;
+		
+		sprintf(buf, "%ld", SE_GetBoardId());
+		if(SetVar("VBoardID", (STRPTR)buf, -1, LV_VAR+GVF_GLOBAL_ONLY))
+			result++;
+		
+		sprintf(buf, "%s",  SE_GetBoardName());
+		if(SetVar("VBoardName", (STRPTR)buf, -1, LV_VAR+GVF_GLOBAL_ONLY))
+			result++;
+	}
+	
+	if(result == 5)
+		result = RETURN_OK;
+	else
+		result = RETURN_WARN;
+	
+	return(result);
+}
+
+/**********************************************************
+ ** 
  ** Entry point
  ** 
  **********************************************************/
@@ -1161,6 +1356,9 @@ ULONG main(ULONG argc, char *argv[])
 				if(opts[OPT_HELP])
 					result = Help();
 				
+				if(opts[OPT_SETENV])
+					result = SetEnvVars();
+				
 				if(opts[OPT_AKIKO])
 					result = SetAkiko();
 				
@@ -1176,6 +1374,12 @@ ULONG main(ULONG argc, char *argv[])
 				if(opts[OPT_BOARDNAME])
 					result = GetBoardName();
 				
+				if(opts[OPT_BOARDSERIAL])
+					result = GetBoardSerialNumber();
+				
+				if(opts[OPT_COREREVNUMBER])
+					result = GetCoreRevisionNumber();
+				
 				if(opts[OPT_COREREVSTRING])
 					result = GetCoreRevisionString();
 				
@@ -1188,17 +1392,11 @@ ULONG main(ULONG argc, char *argv[])
 				if(opts[OPT_FPU])
 					result = SetFPU(*(LONG *)opts[OPT_FPU]);
 				
-				if(opts[OPT_HERTZ])
-					result = GetBoardFreqSW();
-				
 				if(opts[OPT_IDESPEED])
 					result = SetFastIDE(*(LONG *)opts[OPT_IDESPEED]);
 				
 				if(opts[OPT_SDCLOCKDIV])
 					result = SetSDClockDivider(*(LONG *)opts[OPT_SDCLOCKDIV]);
-				
-				if(opts[OPT_SERIALNUMBER])
-					result = GetBoardSerial();
 				
 				if(opts[OPT_SUPERSCALAR])
 					result = SetSuperScalar(*(LONG *)opts[OPT_SUPERSCALAR]);
@@ -1212,11 +1410,17 @@ ULONG main(ULONG argc, char *argv[])
 				if(opts[OPT_CPU])
 					result = GetCPU();
 				
+				if(opts[OPT_CPUHERTZ])
+					result = GetBoardFreqSW();
+				
 				if(opts[OPT_MEMLIST])
 					result = EnumMemList();
 				
 				if(opts[OPT_MODULES])
 					result = EnumModules();
+
+				if(opts[OPT_CONFIGDEV])
+					result = EnumConfigDevs();
 				
 				if(opts[OPT_MAPROM])
 					result = MapROM((char *)opts[OPT_MAPROM]);

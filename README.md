@@ -7,7 +7,7 @@ The purpose of `VControl` is to bring some valuable information and control over
 
 # Releases
 
-VControl 1.15 (1.6.2020)
+VControl 1.16 (9.6.2020)
 
 Latest official binary releases : [Download](https://www.apollo-accelerators.com/wiki/doku.php/saga:updates)
 
@@ -27,9 +27,10 @@ BOARDSERIAL | Output Board Serial Number
 CORE | Output Core Revision String
 COREREV | Output Core Revision Number
 CPU | Output CPU information
-HERTZ | Output CPU Frequency
+CPUHERTZ | Output CPU Frequency
 MEMLIST | Output Memory list
 MODULES | Output Modules list
+CONFIGDEV | Output ConfigDev list
 SETENV | Create Environment Variables
 ATTNFLAGS | Change the AttnFlags
 AKIKO | Initialize the Akiko Chip
