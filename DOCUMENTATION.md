@@ -39,9 +39,10 @@ Command | Description
 [CO=CORE/S](#vcontrol-core) | Output Core Revision String
 [CR=COREREV/S](#vcontrol-corerev) | Output Core Revision Number
 [CP=CPU/S](#vcontrol-cpu) | Output CPU information
-[HZ=HERTZ/S](#vcontrol-hertz) | Output CPU Frequency (Hertz)
+[HZ=CPUHERTZ/S](#vcontrol-cpuhertz) | Output CPU Frequency (Hertz)
 [ML=MEMLIST/S](#vcontrol-memlist) | Output Memory list
 [MO=MODULES/S](#vcontrol-modules) | Output Modules list
+[CD=CONFIGDEV/S](#vcontrol-configdev) | Output ConfigDev list
 [SE=SETENV/S](#vcontrol-setenv) | Create Environment Variables
 [AF=ATTNFLAGS/S](#vcontrol-attnflags) | Change the AttnFlags (Force 080's)
 [AK=AKIKO/S](#vcontrol-akiko) | Change the GfxBase->ChunkyToPlanarPtr()
@@ -414,7 +415,7 @@ ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
 ```
 
 
-# VControl HERTZ
+# VControl CPUHERTZ
 
 **SYNOPSIS :**
 
@@ -441,7 +442,7 @@ This command takes 1 second to execute (blocking), on purpose.
 **EXAMPLES :**
 
 ```
-> C:VControl HERTZ
+> C:VControl CPUHERTZ
 AC68080 @ 85 MHz (x12)
 > 
 ```
@@ -469,11 +470,12 @@ It should never fails since Exec is always available.
 
 ```
 > C:VControl MEMLIST
-Address    Name               Pri Lower     Upper     Attrs
-$01000000: VampireFastMem      64 $01000020 $1fffffff $0505 (496.0 MB)
-$00c00000: memory              -5 $00c00020 $00d7ffff $0705 (  1.5 MB)
-$00004000: chip memory        -10 $00004020 $001fffff $0703 (  2.0 MB)
-$00200000: VmpireChipMMem     -11 $00200020 $00b7ffff $0703 (  9.5 MB)
+Memory information:
+
+Address    Name              Pri Lower     Upper     Attrs 
+$08000000: expansion memory   40 $08000020 $0fdfffff $0505 (126.0 MB)
+$00c00000: memory             -5 $00c00020 $00c7ffff $0705 (511.9 KB)
+$00004000: chip memory       -10 $00004020 $001fffff $0703 (  2.0 MB)
 > 
 ```
 
@@ -510,12 +512,51 @@ The enumerated modules are of different kinds :
 
 ```
 > C:VControl MODULES
-Address    Name                   Version
-$010620c4: 68040.library          37.40
-$00e001be: VampireFastMem         40.00
-$011be704: vampiregfx.card        01.28
-$00e001a4: VampireSupport         40.00
-$010172e4: vampire.resource       45.03
+Modules information:
+
+Address    Name                     Version 
+$08057c9c: 68040.library              40.02
+$00e17350: 680x0.library              40.00
+$0818c36c: vampiregfx.card            01.30
+$00e12e3e: VampireBoot                37.00
+$00e001be: VampireFastMem             40.00
+$00e001a4: VampireSupport             40.00
+$0801aefc: vampire.resource           45.03
+$0800009c: vampiresupport.resource    40.41
+$0801c34c: processor.resource         44.03
+$00000000: sagasd.device         NOT LOADED!
+>
+```
+
+
+# VControl CONFIGDEV
+
+**SYNOPSIS :**
+
+This command enumerates the `Expansion` devices, by using FindConfigDev().
+
+It should never fails since Exec is always available.
+
+**INPUT :**
+
+* None
+
+**OUTPUT :**
+
+* Returns `OK` ($RC = 0).
+
+**NOTES :**
+
+(!) This function is experimental and may change in future (!)
+
+**EXAMPLES :**
+
+```
+> C:VControl CONFIGDEV
+Expansion information:
+
+Address    BoardAddr BoardSize Type Manufacturer Product Description
+$00004020: $00dfe000   64.0 KB 0xc1 0x1398       0x06    Majsta @ Vampire V1200
 >
 ```
 
