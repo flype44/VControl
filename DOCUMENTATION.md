@@ -567,8 +567,6 @@ $00004020: $00dfe000   64.0 KB 0xc1 0x1398       0x06    Majsta @ Vampire V1200
 
 This command creates the `VControl Environment Variables` into `ENV:`
 
-As a consequency, `ENV:` assign **MUST** be initialized before executing this command.
-
 Those variables are intended to make life easier for scripting usages.
 
 **INPUT :**
@@ -593,6 +591,8 @@ $VBoardName | Board Short Name | V1200
 **NOTE :**
 
 The variables are created **ONLY** if a Vampire is detected.
+
+In addition, `ENV:` **MUST** be properly assigned before executing this command.
 
 **EXAMPLES :**
 
