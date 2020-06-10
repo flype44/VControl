@@ -20,7 +20,7 @@ V_FPU.o\
 V_SERIAL.o\
 V_MAPROM.o
 
-AS=vasm
+AS=vasmm68k_mot
 ASMFLAGS=-Fhunk -devpac -m68000 -quiet
 ASMINCLUDES=-Isc:include/
 OUTFILE=VControl
