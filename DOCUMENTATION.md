@@ -53,9 +53,9 @@ Command | Description
 
 **NOTE :**
 
-For more information about the `Amiga DOS` command line arguments and scriptings, 
+For more information about the `Amiga DOS` command line arguments and scripting, 
 
-Please refer to the official documentations :
+Please refer to the official documentation :
 
 [AmigaDOS: Templates](https://wiki.amigaos.net/wiki/AmigaOS_Manual:_AmigaDOS_Command_Reference#Template)
 
@@ -79,7 +79,7 @@ Please refer to the official documentations :
 
 **SYNOPSIS :**
 
-This command proceeds a true `Apollo Core 68080` detection.
+This command performs a true `Apollo Core 68080` detection.
 
 It checks the presence of the processor `PCR` register and the associated processor identifier word (which should be `0x0440` for a 68080 CPU).
 
@@ -139,7 +139,7 @@ Product-ID   : 6
 Product-Name : Vampire V1200
 Serial-Number: 0000000000000000-0
 Designer     : Majsta
-Manufaturer  : APOLLO-Team (C)
+Manufacturer : APOLLO-Team (C)
 
 EClock Freq. : 7.09379 Hz (PAL)
 VBlank Freq. : 50 Hz
@@ -300,7 +300,7 @@ This command reads the Vampire Core `Revision String` from its internal Flash ch
 
 The Core `Revision String` is only present in the official AmigaOS Flash Binary cores provided by the APOLLO-Team.
 
-This feature can **NOT** work on cores provided in the `Altera Quartus .JIC` forms (when flashed with an `USB-Blaster` device).
+This means this feature can **NOT** work on cores provided in the `Altera Quartus .JIC` forms (when flashed with a `USB-Blaster` device).
 
 **INPUT :**
 
@@ -325,7 +325,7 @@ Vampire 1200 V2 Apollo rev 7389B x12 (Gold 2.12)
 
 **SYNOPSIS :**
 
-This command parses the `Revision Number` found into the Vampire Core `Revision String`.
+This command parses the `Revision Number` found inside the Vampire Core `Revision String`.
 
 The Core `Revision String` is only present in the official AmigaOS Flash Binary cores provided by the APOLLO-Team.
 
@@ -417,9 +417,9 @@ ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
 
 This command determines the frequency (in MHz) of the Apollo Core `68080` processor.
 
-On contrary to the usual `Hardware` method, this command use a `Software` method to determine the frequency.
+Contrary to the usual `Hardware` method, this command uses a `Software` method to determine the frequency.
 
-It calculates the real number of processor cycles occured in 1 second, using the 68080 `Clock-Cycle Register`.
+It calculates the real number of processor cycles that occured in 1 second, using the 68080 `Clock-Cycle Register`.
 
 **INPUT :**
 
@@ -448,11 +448,11 @@ AC68080 @ 85 MHz (x12)
 
 **SYNOPSIS :**
 
-This command displays all the memory nodes found into the AmigaOS `Exec -> MemList`.
+This command displays all the memory nodes found inside the AmigaOS `Exec -> MemList`.
 
-It gives quite similar information than `C:ShowConfig`.
+It gives quite similar information to `C:ShowConfig`.
 
-It should never fails since Exec is always available.
+It should never fail since Exec is always available.
 
 **INPUT :**
 
@@ -480,9 +480,9 @@ $00004000: chip memory       -10 $00004020 $001fffff $0703 (  2.0 MB)
 
 **SYNOPSIS :**
 
-This command enumerates a number of vampire-related system modules running.
+This command enumerates a number of vampire-related system modules that are loaded.
 
-It should never fails since Exec is always available.
+It should never fail since Exec is always available.
 
 The enumerated modules are of different kinds :
 
@@ -531,7 +531,7 @@ $00000000: sagasd.device         NOT LOADED!
 
 This command enumerates the `Expansion` devices, by using FindConfigDev().
 
-It should never fails since Exec is always available.
+It should never fail since Exec is always available.
 
 **INPUT :**
 
@@ -563,7 +563,7 @@ $00004020: $00dfe000   64.0 KB 0xc1 0x1398       0x06    Majsta @ Vampire V1200
 
 This command creates the `VControl Environment Variables` into `ENV:`
 
-Those variables are intended to make life easier for scripting usages.
+Those variables are intended to make life easier for scripting use cases.
 
 **INPUT :**
 
@@ -572,7 +572,7 @@ Those variables are intended to make life easier for scripting usages.
 **OUTPUT :**
 
 * Returns `OK` ($RC = 0) if successful.
-* Returns `DOS` WARN ($RC = 5) if failed.
+* Returns `WARN` ($RC = 5) if failed.
 
 **RESULTS :**
 
@@ -611,7 +611,7 @@ IF NOT WARN
 	ENDIF
 
 	IF $VCoreRev NOT GE 7390
-		ECHO "Core is out dated, please download latest"
+		ECHO "Core is outdated, please download latest"
 	ELSE
 		ECHO "Core is up to date"
 	ENDIF
@@ -656,11 +656,11 @@ ENDIF
 
 **SYNOPSIS :**
 
-This command changes the Operating System `Exec -> AttnFlags` in order to forces the usual 68080 ones.
+This command changes the Operating System `Exec -> AttnFlags` in order to force the usual 68080 ones.
 
-It can be handy when MapROM'ing some ROM which do not initialize the AC68080 Exec flags.
+It can be handy when MapROM'ing some ROM which does not initialize the AC68080 Exec flags.
 
-Those flags are forced :
+These flags are forced :
 
 * AFF_68010
 * AFF_68020
@@ -695,11 +695,11 @@ This command Initialize the Akiko Chunky To Planar routine.
 
 It checks the presence of the `CD32 Akiko Chip`, checks if the graphics.library is `V40+`, and finally updates the `GfxBase -> ChunkyToPlanarPtr` address if necessary.
 
-This may be needed when the graphics.library fail to detect the Akiko chip during the boot process.
+This may be needed when the graphics.library fails to detect the Akiko Chip during the boot process.
 
-The graphics.library `WriteChunkyPixels()` function can benefits of such hardware, when detected and enabled.
+The graphics.library `WriteChunkyPixels()` function can take advantage of such hardware, when detected and enabled.
 
-More informations [here](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_3._guide/node033C.html).
+More information [here](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_3._guide/node033C.html).
 
 
 **INPUT :**
@@ -713,9 +713,9 @@ More informations [here](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_A
 
 **NOTE :**
 
-Theorically, it's only aiming `AGA` Amiga machines.
+Theoretically, it's only aimed at `AGA` Amiga machines.
 
-Currentely compatible with the `Vampire V4` model.
+Currently compatible with the `Vampire V4` model.
 
 Planned for the `Vampire V1200` in future core.
 
@@ -754,13 +754,13 @@ It changes the VESA `Display Power Management Signaling` (DPMS) level by calling
 
 **NOTE :**
 
-The Vampire P96 Graphics Driver support the `DPMS` signals.
+The Vampire P96 Graphics Driver supports the `DPMS` signals.
 
 The "Stand-by" and "Suspend" states are not supported.
 
 Recommended tool : [DPMSManager](http://aminet.net/package/util/blank/DPMSManager) for energy-saving.
 
-However, one may need to disable the display MANUALLY for various reasons, such as benchmarkings.
+However, one may need to disable the display MANUALLY for various reasons, such as benchmarking.
 
 **EXAMPLES :**
 
@@ -809,16 +809,16 @@ C:SetPatch
 
 **SYNOPSIS :**
 
-This command changes the Vampire `FastIDE` mode for faster-than-legacy `IDE` devices reads.
+This command changes the Vampire `FastIDE` mode for faster-than-legacy `IDE` device reads.
 
-It applies only on compatible Vampire boards, with an embedded `FastIDE` slot.
+It applies only to compatible Vampire boards, with an embedded `FastIDE` slot.
 
 NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 
 **INPUT :**
 
 * `IDESPEED=0` : PIO Mode 0 → Very old hard disks and CD/DVD drives. Default at boot.
-* `IDESPEED=1` : PIO Mode 4 → Most hard disks and CD/DVD drives, and for very old CompactFlash cards.
+* `IDESPEED=1` : PIO Mode 4 → Most hard disks and CD/DVD drives, and very old CompactFlash cards.
 * `IDESPEED=2` : PIO Mode 5 → Most CompactFlash cards.
 * `IDESPEED=3` : PIO Mode 6 → Fast CompactFlash cards.
 
@@ -852,7 +852,7 @@ The nominal speed of the `SDPort` is based on the actual Vampire Core frequency,
 
 To decrease that speed, the `SDPort` can use a fraction (divider) of the Core frequency.
 
-It applies only on compatible Vampire boards, with an embedded `SDPort` slot.
+It applies only to compatible Vampire boards, with an embedded `SDPort` slot.
 
 NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 
@@ -882,11 +882,11 @@ SDPort Clock Divider = 1 (Fastest=0, 255=Slowest).
 
 **SYNOPSIS :**
 
-This command enables or disables the so-called Apollo Core `SUPERSCALAR` mode (Default is Enabled).
+This command enables or disables the Apollo Core `SUPERSCALAR` mode (Default is Enabled).
 
 SuperScalar is a processor feature which allows to `execute 2 instructions` per fetch, through a `2nd pipe`.
 
-When enabled, the processor works faster, whenever appliable, and even more with programs compiled for (When compiled for MC68060).
+When enabled, the processor works faster, whenever applicable, and even more with programs compiled to take advantage of it (e.g. when compiled for MC68060).
 
 **INPUT :**
 
@@ -908,7 +908,7 @@ This setting is **NOT** reset to `0` after a reboot.
 > C:VControl SUPERSCALAR 0 ; Disable SuperScalar.
 SuperScalar: Disabled.
 > C:VControl CPU ; Check the effect of the previous command. See PCR line.
-Processor informations :
+Processor information :
 
 CPU:  AC68080 @ 85 MHz (x12) (1p)
 FPU:  Is working.
@@ -923,7 +923,7 @@ ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
 > C:VControl SUPERSCALAR 1 ; Enable SuperScalar.
 SuperScalar: Enabled.
 > C:VControl CPU ; Check the effect of the previous command. See PCR line.
-Processor informations :
+Processor information :
 
 CPU:  AC68080 @ 85 MHz (x12) (1p)
 FPU:  Is working.
@@ -943,7 +943,7 @@ This command enables or disables the so-called Apollo Core `TURTLE` mode.
 
 This feature intends to **HEAVILY** slowdown the processor execution in order to approximate the `MC68000` / `MC68020` speed.
 
-It eventually helps compatibility when launching old Amiga demos and games.
+It might help compatibility when launching old Amiga demos and games.
 
 **INPUT :**
 
@@ -1010,7 +1010,7 @@ This command is compatible with [VBRControl](http://aminet.net/package/util/sys/
 ```
 > C:VControl VBRMOVE 0 ; Relocate the VBR in CHIP memory.
 > C:VControl CPU ; Check the effect of the previous command. See VBR line.
-Processor informations :
+Processor information :
 
 CPU:  AC68080 @ 85 MHz (x12) (2p)
 FPU:  Is working.
@@ -1024,7 +1024,7 @@ ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
 ```
 > C:VControl VBRMOVE 1 ; Relocate the VBR in FAST memory.
 > C:VControl CPU ; Check the effect of the previous command. See VBR line.
-Processor informations :
+Processor information :
 
 CPU:  AC68080 @ 85 MHz (x12) (2p)
 FPU:  Is working.
@@ -1055,9 +1055,9 @@ It does a RAW maprom, the input file content remains unchecked, untouched and ma
 
 **NOTE :**
 
-* The mapped ROM will survive from a `WARM REBOOT`.
+* The mapped ROM will survive a `WARM REBOOT`.
 
-* The mapped ROM will NOT survive from a `POWER OFF`.
+* The mapped ROM will NOT survive a `POWER OFF`.
 
 * Shutdown the system if the mapped ROM gives troubles.
 
