@@ -13,7 +13,7 @@ It always refers to the latest version. Take care using latest version in your s
 
 Latest `VControl` binaries are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/saga:updates). 
 
-Latest `Vampire` cores are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/vampire:accelerator_core_updates). 
+Latest `Vampire` cores are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/start#core_and_software_updates). 
 
 Additional support and guidelines for `VControl` can be found [here](https://www.apollo-accelerators.com/wiki/doku.php/system_tools:vcontrol).
 
