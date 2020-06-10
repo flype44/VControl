@@ -41,7 +41,7 @@ Command | Description
 [CD=CONFIGDEV/S](#vcontrol-configdev) | Output ConfigDev list
 [SE=SETENV/S](#vcontrol-setenv) | Create Environment Variables
 [AF=ATTNFLAGS/S](#vcontrol-attnflags) | Change the AttnFlags (Force 080's flags)
-[AK=AKIKO/S](#vcontrol-akiko) | Change Akiko C2P routine
+[AK=AKIKO/S](#vcontrol-akiko) | Change the Akiko C2P routine
 [DP=DPMS/N](#vcontrol-dpms) | Change the DPMS mode. 0=Off, 1=On
 [FP=FPU/N](#vcontrol-fpu) | Change the FPU mode. 0=Off, 1=On
 [ID=IDESPEED/N](#vcontrol-idespeed) | Change the IDE speed. 0=Slow, 1=Fast, 2=Faster, 3=Fastest
