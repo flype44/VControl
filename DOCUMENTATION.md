@@ -6,7 +6,7 @@ The purpose of `VControl` is to bring some valuable information and control over
 
 This article describes all the commands provided in the `VControl` program.
 
-It always refers to the latest version. Take care using latest version in your scripts.
+It always refers to the latest version. Take care to use latest version in your scripts.
 
 
 # Releases
@@ -27,7 +27,7 @@ Below are all the supported commands.
 Command | Description
 ------------ | -------------
 [HELP/S](#commands) | This help
-[DE=DETECT/S](#vcontrol-detect) | Return AC68080 detection is $RC
+[DE=DETECT/S](#vcontrol-detect) | Return AC68080 detection in $RC
 [BO=BOARD/S](#vcontrol-board) | Output Board Information
 [BI=BOARDID/S](#vcontrol-boardid) | Output Board Identifier
 [BN=BOARDNAME/S](#vcontrol-boardname) | Output Board Name
@@ -40,7 +40,7 @@ Command | Description
 [MO=MODULES/S](#vcontrol-modules) | Output Modules list
 [CD=CONFIGDEV/S](#vcontrol-configdev) | Output ConfigDev list
 [SE=SETENV/S](#vcontrol-setenv) | Create Environment Variables
-[AF=ATTNFLAGS/S](#vcontrol-attnflags) | Change the AttnFlags (Force 080's)
+[AF=ATTNFLAGS/S](#vcontrol-attnflags) | Change the AttnFlags (Force 080's flags)
 [AK=AKIKO/S](#vcontrol-akiko) | Change Akiko C2P routine
 [DP=DPMS/N](#vcontrol-dpms) | Change the DPMS mode. 0=Off, 1=On
 [FP=FPU/N](#vcontrol-fpu) | Change the FPU mode. 0=Off, 1=On
@@ -91,8 +91,8 @@ It does not rely on any Operating System prerequisites (such as the Exec->AttnFl
 
 **OUTPUT :**
 
-* Returns `OK` ($RC = 0) if successful.
-* Returns `WARN` ($RC = 5) if failed.
+* Returns `OK` ($RC = 0) if detected.
+* Returns `WARN` ($RC = 5) if not detected.
 
 **EXAMPLES :**
 
@@ -755,6 +755,8 @@ It changes the VESA `Display Power Management Signaling` (DPMS) level by calling
 **NOTE :**
 
 The Vampire P96 Graphics Driver support the `DPMS` signals.
+
+The "Stand-by" and "Suspend" states are not supported.
 
 Recommended tool : [DPMSManager](http://aminet.net/package/util/blank/DPMSManager) for energy-saving.
 
