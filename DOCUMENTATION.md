@@ -8,10 +8,6 @@ This article describes all the commands provided in the `VControl` program.
 
 It always refers to the latest version. Take care using latest version in your scripts.
 
-**WARNING** :
-
-This documentation is still heavily in `Work In Progress` status.
-
 
 # Releases
 
