@@ -45,7 +45,7 @@ Command | Description
 [CD=CONFIGDEV/S](#vcontrol-configdev) | Output ConfigDev list
 [SE=SETENV/S](#vcontrol-setenv) | Create Environment Variables
 [AF=ATTNFLAGS/S](#vcontrol-attnflags) | Change the AttnFlags (Force 080's)
-[AK=AKIKO/S](#vcontrol-akiko) | Change the GfxBase->ChunkyToPlanarPtr()
+[AK=AKIKO/S](#vcontrol-akiko) | Change Akiko C2P routine
 [DP=DPMS/N](#vcontrol-dpms) | Change the DPMS mode. 0=Off, 1=On
 [FP=FPU/N](#vcontrol-fpu) | Change the FPU mode. 0=Off, 1=On
 [ID=IDESPEED/N](#vcontrol-idespeed) | Change the IDE speed. 0=Slow, 1=Fast, 2=Faster, 3=Fastest
@@ -695,7 +695,9 @@ AttnFlags : 0x847f
 
 **SYNOPSIS :**
 
-This command checks the presence of the `CD32 Akiko Chip`, check if the graphics.library is `V40+`, and update the `GfxBase -> ChunkyToPlanarPtr` address if necessary.
+This command Initialize the Akiko Chunky To Planar routine.
+
+It checks the presence of the `CD32 Akiko Chip`, checks if the graphics.library is `V40+`, and finally updates the `GfxBase -> ChunkyToPlanarPtr` address if necessary.
 
 This may be needed when the graphics.library fail to detect the Akiko chip during the boot process.
 
