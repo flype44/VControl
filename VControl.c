@@ -227,7 +227,7 @@ ULONG Help(void)
 	"CD=CONFIGDEV/S    Output AutoConfig Devices list\n\n"
 	"SE=SETENV/S       Create Environment Variables\n\n"
 	"AF=ATTNFLAGS/S    Change the AttnFlags (Force 080's)\n"
-	"AK=AKIKO/S        Update the Akiko C2P routine\n"
+	"AK=AKIKO/S        Initialize the Akiko C2P routine\n"
 	"DP=DPMS/N         Change the DPMS mode. 0=Off, 1=On\n"
 	"FP=FPU/N          Change the FPU mode. 0=Off, 1=On\n"
 	"ID=IDESPEED/N     Change the IDE speed. 0=Slow, 1=Fast, 2=Faster, 3=Fastest\n"
