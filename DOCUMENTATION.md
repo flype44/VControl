@@ -1041,9 +1041,11 @@ It might help compatibility when launching old Amiga demos and games.
 This setting is reset to `0` after a reboot.
 
 On **V2** boards,
+
 This command uses the Motorola™ `Cache Control Register` (CACR) register, Bit `Instruction Cache` (ICache).
 
 On **V4** boards,
+
 This command uses the Motorola™ `Processor Configuration Register` (PCR) register, Bit `Enable TUrtle` (ETU).
 
 **EXAMPLES :**
