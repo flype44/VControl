@@ -691,7 +691,7 @@ AttnFlags : 0x847f
 
 **SYNOPSIS :**
 
-This command Initialize the Akiko Chunky To Planar routine.
+This command initialize the `Akiko` Chunky To Planar routine.
 
 It checks the presence of the `CD32 Akiko Chip`, checks if the graphics.library is `V40+`, and finally updates the `GfxBase -> ChunkyToPlanarPtr` address if necessary.
 
@@ -756,7 +756,7 @@ It changes the VESA `Display Power Management Signaling` (DPMS) level by calling
 
 The Vampire P96 Graphics Driver supports the `DPMS` signals.
 
-The "Stand-by" and "Suspend" states are not supported.
+The `Stand-by` and `Suspend` states are not supported.
 
 Recommended tool : [DPMSManager](http://aminet.net/package/util/blank/DPMSManager) for energy-saving.
 
@@ -778,8 +778,8 @@ This command switchs the `FPU` On/Off by using the dedicated API from `vampiresu
 
 **INPUT :**
 
-* `FPU=0` : Switch ON the FPU.
-* `FPU=1` : Switch OFF the FPU.
+* `FPU=0` : Switch OFF the FPU.
+* `FPU=1` : Switch ON the FPU.
 
 **OUTPUT :**
 
@@ -788,7 +788,7 @@ This command switchs the `FPU` On/Off by using the dedicated API from `vampiresu
 
 **NOTE :**
 
-This setting is reset to `0` after a reboot.
+This setting is reset to `1` after a reboot.
 
 In essence, the FPU Off needs to be done as early as possible in the `S:Startup-Sequence`, preferably before the `SetPatch` command.
 
@@ -882,7 +882,7 @@ SDPort Clock Divider = 1 (Fastest=0, 255=Slowest).
 
 **SYNOPSIS :**
 
-This command enables or disables the Apollo Core `SUPERSCALAR` mode (Default is Enabled).
+This command enables or disables the Apollo Core `SuperScalar` mode (Default is Enabled).
 
 SuperScalar is a processor feature which allows to `execute 2 instructions` per fetch, through a `2nd pipe`.
 
@@ -890,8 +890,8 @@ When enabled, the processor works faster, whenever applicable, and even more wit
 
 **INPUT :**
 
-* `SUPERSCALAR=0` : Disable the processor SUPERSCALAR mode (1 pipe mode).
-* `SUPERSCALAR=1` : Enable the processor SUPERSCALAR mode (2 pipes mode).
+* `SUPERSCALAR=0` : Disable the processor SuperScalar mode (1 pipe mode).
+* `SUPERSCALAR=1` : Enable the processor SuperScalar mode (2 pipes mode).
 
 **OUTPUT :**
 
