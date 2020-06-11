@@ -33,7 +33,7 @@ MODULES | Output Modules list
 CONFIGDEV | Output ConfigDev list
 SETENV | Create Environment Variables
 ATTNFLAGS | Change the AttnFlags
-AKIKO | Initialize the Akiko C2P routine
+AKIKO | Update the Akiko C2P routine
 DPMS | Change the DPMS mode
 FPU | Change the FPU mode
 IDESPEED | Change the IDE speed
