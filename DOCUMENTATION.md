@@ -141,7 +141,7 @@ This command uses :
 * Vampire `Serial Peripheral Interface` (SPI) private registers.
 * AmigaHW `POTINP` (0xdff016) chipset register, for the Audio chip version.
 * AmigaHW `DENISEID` (0xdff07c) chipset register, for the Video chip version.
-* AmigaOS `Exec` functions for additional information.
+* AmigaOS `Exec` functions for the available memory and frequency information.
 
 **EXAMPLES :**
 
