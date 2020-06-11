@@ -11,6 +11,7 @@
 #define VREG_SDCLKDIV   0xde000c
 #define VREG_VMODE      0xdff1f4
 #define VREG_BOARD      0xdff3fc
+#define VREG_MAPROM     0xdff3fe
 
 #define VREG_BOARD_Unknown  0x00
 #define VREG_BOARD_V600     0x01
