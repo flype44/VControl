@@ -774,6 +774,11 @@ It does a RAW maprom, the input file content remains unchecked, untouched and ma
 
 **NOTE :**
 
+The `Vampire` ROMs are located to :
+
+* 1st 512KB at address `$00E00000` to `$00E7FFFF`.
+* 2nd 512KB at address `$00F80000` to `$00FFFFFF`.
+
 The mapped ROM will survive a `WARM REBOOT`.
 
 The mapped ROM will NOT survive a `POWER OFF`.
