@@ -221,7 +221,7 @@ This command uses :
 **EXAMPLES :**
 
 ```
-C:VControl BOARD
+> C:VControl BOARD
 Board information :
 
 Product-ID   : 6
@@ -278,7 +278,7 @@ This command uses the Vampire `VREG_BOARD` (0xdff3fc) chipset register.
 **EXAMPLES :**
 
 ```
-C:VControl BOARDID
+> C:VControl BOARDID
 > Echo $RC
 6
 > 
