@@ -11,9 +11,9 @@ It always refers to the latest version. Take care to use latest version in your 
 
 # Releases
 
-Latest `VControl` binaries are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/saga:updates). 
-
 Latest `Vampire` cores are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/start#core_and_software_updates). 
+
+Latest `VControl` binaries are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/saga:updates). 
 
 Additional support and guidelines for `VControl` can be found [here](https://www.apollo-accelerators.com/wiki/doku.php/system_tools:vcontrol).
 
