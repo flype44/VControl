@@ -41,7 +41,7 @@ Command | Description
 [CD=CONFIGDEV/S](#vcontrol-configdev) | Output ConfigDev list
 [SE=SETENV/S](#vcontrol-setenv) | Create Environment Variables
 [AF=ATTNFLAGS/S](#vcontrol-attnflags) | Change the AttnFlags (Force 080's flags)
-[AK=AKIKO/S](#vcontrol-akiko) | Change the Akiko C2P routine
+[AK=AKIKO/S](#vcontrol-akiko) | Initialize the Akiko C2P routine
 [DP=DPMS/N](#vcontrol-dpms) | Change the DPMS mode. 0=Off, 1=On
 [FP=FPU/N](#vcontrol-fpu) | Change the FPU mode. 0=Off, 1=On
 [ID=IDESPEED/N](#vcontrol-idespeed) | Change the IDE speed. 0=Slow, 1=Fast, 2=Faster, 3=Fastest
@@ -274,7 +274,7 @@ This command retrieves the Vampire `Board Serial Number`.
 
 Implemented and works for `V500`, `V600`, `V1200`.
 
-Implemented and **NOT** works for `V4`, for now.
+Implemented and does **NOT** works for `V4`, for now.
 
 **EXAMPLES :**
 
@@ -419,7 +419,7 @@ This command determines the frequency (in MHz) of the Apollo Core `68080` proces
 
 Contrary to the usual `Hardware` method, this command uses a `Software` method to determine the frequency.
 
-It calculates the real number of processor cycles that occured in 1 second, using the 68080 `Clock-Cycle Register`.
+It calculates the real number of processor cycles that occurred in 1 second, using the 68080 `Clock-Cycle Register`.
 
 **INPUT :**
 
@@ -691,7 +691,7 @@ AttnFlags : 0x847f
 
 **SYNOPSIS :**
 
-This command initialize the `Akiko` Chunky To Planar routine.
+This command initializes the `Akiko` Chunky To Planar routine.
 
 It checks the presence of the `CD32 Akiko Chip`, checks if the graphics.library is `V40+`, and finally updates the `GfxBase -> ChunkyToPlanarPtr` address if necessary.
 
