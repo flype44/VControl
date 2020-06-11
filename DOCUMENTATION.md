@@ -94,6 +94,10 @@ It does not rely on any Operating System prerequisites (such as the Exec->AttnFl
 * Returns `OK` ($RC = 0) if detected.
 * Returns `WARN` ($RC = 5) if not detected.
 
+**NOTE :**
+
+This command uses the Motorola™ `Processor Configuration Register` (PCR) register.
+
 **EXAMPLES :**
 
 ```
@@ -128,6 +132,16 @@ This command collects and outputs information about the Vampire Board.
 * Returns `OK` ($RC = 0) if successful.
 * Returns `WARN` ($RC = 5) if failed.
 * Print out information about the Vampire Board.
+
+**NOTE :**
+
+This command uses :
+
+* Vampire `VREG_BOARD` (0xdff3fc) chipset register.
+* Vampire `Serial Peripheral Interface` (SPI) private registers.
+* AmigaHW `POTINP` (0xdff016) chipset register, for the Audio chip version.
+* AmigaHW `DENISEID` (0xdff07c) chipset register, for the Video chip version.
+* AmigaOS `Exec` functions for additional information.
 
 **EXAMPLES :**
 
@@ -182,6 +196,10 @@ List of the Vampire `Board Identifiers` :
 * Returns the Vampire `Board Identifier` ($RC).
 * If `$RC` is `0`, it means no Vampire hardware detected.
 
+**NOTE :**
+
+This command uses the Vampire `VREG_BOARD` (0xdff3fc) chipset register.
+
 **EXAMPLES :**
 
 ```
@@ -231,6 +249,10 @@ This command ouputs the Vampire `Board Short Name` based on the `Board Identifie
 * Returns `WARN` ($RC = 5) if failed.
 * Print out the Vampire `Board Short Name`.
 
+**NOTE :**
+
+This command uses the Vampire `VREG_BOARD` (0xdff3fc) chipset register.
+
 **EXAMPLES :**
 
 ```
@@ -276,6 +298,8 @@ Implemented and works for `V500`, `V600`, `V1200`.
 
 Implemented and does **NOT** works for `V4`, for now.
 
+This command uses some Vampire `Serial Peripheral Interface` (SPI) private registers.
+
 **EXAMPLES :**
 
 ```
@@ -312,6 +336,10 @@ This means this feature can **NOT** work on cores provided in the `Altera Quartu
 * Returns `WARN` ($RC = 5) if failed.
 * Print out the Core `Revision String`.
 
+**NOTE :**
+
+This command uses some Vampire `Serial Peripheral Interface` (SPI) private registers.
+
 **EXAMPLES :**
 
 ```
@@ -340,6 +368,10 @@ This means this feature can **NOT** work on cores provided in the `Quartus .JIC`
 * Returns `OK` ($RC = 0) if successful.
 * Returns `WARN` ($RC = 5) if failed.
 * Print out the Core `Revision Number`.
+
+**NOTE :**
+
+This command uses some Vampire `Serial Peripheral Interface` (SPI) private registers.
 
 **EXAMPLES :**
 
@@ -377,6 +409,16 @@ Some of them are controllable from `VControl`, eg. FPU, SuperScalar, Turtle, Vec
 * Returns `OK` ($RC = 0) if successful.
 * Returns `WARN` ($RC = 5) if failed.
 * Print out information about the Apollo Core `68080` processor.
+
+**NOTE :**
+
+This command uses :
+
+* AmigaOS `Exec -> AttnFlags`.
+* Vampire `VREG_BOARD` chipset register.
+* Motorola™ `Vector Base Register` (VBR) register.
+* Motorola™ `Cache Control Register` (CACR) register.
+* Motorola™ `Processor Configuration Register` (PCR) register.
 
 **DETAILS :**
 
@@ -417,9 +459,7 @@ ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
 
 This command determines the frequency (in MHz) of the Apollo Core `68080` processor.
 
-Contrary to the usual `Hardware` method, this command uses a `Software` method to determine the frequency.
-
-It calculates the real number of processor cycles that occurred in 1 second, using the 68080 `Clock-Cycle Register`.
+Contrary to the usual `Hardware` method (eg. `VREG_BOARD` register), this command uses a `Software` method to determine the frequency.
 
 **INPUT :**
 
@@ -434,6 +474,10 @@ It calculates the real number of processor cycles that occurred in 1 second, usi
 **NOTE :**
 
 This command takes 1 second to execute (blocking), on purpose.
+
+It calculates the real number of processor cycles that occurred in 1 second.
+
+This command uses the `Clock-Cycle Register` MOVEC register of the Apollo Core `68080` processor.
 
 **EXAMPLES :**
 
@@ -678,6 +722,24 @@ These flags are forced :
 
 * Returns `OK` ($RC = 0).
 
+**NOTE :**
+
+For coders, the following values may not be declared in `exec/execbase.h`, here are the correct values :
+
+```
+#ifndef AFB_68060
+#define AFB_68060 7
+#define AFF_68060 (1 << AFB_68060)
+#endif
+
+#ifndef AFB_68080
+#define AFB_68080 10
+#define AFF_68080 (1 << AFB_68080)
+#endif
+```
+
+More information [here](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node009E.html).
+
 **EXAMPLES :**
 
 ```
@@ -701,7 +763,6 @@ The graphics.library `WriteChunkyPixels()` function can take advantage of such h
 
 More information [here](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_3._guide/node033C.html).
 
-
 **INPUT :**
 
 * None
@@ -718,6 +779,8 @@ Theoretically, it's only aimed at `AGA` Amiga machines.
 Currently compatible with the `Vampire V4` model.
 
 Planned for the `Vampire V1200` in future core.
+
+This command uses the following `CD32` chipset registers : `0xB80002` (ID) and `0xB80038` (C2P).
 
 **EXAMPLES :**
 
@@ -790,6 +853,8 @@ This command switchs the `FPU` On/Off by using the dedicated API from `vampiresu
 
 This setting is reset to `1` after a reboot.
 
+This command uses the Motorola™ `Processor Configuration Register` (PCR) register, Bit `Disable Floating Point` (DFP).
+
 In essence, the FPU Off needs to be done as early as possible in the `S:Startup-Sequence`, preferably before the `SetPatch` command.
 
 When executed from the Workbench, various malfunctions may/will happen.
@@ -811,9 +876,9 @@ C:SetPatch
 
 This command changes the Vampire `FastIDE` mode for faster-than-legacy `IDE` device reads.
 
-It applies only to compatible Vampire boards, with an embedded `FastIDE` slot.
+It applies only to compatible Vampire boards, with an embedded `FastIDE` slot (eg. `V500`, `V1200`, `V4`).
 
-NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
+> NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 
 **INPUT :**
 
@@ -831,7 +896,13 @@ NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 
 This setting is reset to `0` after every reboot.
 
-It should be added at the beginning of `S:Startup-Sequence` so that `FastIDE` is enabled on every boot.
+This command uses the Vampire `VREG_FASTIDE` (`0xdd1020`) chipset register.
+
+It is possible that your storage device (along with any intermediate adapters and cables you might have) supports a speed that is higher than the level recommended above. To explore this possibility, you can try setting `IDESPEED` to a higher level and thoroughly testing some data transfer operations. If you do not get any data corruption, you can keep `IDESPEED` at that higher level.
+
+If you attach multiple devices to a single IDE cable, the slowest device will dictate the maximum speed on this IDE interface. For example, if you have connected a CompactFlash card that supports PIO mode 6, together with a hard disk which only supports PIO mode 4, then you would need to limit yourself to `IDESPEED=1`.
+
+To enable the desired `FastIDE` mode on every boot, you should add the appropriate `VControl IDESPEED` command towards the beginning of your `S:Startup-Sequence`.
 
 **EXAMPLES :**
 
@@ -854,7 +925,7 @@ To decrease that speed, the `SDPort` can use a fraction (divider) of the Core fr
 
 It applies only to compatible Vampire boards, with an embedded `SDPort` slot.
 
-NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
+> NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 
 **INPUT :**
 
@@ -868,6 +939,14 @@ NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 **NOTE :**
 
 This setting is reset to `0` after every reboot.
+
+This command uses the Vampire `VREG_SDCLKDIV` (`0xde000c`) chipset register.
+
+When accessing an SD card, the SAGA SD driver (`sagasd.device`) queries the card and negotiates the appropriate speed automatically. So, normally, there is no need to set the SDCLOCKDIV manually. However, if you believe that your SD card (along with any intermediate adapters and cables you might have) supports a speed that is higher than the negotiated speed, you can try setting `SDCLOCKDIV` to a faster level and thoroughly testing some data transfer operations. If you do not get any data corruption, you can keep `SDCLOCKDIV` at that faster level.
+
+Setting `SDCLOCKDIV` is only effective after mounting the SD card. (In other words, after `sagasd.device` accesses the SD card and negotiates the initial speed.)
+
+To enable the desired `SDCLOCKDIV` on every boot, you should add the appropriate `VControl SDCLOCKDIV` command to your `S:User-Startup` file, making sure that it runs after the SD card is mounted.
 
 **EXAMPLES :**
 
@@ -901,6 +980,8 @@ When enabled, the processor works faster, whenever applicable, and even more wit
 **NOTE :**
 
 This setting is **NOT** reset to `0` after a reboot.
+
+This command uses the Motorola™ `Processor Configuration Register` (PCR) register, Bit `Enable SuperScalar` (ESS).
 
 **EXAMPLES :**
 
@@ -959,6 +1040,12 @@ It might help compatibility when launching old Amiga demos and games.
 
 This setting is reset to `0` after a reboot.
 
+On **V2** boards,
+This command uses the Motorola™ `Cache Control Register` (CACR) register, Bit `Instruction Cache` (ICache).
+
+On **V4** boards,
+This command uses the Motorola™ `Processor Configuration Register` (PCR) register, Bit `Enable TUrtle` (ETU).
+
 **EXAMPLES :**
 
 ```
@@ -985,7 +1072,7 @@ Turtle: Enabled.
 
 This command changes the processor `Vector Base Register` location.
 
-The processor vectors will be moved to a new location, either in CHIP memory (VBRMOVE=0) or in FAST memory (VBRMOVE=1).
+The processor vectors will be moved to a new location, either in CHIP memory (`VBRMOVE=0`) or in FAST memory (`VBRMOVE=1`).
 
 When the processor vectors are moved to FAST memory, it is supposed to increase the system speed, a little.
 
@@ -1002,6 +1089,8 @@ When the processor vectors are moved to FAST memory, it is supposed to increase 
 **NOTE :**
 
 This setting is reset to `0` after a reboot.
+
+This command uses the Motorola™ `Vector Base Register` (VBR) register.
 
 This command is compatible with [VBRControl](http://aminet.net/package/util/sys/vbrcontrol).
 
@@ -1055,11 +1144,13 @@ It does a RAW maprom, the input file content remains unchecked, untouched and ma
 
 **NOTE :**
 
-* The mapped ROM will survive a `WARM REBOOT`.
+The mapped ROM will survive a `WARM REBOOT`.
 
-* The mapped ROM will NOT survive a `POWER OFF`.
+The mapped ROM will NOT survive a `POWER OFF`.
 
-* Shutdown the system if the mapped ROM gives troubles.
+Shutdown the system if the mapped ROM gives troubles.
+
+This command uses the Vampire `VREG_MAPROM` chipset register (0xdff3fe).
 
 **EXAMPLES :**
 
