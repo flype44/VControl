@@ -6,7 +6,7 @@ Written and maintained by `flype`, APOLLO-Team member.
 
 The purpose of `VControl` is to bring valuable information and control over the `Vampire` boards.
 
-![Vampire Logo](VLogo.png)
+![Vampire Logo](V_LOGO.png)
 
 
 # Documentation
