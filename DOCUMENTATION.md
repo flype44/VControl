@@ -1,6 +1,6 @@
 # VControl
 
-(C) Copyright 2016-2020 APOLLO-Team
+> (C) Copyright 2016-2020 APOLLO-Team
 
 Written and maintained by `flype`, APOLLO-Team member.
 
@@ -1181,5 +1181,7 @@ ATTN: 0x847f (010,020,030,040,881,882,FPU40,080,PRIVATE)
 
 
 
+
 <hr />
-(C) APOLLO-Team 2016-2020 - Last edited : 2020-06-11
+
+> (C) APOLLO-Team 2016-2020 - Last edited : 2020-06-11
