@@ -329,7 +329,7 @@ This command parses the `Revision Number` found inside the Vampire Core `Revisio
 
 The Core `Revision String` is only present in the official AmigaOS Flash Binary cores provided by the APOLLO-Team.
 
-This means this feature can **NOT** work on cores provided in the `Quartus .JIC` forms (when flashed with an `USB-Blaster` device).
+This means this feature can **NOT** work on cores provided in the `Quartus .JIC` forms (when flashed with a `USB-Blaster` device).
 
 **INPUT :**
 
