@@ -810,6 +810,8 @@ It gives quite similar information to `C:ShowConfig`.
 
 It should never fail since Exec is always available.
 
+It is not exclusive to the Vampire boards, it can be executed on any AmigaOS-compatible system.
+
 **INPUT :**
 
 * None
@@ -822,9 +824,6 @@ It should never fail since Exec is always available.
 
 V1200, from AmigaOS :
 ```
-> C:VControl MEMLIST
-Memory information:
-
 Address    Name              Pri Lower     Upper     Attrs 
 $08000000: expansion memory   40 $08000020 $0fdfffff $0505 (126.0 MB)
 $00c00000: memory             -5 $00c00020 $00c7ffff $0705 (511.9 KB)
@@ -852,6 +851,14 @@ $00c01148: Kickstart ROM    -128 $00f80000 $00ffffff $0400 (512.0 KB)
 $00c01168: Kickstart ROM    -128 $00e00000 $00e7ffff $0400 (512.0 KB)
 ```
 
+Amithon, from AmigaOS :
+```
+Address    Name              Pri Lower     Upper     Attrs 
+$03a80000: amithlon fastram   40 $03a80020 $2fd2ffff $0505 (706.7 MB)
+$00c00000: memory             -5 $00c00020 $00d7ffff $0705 (  1.5 MB)
+$004c0000: amithlon chipram   -5 $004c0020 $00beffff $0703 (  7.1 MB)
+$00004000: chip memory       -10 $00004020 $0007ffff $0703 (495.9 KB)
+```
 
 # VControl MODULES
 
