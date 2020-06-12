@@ -781,7 +781,7 @@ The ROM file passed in argument will be copied to the following locations :
 
 A check is performed to verify if the provided ROM file is already installed in memory.
 
-This check prevents infinite reboots if `VControl MAPROM` is installed in the `S:Sartup-Sequence`.
+This check prevents infinite reboots if `VControl MAPROM` is installed in the `S:Startup-Sequence`.
 
 The mapped ROM will survive a `WARM REBOOT`.
 
