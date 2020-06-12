@@ -27,11 +27,10 @@ Permissions of this weak copyleft license are conditioned on making available so
 
 # Releases
 
-Latest `Vampire` cores are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/start#core_and_software_updates). 
-
 Latest `VControl` binaries are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/saga:updates). 
 
-Additional support and guidelines for `VControl` can be found [here](https://www.apollo-accelerators.com/wiki/doku.php/system_tools:vcontrol).
+Latest `Vampire` cores are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/start#core_and_software_updates). 
+
 
 # Commands
 
@@ -833,7 +832,7 @@ $00004000: chip memory       -10 $00004020 $001fffff $0703 (  2.0 MB)
 > 
 ```
 
-V4, from on AmigaOS :
+V4, from AmigaOS :
 ```
 Address    Name              Pri Lower     Upper     Attrs 
 $01000000: VampireFastMem     64 $01000020 $1fffffff $0505 (496.0 MB)
