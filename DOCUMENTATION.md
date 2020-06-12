@@ -167,7 +167,7 @@ These flags are forced :
 
 **NOTE :**
 
-For coders, the following values may not be declared in `exec/execbase.h`, here are the correct values :
+For coders, the following values might not be declared in `exec/execbase.h`, here are the correct values :
 
 ```
 #ifndef AFB_68060
@@ -212,10 +212,10 @@ This command collects and outputs information about the Vampire Board.
 
 This command uses :
 
-* Vampire `VREG_BOARD` (0xdff3fc) chipset register.
+* Vampire `VREG_BOARD` (`0xdff3fc`) chipset register.
 * Vampire `Serial Peripheral Interface` (SPI) private registers.
-* AmigaHW `POTINP` (0xdff016) chipset register, for the Audio chip version.
-* AmigaHW `DENISEID` (0xdff07c) chipset register, for the Video chip version.
+* AmigaHW `POTINP` (`0xdff016`) chipset register, for the Audio chip version.
+* AmigaHW `DENISEID` (`0xdff07c`) chipset register, for the Video chip version.
 * AmigaOS `Exec` functions for the available memory and frequency information.
 
 **EXAMPLES :**
@@ -273,7 +273,7 @@ List of the Vampire `Board Identifiers` :
 
 **NOTE :**
 
-This command uses the Vampire `VREG_BOARD` (0xdff3fc) chipset register.
+This command uses the Vampire `VREG_BOARD` (`0xdff3fc`) chipset register.
 
 **EXAMPLES :**
 
@@ -326,7 +326,7 @@ This command ouputs the Vampire `Board Short Name` based on the `Board Identifie
 
 **NOTE :**
 
-This command uses the Vampire `VREG_BOARD` (0xdff3fc) chipset register.
+This command uses the Vampire `VREG_BOARD` (`0xdff3fc`) chipset register.
 
 **EXAMPLES :**
 
@@ -371,7 +371,7 @@ This command retrieves the Vampire `Board Serial Number`.
 
 Implemented and works for `V500`, `V600`, `V1200`.
 
-Implemented and does **NOT** works for `V4`, for now.
+Implemented and does **NOT** work for `V4`, for now.
 
 This command uses some Vampire `Serial Peripheral Interface` (SPI) private registers.
 
@@ -716,11 +716,11 @@ C:SetPatch
 
 **SYNOPSIS :**
 
+> NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
+
 This command changes the Vampire `FastIDE` mode for faster-than-legacy `IDE` device reads.
 
 It applies only to compatible Vampire boards, with an embedded `FastIDE` slot (eg. `V500`, `V1200`, `V4`).
-
-> NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 
 **INPUT :**
 
@@ -761,7 +761,7 @@ FastIDE mode = 0x8000 (Faster).
 
 This command maps a `256KB` or `512KB` or `1MB` valid ROM file and REBOOTs the system.
 
-It does a RAW maprom, the input file content remains unchecked, untouched and mapped as is.
+It does a RAW maprom, the input file content remains unchecked, unmodified and mapped as is.
 
 **INPUT :**
 
@@ -774,18 +774,24 @@ It does a RAW maprom, the input file content remains unchecked, untouched and ma
 
 **NOTE :**
 
-The `Vampire` ROMs are located to :
+The ROM file passed in argument will be copied to the following locations :
 
 * 1st 512KB at address `$00E00000` to `$00E7FFFF`.
 * 2nd 512KB at address `$00F80000` to `$00FFFFFF`.
+
+A check is performed to verify if the provided ROM file is already installed in memory.
+
+This check prevents infinite reboots if `VControl MAPROM` is installed in the `S:Sartup-Sequence`.
 
 The mapped ROM will survive a `WARM REBOOT`.
 
 The mapped ROM will NOT survive a `POWER OFF`.
 
-Shutdown the system if the mapped ROM gives troubles.
+In case of trouble, try `CTRL` + `A` + `A`, it may help start the new ROM.
 
-This command uses the Vampire `VREG_MAPROM` chipset register (0xdff3fe).
+A MAPROM can **NEVER** brick the machine, a `POWER OFF` will **ALWAYS** restore the ROM installed in the system.
+
+This command uses the Vampire `VREG_MAPROM` (`0xdff3fe`) chipset register.
 
 **EXAMPLES :**
 
@@ -815,6 +821,7 @@ It should never fail since Exec is always available.
 
 **EXAMPLES :**
 
+V1200, from AmigaOS :
 ```
 > C:VControl MEMLIST
 Memory information:
@@ -824,6 +831,26 @@ $08000000: expansion memory   40 $08000020 $0fdfffff $0505 (126.0 MB)
 $00c00000: memory             -5 $00c00020 $00c7ffff $0705 (511.9 KB)
 $00004000: chip memory       -10 $00004020 $001fffff $0703 (  2.0 MB)
 > 
+```
+
+V4, from on AmigaOS :
+```
+Address    Name              Pri Lower     Upper     Attrs 
+$01000000: VampireFastMem     64 $01000020 $1fffffff $0505 (496.0 MB)
+$00c00000: memory             -5 $00c00020 $00d7ffff $0705 (  1.5 MB)
+$00004000: chip memory       -10 $00004020 $001fffff $0703 (  2.0 MB)
+$00200000: VampireChipMem    -11 $00200020 $00b7ffff $0703 (  9.5 MB)
+```
+
+V4, from AROS :
+```
+Address    Name              Pri Lower     Upper     Attrs 
+$01000000: expansion.memory   40 $01000020 $07ffffff $0505 (112.0 MB)
+$08000000: expansion.memory   40 $08000020 $1fffffff $0505 (384.0 MB)
+$00c00000: memory             -5 $00c00000 $00d7ffff $1705 (  1.5 MB)
+$00001000: chip memory       -10 $00001000 $00b7ffff $1703 ( 11.5 MB)
+$00c01148: Kickstart ROM    -128 $00f80000 $00ffffff $0400 (512.0 KB)
+$00c01168: Kickstart ROM    -128 $00e00000 $00e7ffff $0400 (512.0 KB)
 ```
 
 
@@ -880,6 +907,8 @@ $00000000: sagasd.device         NOT LOADED!
 
 **SYNOPSIS :**
 
+> NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
+
 This command changes the Vampire `SDPort` speed.
 
 The nominal speed of the `SDPort` is based on the actual Vampire Core frequency, which is represented by the value `0`.
@@ -887,8 +916,6 @@ The nominal speed of the `SDPort` is based on the actual Vampire Core frequency,
 To decrease that speed, the `SDPort` can use a fraction (divider) of the Core frequency.
 
 It applies only to compatible Vampire boards, with an embedded `SDPort` slot.
-
-> NO WARRANTY IS PROVIDED. USE AT YOUR OWN RISK.
 
 **INPUT :**
 
@@ -1104,7 +1131,7 @@ This command uses the Motorola™ `Cache Control Register` (CACR) register, Bit 
 
 On **V4** boards,
 
-This command uses the Motorola™ `Processor Configuration Register` (PCR) register, Bit `Enable TUrtle` (ETU).
+This command uses the Motorola™ `Processor Configuration Register` (PCR) register, Bit `Enable Turtle` (ETU).
 
 **EXAMPLES :**
 
