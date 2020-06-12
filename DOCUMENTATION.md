@@ -851,7 +851,7 @@ $00c01148: Kickstart ROM    -128 $00f80000 $00ffffff $0400 (512.0 KB)
 $00c01168: Kickstart ROM    -128 $00e00000 $00e7ffff $0400 (512.0 KB)
 ```
 
-Amithon, from AmigaOS :
+Amithlon, from AmigaOS :
 ```
 Address    Name              Pri Lower     Upper     Attrs 
 $03a80000: amithlon fastram   40 $03a80020 $2fd2ffff $0505 (706.7 MB)
