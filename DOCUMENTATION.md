@@ -737,7 +737,7 @@ It applies only to compatible Vampire boards, with an embedded `FastIDE` slot (e
 
 This setting is reset to `0` after every reboot.
 
-This command uses the Vampire `VREG_FASTIDE` (`0xdd1020`) chipset register.
+This command uses the `Read-Only` Vampire `VREG_FASTIDE` (`0xdd1020`) chipset register.
 
 It is possible that your storage device (along with any intermediate adapters and cables you might have) supports a speed that is higher than the level recommended above. To explore this possibility, you can try setting `IDESPEED` to a higher level and thoroughly testing some data transfer operations. If you do not get any data corruption, you can keep `IDESPEED` at that higher level.
 
