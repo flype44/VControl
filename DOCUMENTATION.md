@@ -777,8 +777,8 @@ It applies only to compatible Vampire boards, with embedded SAGA USB JOYPORTs (e
 It can fail for various reasons :
 
 - Incompatible Vampire Board
-- Can't open the `lowlevel.library`
 - The patch is already installed
+- Can't open the `lowlevel.library`
 
 **NOTE :**
 
