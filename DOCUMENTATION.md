@@ -761,24 +761,41 @@ FastIDE mode = 0x8000 (Faster).
 
 This command patches the AmigaOS 3.x LowLevel.library, so that it can makes use of the GAMEPADs for APOLLO V4(+).
 
+It provides full direction and buttons support to OS-Friendly games that supports CD32 pads, for both USB ports (JOY1 and JOY2).
+
 It applies only to compatible Vampire boards, with embedded SAGA USB JOYPORTs (eg. `V4`, `V4+`).
 
 **INPUT :**
 
-* `JOYPORT` : Patch the LowLevel.library -> ReadJoyPort().
+* `JOYPORT` : Patch the `lowlevel.library` -> `ReadJoyPort()`
 
 **OUTPUT :**
 
 * Returns `OK` ($RC = 0) if successful.
 * Returns `WARN` ($RC = 5) if failed.
 
+It can fail for various reasons :
+
+- Incompatible Vampire Board
+- Can't open the lowlevel.library
+- The patch is already installed.
+
 **NOTE :**
 
 This command uses the `16-bit` `Read-Only` Vampire `JOYxSTATE` registers (`0xdff220` and `0xdff222`) chipset register.
 
-This command should not be used on `Apollo-OS` since its LowLevel.library is already initialized for the V4(+).
+It is intended to work only on `AmigaOS`, with OS-Friendly programs / games, such as `SDL` games for example.
 
-This command can't be unloaded for now. To disable it, reboot the computer.
+It should not be used on `Apollo-OS` since its LowLevel.library is already initialized for the V4(+).
+
+It can't be unloaded for now. To disable it, reboot the computer.
+
+It can be added to your `S:startup-sequence` after SetPatch.
+
+However, unfortunately, this patch will not work with games that are launched from `WHDLOAD` or games that polls the CD32 pads directely from hardware, rather than calling the `lowlevel.library` -> `ReadJoyPort()`.
+
+You can check the behaviour of your APOLLO GAMEPADs with the `JoyPortTest` tool, before AND after using `C:VControl JOYPORT` :
+https://aminet.net/package/driver/input/JoyPortTest
 
 **EXAMPLES :**
 
