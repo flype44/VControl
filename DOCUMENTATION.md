@@ -759,7 +759,7 @@ FastIDE mode = 0x8000 (Faster).
 
 **SYNOPSIS :**
 
-This command patches the AmigaOS 3.x LowLevel.library, so that it can makes use of the GAMEPADs for APOLLO V4(+).
+This command patches the `AmigaOS` 3.x `lowlevel.library`, so that it can makes use of the GAMEPADs for APOLLO V4(+).
 
 It provides full direction and buttons support to OS-Friendly games that supports CD32 pads, for the two USB game ports (JOY1 and JOY2).
 
