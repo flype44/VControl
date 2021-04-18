@@ -759,13 +759,13 @@ FastIDE mode = 0x8000 (Faster).
 
 **SYNOPSIS :**
 
-This command patches the AmigaOS 3.x LowLevel.library -> ReadJoyPort(portNumber), so that it can makes use of the GAMEPADs for APOLLO V4(+).
+This command patches the AmigaOS 3.x LowLevel.library, so that it can makes use of the GAMEPADs for APOLLO V4(+).
 
 It applies only to compatible Vampire boards, with embedded SAGA USB JOYPORTs (eg. `V4`, `V4+`).
 
 **INPUT :**
 
-* `JOYPORT` : Patch the LowLevel.library.
+* `JOYPORT` : Patch the LowLevel.library -> ReadJoyPort().
 
 **OUTPUT :**
 
