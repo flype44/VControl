@@ -1377,6 +1377,9 @@ ULONG main(ULONG argc, char *argv[])
 				if(opts[OPT_HELP])
 					result = Help();
 				
+				if(opts[OPT_JOYPORT])
+					result = PatchLowLevelReadJoyPort();
+				
 				if(opts[OPT_SETENV])
 					result = SetEnvVars();
 				
@@ -1412,9 +1415,6 @@ ULONG main(ULONG argc, char *argv[])
 				
 				if(opts[OPT_FPU])
 					result = SetFPU(*(LONG *)opts[OPT_FPU]);
-				
-				if(opts[OPT_JOYPORT])
-					result = PatchLowLevelReadJoyPort();
 				
 				if(opts[OPT_IDESPEED])
 					result = SetFastIDE(*(LONG *)opts[OPT_IDESPEED]);
