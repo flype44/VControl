@@ -1,13 +1,13 @@
 # VControl
 
-(C) Copyright 2016-2020 APOLLO-Team
+(C) Copyright 2016-2021 APOLLO-Team
 
 The purpose of `VControl` is to bring some valuable information and control over the `Vampire` boards.
 
 
 # Releases
 
-VControl 1.16 (June 9, 2020)
+VControl 1.17 (April 18, 2021)
 
 Latest official binary releases : [Download](https://www.apollo-accelerators.com/wiki/doku.php/saga:updates)
 
@@ -41,6 +41,7 @@ SDCLOCKDIV | Change the SDPort Clock Divider
 SUPERSCALAR | Change the SuperScalar mode
 TURTLE | Change the Turtle mode
 VBRMOVE | Change the VBR location
+JOYPORT | Patch the LowLevel.library to use the GAMEPADs for APOLLO V4(+)
 MAPROM | Map a ROM file
 
 

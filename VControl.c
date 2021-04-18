@@ -1,10 +1,10 @@
 /**********************************************************
  * 
  * Project: VControl
- * Version: 1.16
+ * Version: 1.17
  * Author:  flype
  * 
- * Copyright (C) 2016-2020 APOLLO-Team
+ * Copyright (C) 2016-2021 APOLLO-Team
  * 
  **********************************************************/
 
@@ -101,6 +101,7 @@ HZ=CPUHERTZ/S,\
 DE=DETECT/S,\
 DP=DPMS/N,\
 FP=FPU/N,\
+JP=JOYPORT/S,\
 ID=IDESPEED/N,\
 MR=MAPROM,\
 ML=MEMLIST/S,\
@@ -127,6 +128,7 @@ typedef enum {
 	OPT_DETECT,
 	OPT_DPMS,
 	OPT_FPU,
+	OPT_JOYPORT,
 	OPT_IDESPEED,
 	OPT_MAPROM,
 	OPT_MEMLIST,
@@ -226,8 +228,8 @@ ULONG Help(void)
 	"MO=MODULES/S      Output Modules list\n\n"
 	"CD=CONFIGDEV/S    Output AutoConfig Devices list\n\n"
 	"SE=SETENV/S       Create Environment Variables\n\n"
-	"AF=ATTNFLAGS/S    Change the AttnFlags (Force 080's)\n"
 	"AK=AKIKO/S        Initialize the Akiko C2P routine\n"
+	"AF=ATTNFLAGS/S    Change the AttnFlags (Force 080's)\n"
 	"DP=DPMS/N         Change the DPMS mode. 0=Off, 1=On\n"
 	"FP=FPU/N          Change the FPU mode. 0=Off, 1=On\n"
 	"ID=IDESPEED/N     Change the IDE speed. 0=Slow, 1=Fast, 2=Faster, 3=Fastest\n"
@@ -235,6 +237,7 @@ ULONG Help(void)
 	"SS=SUPERSCALAR/N  Change the SuperScalar mode. 0=Off, 1=On\n"
 	"TU=TURTLE/N       Change the Turtle mode. 0=Off, 1=On\n"
 	"VB=VBRMOVE/N      Change the VBR location. 0=ChipRAM, 1=FastRAM\n\n"
+	"JP=JOYPORT/S      Patch the LowLevel.library to use the GAMEPADs for APOLLO V4(+).\n\n"
 	"MR=MAPROM         Map a ROM file\n");
 	
 	return(RETURN_OK);
@@ -1331,6 +1334,24 @@ ULONG SetEnvVars(void)
 
 /**********************************************************
  ** 
+ ** PatchLowLevelReadJoyPort(void)
+ ** 
+ **********************************************************/
+
+ULONG PatchLowLevelReadJoyPort(void)
+{
+	ULONG result = RETURN_WARN;
+	
+	if(v_cpu_is080() && GetBoardID() == VREG_BOARD_V4SA)
+	{
+		result = v_joyport_init();
+	}
+	
+	return(result);
+}
+
+/**********************************************************
+ ** 
  ** Entry point
  ** 
  **********************************************************/
@@ -1391,6 +1412,9 @@ ULONG main(ULONG argc, char *argv[])
 				
 				if(opts[OPT_FPU])
 					result = SetFPU(*(LONG *)opts[OPT_FPU]);
+				
+				if(opts[OPT_JOYPORT])
+					result = PatchLowLevelReadJoyPort();
 				
 				if(opts[OPT_IDESPEED])
 					result = SetFastIDE(*(LONG *)opts[OPT_IDESPEED]);
