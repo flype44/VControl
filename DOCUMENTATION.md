@@ -1,6 +1,6 @@
 # VControl
 
-> (C) Copyright 2016-2020 APOLLO-Team
+> (C) Copyright 2016-2021 APOLLO-Team
 
 Written and maintained by `flype`, APOLLO-Team member.
 
@@ -64,6 +64,7 @@ Command | Description
 [SS=SUPERSCALAR/N](#vcontrol-superscalar) | Change the SuperScalar mode. 0=Off, 1=On
 [TU=TURTLE/N](#vcontrol-turtle) | Change the Turtle mode. 0=Off, 1=On
 [VB=VBRMOVE/N](#vcontrol-vbrmove) | Change the VBR location. 0=ChipRAM, 1=FastRAM
+[JP=JOYPORT](#vcontrol-joyport) | Patch the LowLevel.library to use the GAMEPADs for APOLLO V4(+)
 [MR=MAPROM](#vcontrol-maprom) | Map a ROM file
 
 **NOTE :**
@@ -750,6 +751,39 @@ To enable the desired `FastIDE` mode on every boot, you should add the appropria
 ```
 > C:VControl IDESPEED=2
 FastIDE mode = 0x8000 (Faster).
+> 
+```
+
+
+# VControl JOYPORT
+
+**SYNOPSIS :**
+
+This command patches the AmigaOS 3.x LowLevel.library -> ReadJoyPort(portNumber), so that it can makes use of the GAMEPADs for APOLLO V4(+).
+
+It applies only to compatible Vampire boards, with embedded SAGA USB JOYPORTs (eg. `V4`, `V4+`).
+
+**INPUT :**
+
+* `JOYPORT` : Patch the LowLevel.library.
+
+**OUTPUT :**
+
+* Returns `OK` ($RC = 0) if successful.
+* Returns `WARN` ($RC = 5) if failed.
+
+**NOTE :**
+
+This command uses the `16-bit` `Read-Only` Vampire `JOYxSTATE` registers (`0xdff220` and `0xdff222`) chipset register.
+
+This command should not be used on `Apollo-OS` since its LowLevel.library is already initialized for the V4(+).
+
+This command can't be unloaded for now. To disable it, reboot the computer.
+
+**EXAMPLES :**
+
+```
+> C:VControl JOYPORT
 > 
 ```
 
