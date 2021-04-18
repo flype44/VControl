@@ -777,8 +777,8 @@ It applies only to compatible Vampire boards, with embedded SAGA USB JOYPORTs (e
 It can fail for various reasons :
 
 - Incompatible Vampire Board
-- Can't open the lowlevel.library
-- The patch is already installed.
+- Can't open the `lowlevel.library`
+- The patch is already installed
 
 **NOTE :**
 
@@ -792,10 +792,9 @@ It can't be unloaded for now. To disable it, reboot the computer.
 
 It can be added to your `S:startup-sequence` after SetPatch.
 
-However, unfortunately, this patch will not work with games that are launched from `WHDLOAD` or games that polls the CD32 pads directely from hardware, rather than calling the `lowlevel.library` -> `ReadJoyPort()`.
+Unfortunately, this patch will not work with games that are launched from `WHDLOAD` or games that polls the CD32 pads directely from hardware, rather than calling the `lowlevel.library` -> `ReadJoyPort()`.
 
-You can check the behaviour of your APOLLO GAMEPADs with the `JoyPortTest` tool, before AND after using `C:VControl JOYPORT` :
-https://aminet.net/package/driver/input/JoyPortTest
+The behaviour of the APOLLO GAMEPADs can be checked for example with the [JoyPortTest](https://aminet.net/package/driver/input/JoyPortTest) Aminet tool, before AND after using `C:VControl JOYPORT`.
 
 **EXAMPLES :**
 
