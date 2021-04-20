@@ -54,8 +54,9 @@ _v_joyport_init:
 	move.l   LOWLEVELVERSION(pc),d0    ; Library Version
 	move.l   EXECBASE.w,a6             ; SysBase
 	jsr      _LVOOpenLibrary(a6)       ; SysBase->OpenLibrary()
-	move.l   d0,a2                     ; Library Base
+	tst.l    d0                        ; NULL ?
 	beq.w    .failure                  ; Failed
+	move.l   d0,a2                     ; Library Base
 	
 	;------------------------------------------------------
 	; Check if 'our' patch is already installed
