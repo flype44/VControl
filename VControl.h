@@ -1,7 +1,7 @@
 #ifndef __VCONTROL_H__
 #define __VCONTROL_H__
 
-#define APP_VSTRING "$VER: VControl 1.17 (18.4.2021) (C) APOLLO-Team"
+#define APP_VSTRING "$VER: VControl 1.18 (20.4.2021) (C) APOLLO-Team"
 
 /*****************************************************************
  * VAMPIRE HARDWARE

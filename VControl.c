@@ -1,7 +1,7 @@
 /**********************************************************
  * 
  * Project: VControl
- * Version: 1.17
+ * Version: 1.18
  * Author:  flype
  * 
  * Copyright (C) 2016-2021 APOLLO-Team

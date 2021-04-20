@@ -7,7 +7,7 @@ The purpose of `VControl` is to bring some valuable information and control over
 
 # Releases
 
-VControl 1.17 (April 18, 2021)
+VControl 1.18 (April 20, 2021)
 
 Latest official binary releases : [Download](https://www.apollo-accelerators.com/wiki/doku.php/saga:updates)
 
