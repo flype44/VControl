@@ -4,7 +4,23 @@
 	include  exec/exec.i
 	include  exec/exec_lib.i
 	include  libraries/lowlevel.i
+;	include  libraries/lowlevel_lib.i
 	include  lvo/lowlevel_lib.i
+
+;----------------------------------------------------------
+;	
+;	STRUCT VJOYP
+;	
+;----------------------------------------------------------
+
+EXECBASE     EQU 4
+VJOYP_MARK   EQU 'JOYP'
+
+	RSRESET
+jp_New  RS.W 1    ; New code
+jp_Old  RS.L 1    ; Old function
+jp_Mark RS.B 4    ; Our marker
+jp_Size RS.L 0    ; SizeOf
 
 ;----------------------------------------------------------
 ;	
@@ -34,72 +50,93 @@ _v_joyport_init:
 	; Open the operating-system "lowlevel.library"
 	;------------------------------------------------------
 	
-	lea.l    .name(pc),a1              ; LibName
-	moveq.l  #0,d0                     ; LibVersion
-	move.l   $4.w,a6                   ; SysBase
-	JSRLIB   OpenLibrary               ; SysBase->OpenLibrary()
-	move.l   d0,a2                     ; LibBase
-	beq.w    .warn                     ; Skip
+	lea.l    LOWLEVELNAME(pc),a1       ; Library Name
+	move.l   LOWLEVELVERSION(pc),d0    ; Library Version
+	move.l   EXECBASE.w,a6             ; SysBase
+	jsr      _LVOOpenLibrary(a6)       ; SysBase->OpenLibrary()
+	move.l   d0,a2                     ; Library Base
+	beq.w    .failure                  ; Failed
 	
 	;------------------------------------------------------
-	; Check if the patch is already installed
+	; Check if 'our' patch is already installed
 	;------------------------------------------------------
 	
-	move.l   a2,a0                     ; LibBase
-	add.l    #_LVOReadJoyPort+2,a0     ; LibFunction
-	move.l   (a0),a0                   ; LibFunction->Marker
-	cmp.l    #'JOYP',2(a0)             ; Check if installed
-	beq.w    .warn                     ; Already installed
+	move.l   a2,a0                     ; Library  Base
+	adda.l   #_LVOReadJoyPort+2,a0     ; Library Function
+	move.l   (a0),a0                   ; Library Function
+	cmp.l    #VJOYP_MARK,jp_Mark(a0)   ; Check 'our' mark
+	beq.s    .uninstall                ; Already installed
 	
 	;------------------------------------------------------
-	; Allocate memory for the patch
+	; Install 'our' ReadJoyPort() replacement
 	;------------------------------------------------------
-	
-	move.l   #MEMF_PUBLIC,d1           ; MemType
-	move.l   #_v_joyport_end,d0        ; MemSize
-	subi.l   #_v_joyport_new,d0        ; MemSize
-	JSRLIB   AllocMem                  ; SysBase->AllocMem()
-	move.l   d0,d2                     ; MemAddr
-	beq.s    .warn                     ; Skip
-	
-	;------------------------------------------------------
-	; Replace the ReadJoyPort() function
-	;------------------------------------------------------
-	
-	JSRLIB   Disable                   ; SysBase->Disable()
 
-	move.l   a2,a1                     ; LibBase
-	move.l   #_LVOReadJoyPort,a0       ; LibFunction
-	move.l   d2,d0                     ; NewFunction
-	JSRLIB   SetFunction               ; SysBase->SetFunction()
-	move.l   d0,_v_joyport_old         ; OldFunction
+.install	
+
+	move.l   #MEMF_PUBLIC,d1           ; Memory Type
+	move.l   #_v_joyport_end,d0        ; Memory Size
+	subi.l   #_v_joyport_new,d0        ; Memory Size
+	jsr      _LVOAllocVec(a6)          ; SysBase->AllocVec()
+	move.l   d0,d2                     ; Memory Address
+	beq.s    .failure                  ; Failed
 	
-	lea.l    _v_joyport_new(pc),a0     ; Source
-	move.l   d2,a1                     ; Destination
-	move.l   #_v_joyport_end,d0        ; MemSize
-	subi.l   #_v_joyport_new,d0        ; MemSize
-	subq.l   #1,d0                     ; MemSize
+	jsr      _LVODisable(a6)           ; SysBase->Disable()
+	
+	move.l   a2,a1                     ; Library Base
+	move.l   d2,d0                     ; Function Entry
+	move.l   #_LVOReadJoyPort,a0       ; Function Offset
+	jsr      _LVOSetFunction(a6)       ; SysBase->SetFunction()
+	move.l   d0,_v_joyport_old         ; Old Function Entry
+	
+	lea.l    _v_joyport_new(pc),a0     ; Memory Source
+	move.l   d2,a1                     ; Memory Destination
+	move.l   #_v_joyport_end,d0        ; Memory Size
+	subi.l   #_v_joyport_new,d0        ; Memory Size
+	subq.l   #1,d0                     ; Memory Size
 .copy
 	move.b   (a0)+,(a1)+               ; Copy routine
 	dbf      d0,.copy                  ; Continue
 	
-	JSRLIB   Enable                    ; SysBase->Enable()
+	jsr      _LVOEnable(a6)            ; SysBase->Enable()
+	
+	bra.s    .success                  ; Continue
 	
 	;------------------------------------------------------
-	; All done, we can set the exit codes and exit
+	; Uninstall 'our' ReadJoyPort() replacement
 	;------------------------------------------------------
 	
+.uninstall	
+	
+	jsr      _LVODisable(a6)           ; SysBase->Disable()
+	
+	move.l   a2,a1                     ; Library Base
+	move.l   jp_Old(a0),d0             ; Function Entry
+	move.l   #_LVOReadJoyPort,a0       ; Function Offset
+	jsr      _LVOSetFunction(a6)       ; SysBase->SetFunction()
+	move.l   d0,a1                     ; Old Function Entry
+	jsr      _LVOFreeVec(a6)           ; SysBase->FreeVec()
+	
+	jsr      _LVOEnable(a6)            ; SysBase->Enable()
+
+	;------------------------------------------------------
+	; Exit code
+	;------------------------------------------------------
+	
+.success
 	moveq.l  #0,d0                     ; ExitCode = OK
 	bra.s    .exit                     ; Continue
 	
-.warn
+.failure
 	moveq.l  #5,d0                     ; ExitCode = WARN
 	
 .exit
 	movem.l  (sp)+,d2-d7/a2-a6         ; Pop
 	rts                                ; Exit
 
-.name
+LOWLEVELVERSION:
+	dc.l     40
+
+LOWLEVELNAME:
 	dc.b     "lowlevel.library",0
 
 ;----------------------------------------------------------
@@ -114,7 +151,7 @@ _v_joyport_init:
 ; 	FUNCTION
 ;		This function is 'our' replacement for the
 ;		lowlevel.library -> ReadJoyPort() function.
-;		It remaps the SAGA JOYxSTATE bits to the 
+;		It converts all the SAGA JOYxSTATE bits to the
 ;		legacy Commodore Amiga CD32 controller values.
 ;	
 ;----------------------------------------------------------
@@ -123,13 +160,15 @@ _v_joyport_init:
 
 _v_joyport_new:
 	
-	bra.b    _v_joyport_code           ; Entry code
-	
-	dc.b     'JOYP'                    ; Owner marker
+	bra.s    _v_joyport_code           ; Entry code
 	
 _v_joyport_old:
 	
-	dc.l     0                         ; Original code
+	dc.l     0                         ; Old Function Entry
+	
+_v_joyport_mark:
+	
+	dc.l     VJOYP_MARK                ; 4-bytes mark
 	
 _v_joyport_code:
 	
@@ -169,7 +208,7 @@ _v_joyport_code:
 	lea.l    .joy2map(pc),a0           ; Conversion table
 	
 	;------------------------------------------------------
-	; Convert JOYxSTATE to CD32 values
+	; Convert SAGA JOYxSTATE to CD32 values
 	;------------------------------------------------------
 	
 .conv
@@ -184,7 +223,7 @@ _v_joyport_code:
 	move.b   (a0),d2                   ; Conversion table
 	bset.l   d2,d0                     ; Set CD32 bit
 .skip
-	add.l    #1,a0                     ; Next table entry
+	addq.l   #1,a0                     ; Next table entry
 	bra.s    .loop                     ; Continue
 .done
 	move.l   a1,d2                     ; Pop
