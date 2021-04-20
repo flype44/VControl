@@ -759,6 +759,9 @@ FastIDE mode = 0x8000 (Faster).
 
 **SYNOPSIS :**
 
+Added in version 1.17.
+Updated in version 1.18.
+
 This command patches the `AmigaOS` 3.x `lowlevel.library`, so that it can makes use of the GAMEPADs for APOLLO V4(+).
 
 It provides full direction and buttons support to OS-Friendly games that supports CD32 pads, for the two USB game ports (JOY1 and JOY2).
@@ -777,8 +780,8 @@ It applies only to compatible Vampire boards, with embedded SAGA USB JOYPORTs (e
 It can fail for various reasons :
 
 - Incompatible Vampire Board
-- The patch is already installed
-- Can't open the `lowlevel.library`
+- Can not open the `lowlevel.library`
+- Can not allocate memory for the patch
 
 **NOTE :**
 
@@ -789,6 +792,7 @@ It is intended to work only on `AmigaOS`, with OS-Friendly programs / games, suc
 It should not be used on `Apollo-OS` since its LowLevel.library is already initialized for the V4(+).
 
 It can't be unloaded for now. To disable it, reboot the computer.
+EDIT: Since Version 1.18, unload is supported, see example below.
 
 It can be added to your `S:startup-sequence` after SetPatch.
 
@@ -799,8 +803,9 @@ The behaviour of the APOLLO GAMEPADs can be checked for example with the [JoyPor
 **EXAMPLES :**
 
 ```
-> C:VControl JOYPORT
-> 
+> C:VControl JOYPORT ; 1st call = install patch
+> C:VControl JOYPORT ; 2nd call = uninstall patch
+>
 ```
 
 
