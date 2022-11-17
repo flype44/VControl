@@ -181,16 +181,15 @@ UBYTE * AttnName[16] = {
 };
 
 UBYTE * BoardName[MAXBOARDID][3] = {
-   { "Unknown",                "N/A",   "Unknown" },  // 0x00
-   { "Vampire V600",           "V600",  "Majsta"  },  // 0x01
-   { "Vampire V500",           "V500",  "Majsta"  },  // 0x02
-   { "Vampire V4 Accelerator", "V4",    "Ceaich"  },  // 0x03
-   { "Vampire V666",           "V666",  "Majsta"  },  // 0x04
-   { "Vampire V4 Standalone",  "V4SA",  "Ceaich"  },  // 0x05
-   { "Vampire V1200",          "V1200", "Majsta"  },  // 0x06
-   { "Vampire V4000",          "V4000", "Majsta"  },  // 0x07
-   { "Vampire VCD32",          "VCD32", "Majsta"  },  // 0x08
-   { "Unknown",                "N/A",   "Unknown" }   // 0x09
+   { "Unknown",                "N/A",   "Unknown"    },  // 0x00
+   { "Vampire V600",           "V600",  "Majsta"     },  // 0x01
+   { "Vampire V500",           "V500",  "Majsta"     },  // 0x02
+   { "Apollo V4 FireBird",     "FireBird", "ceaich"  },  // 0x03
+   { "Apollo V4 IceDrake",     "IceDrake", "ceaich"  },  // 0x04
+   { "Apollo V4 Standalone",   "V4SA",  "ceaich"     },  // 0x05
+   { "Vampire V1200",          "V1200", "Majsta"     },  // 0x06
+   { "Apollo V4 Manticore",    "Manticore", "ceaich" },  // 0x07
+   { "Unknown",                "N/A",   "Unknown" }   // 0x08
 };
 
 struct Library* CyberGfxBase;
@@ -455,7 +454,7 @@ ULONG GetBoard(void)
 				printf("Product-Name : %s\n",  BoardName[boardId][BOARD_FULLNAME]);
 				printf("Serial-Number: %s\n",  serial);
 				printf("Designer     : %s\n",  BoardName[boardId][BOARD_DESIGNER]);
-				printf("Manufacturer : APOLLO-Team (C)\n");
+				printf("Manufacturer : Apollo-Team (C)\n");
 				printf("\n");
 			}
 		}
@@ -973,7 +972,7 @@ ULONG SetTurtle(ULONG mode)
 	{
 		ULONG boardId = GetBoardID();
 		
-		if(boardId == VREG_BOARD_V4 || boardId == VREG_BOARD_V4SA)
+		if(boardId == VREG_BOARD_V4FB || boardId == VREG_BOARD_V4ID || boardId == VREG_BOARD_V4SA || boardId == VREG_BOARD_V4MC )
 		{
 			// V4: PCR method
 			
@@ -1017,10 +1016,11 @@ ULONG SetFastIDE(ULONG value)
 		ULONG boardId = GetBoardID();
 		
 		if(	boardId == VREG_BOARD_V500  ||
-			boardId == VREG_BOARD_V666  ||
 			boardId == VREG_BOARD_V1200 ||
-			boardId == VREG_BOARD_V4    ||
-			boardId == VREG_BOARD_V4SA)
+			boardId == VREG_BOARD_V4FB  ||
+			boardId == VREG_BOARD_V4ID  ||	
+			boardId == VREG_BOARD_V4SA  ||			   
+			boardId == VREG_BOARD_V4MC)
 		{
 			if(value == 0)
 			{
@@ -1072,10 +1072,11 @@ ULONG SetSDClockDivider(ULONG value)
 		
 		if(	boardId == VREG_BOARD_V500  ||
 			boardId == VREG_BOARD_V600  ||
-			boardId == VREG_BOARD_V666  ||
 			boardId == VREG_BOARD_V1200 ||
-			boardId == VREG_BOARD_V4    ||
-			boardId == VREG_BOARD_V4SA)
+			boardId == VREG_BOARD_V4FB  ||
+			boardId == VREG_BOARD_V4ID  ||
+			boardId == VREG_BOARD_V4SA  ||		   
+			boardId == VREG_BOARD_V4MC)
 		{
 			if (value >= 0 && value <= 255)
 			{
