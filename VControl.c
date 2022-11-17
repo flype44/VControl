@@ -1,10 +1,10 @@
 /**********************************************************
  * 
  * Project: VControl
- * Version: 1.18
+ * Version: 1.23
  * Author:  flype
  * 
- * Copyright (C) 2016-2021 APOLLO-Team
+ * Copyright (C) 2016-2022 APOLLO-Team
  * 
  **********************************************************/
 
