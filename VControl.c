@@ -152,7 +152,7 @@ typedef enum {
 
 UBYTE * AudioName[2]  = {
 	"Paula (8364 rev0)", // Paula identifier 0x00 
-	"Pamela (8364 rev1)" // Paula identifier 0x01
+	"Arne (8364 rev1)" // Paula identifier 0x01
 };
 
 UBYTE * VideoName[3]  = {
@@ -184,13 +184,12 @@ UBYTE * BoardName[MAXBOARDID][3] = {
    { "Unknown",                "N/A",   "Unknown" },  // 0x00
    { "Vampire V600",           "V600",  "Majsta"  },  // 0x01
    { "Vampire V500",           "V500",  "Majsta"  },  // 0x02
-   { "Vampire V4 Accelerator", "V4",    "Ceaich"  },  // 0x03
-   { "Vampire V666",           "V666",  "Majsta"  },  // 0x04
-   { "Vampire V4 Standalone",  "V4SA",  "Ceaich"  },  // 0x05
+   { "Apollo Firebird V4",     "V4FB",  "ceaich"  },  // 0x03
+   { "Apollo Icedrake V4",     "V4ID",  "ceaich"  },  // 0x04
+   { "Apollo V4 Standalone",   "V4SA",  "ceaich"  },  // 0x05
    { "Vampire V1200",          "V1200", "Majsta"  },  // 0x06
-   { "Vampire V4000",          "V4000", "Majsta"  },  // 0x07
-   { "Vampire VCD32",          "VCD32", "Majsta"  },  // 0x08
-   { "Unknown",                "N/A",   "Unknown" }   // 0x09
+   { "Apollo Manticore V4",    "V4MC",  "ceaich"  },  // 0x07
+   { "Unknown",                "N/A",   "Unknown" }   // 0x08
 };
 
 struct Library* CyberGfxBase;
